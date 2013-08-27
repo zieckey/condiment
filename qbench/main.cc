@@ -10,9 +10,9 @@ void usage(char** argv)
     printf("\t-t Thread count\n");
     printf("\t-i server ip\n");
     printf("\t-p server port\n");
-    printf("\t-m The message size\n");
-    printf("\t-s Session count, how many connections\n");
-    printf("\t-k send message interval for every session connection\n");
+    printf("\t-m The message size, default 512\n");
+    printf("\t-s Session count, how many connections, default 1\n");
+    printf("\t-k send message interval for every session connection, in second, default 1.0\n");
 }
 
     

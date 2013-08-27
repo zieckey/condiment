@@ -1,18 +1,20 @@
 #include "session.h"
 #include "client.h"
 
+AtomicInt32 Session::totalSession_ = 0;
+
 void Session::onConnection(const TcpConnectionPtr& conn)
 {
   if (conn->connected())
   {
-    LOG_INFO << "connected to " << conn->peerAddress().toIpPort();
+    LOG_INFO << "id=" << id_ << " connected to " << conn->peerAddress().toIpPort();
     conn->setTcpNoDelay(true);
     sendMessage(conn);
     owner_->onConnect();
   }
   else
   {
-    LOG_INFO << conn->peerAddress().toIpPort() << " not connetted";
+    LOG_INFO << "id=" << id_ << " " << conn->peerAddress().toIpPort() << " disconnetted";
     owner_->onDisconnect(conn);
   }
 }
@@ -21,8 +23,9 @@ void Session::onConnection(const TcpConnectionPtr& conn)
 void Session::sendMessage(const TcpConnectionPtr& conn)
 {
   if (messagesRead_ >= loopCount_) {
-    LOG_INFO << "have been sent " << messagesRead_ << " messages , all done";
-    conn->shutdown();
+    LOG_INFO << "id=" << id_ << " have been sent " << messagesRead_ << " messages , all done";
+    //conn->shutdown();
+    tcp_client_.disconnect();
     return;
   }
   int64_t now = Timestamp::now().microSecondsSinceEpoch();

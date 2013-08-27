@@ -47,6 +47,8 @@ class Session : boost::noncopyable
         boost::bind(&Session::onMessage, this, _1, _2, _3));
 
     tcp_client_.enableRetry();
+
+    id_ = totalSession_.incrementAndGet();
   }
 
   void start()
@@ -77,7 +79,8 @@ class Session : boost::noncopyable
 
   void onMessage(const TcpConnectionPtr& conn, Buffer* buf, Timestamp)
   {
-    LOG_DEBUG << "recv from " << conn->peerAddress().toIpPort() 
+    LOG_DEBUG << "id=" << id_ 
+        << " recv from " << conn->peerAddress().toIpPort() 
         << " localIpPort=" << conn->localAddress().toIpPort()
         << " len=" << buf->readableBytes();
     ++messagesRead_;
@@ -95,6 +98,10 @@ class Session : boost::noncopyable
   int64_t bytesRead_;
   int64_t bytesWritten_;
   int64_t messagesRead_;
+
+  int64_t id_;
+
+  static AtomicInt32 totalSession_;
 };
 
 
