@@ -1,0 +1,113 @@
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/78/trunk/studysolution/cpp/unixstudycode/protobuf/google/protobuf
+END
+descriptor.proto
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/76/trunk/studysolution/cpp/unixstudycode/protobuf/google/protobuf/descriptor.proto
+END
+wire_format_lite.h
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/76/trunk/studysolution/cpp/unixstudycode/protobuf/google/protobuf/wire_format_lite.h
+END
+text_format.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/76/trunk/studysolution/cpp/unixstudycode/protobuf/google/protobuf/text_format.h
+END
+repeated_field.h
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/76/trunk/studysolution/cpp/unixstudycode/protobuf/google/protobuf/repeated_field.h
+END
+wire_format_lite_inl.h
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/76/trunk/studysolution/cpp/unixstudycode/protobuf/google/protobuf/wire_format_lite_inl.h
+END
+generated_message_util.h
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/76/trunk/studysolution/cpp/unixstudycode/protobuf/google/protobuf/generated_message_util.h
+END
+service.h
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/76/trunk/studysolution/cpp/unixstudycode/protobuf/google/protobuf/service.h
+END
+message_lite.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/76/trunk/studysolution/cpp/unixstudycode/protobuf/google/protobuf/message_lite.h
+END
+descriptor_database.h
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/76/trunk/studysolution/cpp/unixstudycode/protobuf/google/protobuf/descriptor_database.h
+END
+reflection_ops.h
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/76/trunk/studysolution/cpp/unixstudycode/protobuf/google/protobuf/reflection_ops.h
+END
+generated_message_reflection.h
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/!svn/ver/76/trunk/studysolution/cpp/unixstudycode/protobuf/google/protobuf/generated_message_reflection.h
+END
+unknown_field_set.h
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/76/trunk/studysolution/cpp/unixstudycode/protobuf/google/protobuf/unknown_field_set.h
+END
+descriptor.pb.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/78/trunk/studysolution/cpp/unixstudycode/protobuf/google/protobuf/descriptor.pb.h
+END
+wire_format.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/76/trunk/studysolution/cpp/unixstudycode/protobuf/google/protobuf/wire_format.h
+END
+descriptor.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/78/trunk/studysolution/cpp/unixstudycode/protobuf/google/protobuf/descriptor.h
+END
+message.h
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/76/trunk/studysolution/cpp/unixstudycode/protobuf/google/protobuf/message.h
+END
+extension_set.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/78/trunk/studysolution/cpp/unixstudycode/protobuf/google/protobuf/extension_set.h
+END
+dynamic_message.h
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/76/trunk/studysolution/cpp/unixstudycode/protobuf/google/protobuf/dynamic_message.h
+END

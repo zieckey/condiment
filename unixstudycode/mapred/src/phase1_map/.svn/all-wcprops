@@ -1,0 +1,149 @@
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/182/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_map
+END
+constant.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/118/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_map/constant.h
+END
+buffer_reader.cc
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/176/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_map/buffer_reader.cc
+END
+buffer_reader.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/176/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_map/buffer_reader.h
+END
+file_reader.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/154/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_map/file_reader.h
+END
+thread_writer.cc
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/148/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_map/thread_writer.cc
+END
+buffer_writer.cc
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/172/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_map/buffer_writer.cc
+END
+thread_writer.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/145/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_map/thread_writer.h
+END
+buffer_writer.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/172/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_map/buffer_writer.h
+END
+line_reader.cc
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/137/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_map/line_reader.cc
+END
+command_handler.impl.cc
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/179/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_map/command_handler.impl.cc
+END
+command_handler.cc
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/176/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_map/command_handler.cc
+END
+line_reader.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/136/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_map/line_reader.h
+END
+mid.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/182/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_map/mid.h
+END
+file_handler.cc
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/168/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_map/file_handler.cc
+END
+command_handler.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/179/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_map/command_handler.h
+END
+command_handler.impl.h
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/179/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_map/command_handler.impl.h
+END
+file_writer.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/138/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_map/file_writer.h
+END
+file_handler.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/168/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_map/file_handler.h
+END
+map.result.sorted.txt
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/120/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_map/map.result.sorted.txt
+END
+map.result.txt
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/120/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_map/map.result.txt
+END
+main.cc
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/175/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_map/main.cc
+END
+unordered_map_bucket_calculate.txt
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/!svn/ver/169/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_map/unordered_map_bucket_calculate.txt
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/182/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_map/Makefile
+END
+common.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/153/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_map/common.h
+END

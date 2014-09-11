@@ -1,0 +1,137 @@
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/181/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_reduce
+END
+constant.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/121/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_reduce/constant.h
+END
+buffer_reader.cc
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/136/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_reduce/buffer_reader.cc
+END
+buffer_reader.h
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/136/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_reduce/buffer_reader.h
+END
+file_reader.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/121/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_reduce/file_reader.h
+END
+thread_writer.cc
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/139/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_reduce/thread_writer.cc
+END
+buffer_writer.cc
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/138/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_reduce/buffer_writer.cc
+END
+thread_writer.h
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/139/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_reduce/thread_writer.h
+END
+buffer_writer.h
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/138/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_reduce/buffer_writer.h
+END
+line_reader.cc
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/121/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_reduce/line_reader.cc
+END
+command_handler.impl.cc
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/181/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_reduce/command_handler.impl.cc
+END
+line_reader.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/121/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_reduce/line_reader.h
+END
+mid.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/180/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_reduce/mid.h
+END
+command_handler.cc
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/121/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_reduce/command_handler.cc
+END
+file_handler.cc
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/121/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_reduce/file_handler.cc
+END
+command_handler.h
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/121/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_reduce/command_handler.h
+END
+command_handler.impl.h
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/!svn/ver/180/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_reduce/command_handler.impl.h
+END
+file_writer.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/138/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_reduce/file_writer.h
+END
+file_handler.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/121/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_reduce/file_handler.h
+END
+reduce.result.txt
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/118/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_reduce/reduce.result.txt
+END
+main.cc
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/121/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_reduce/main.cc
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/127/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_reduce/Makefile
+END
+common.h
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/147/trunk/studysolution/cpp/unixstudycode/mapred/src/phase1_reduce/common.h
+END

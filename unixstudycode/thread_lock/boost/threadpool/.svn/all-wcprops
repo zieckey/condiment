@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/530/trunk/studysolution/cpp/unixstudycode/thread_lock/boost/threadpool
+END
+pool.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/530/trunk/studysolution/cpp/unixstudycode/thread_lock/boost/threadpool/pool.hpp
+END
+future.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/530/trunk/studysolution/cpp/unixstudycode/thread_lock/boost/threadpool/future.hpp
+END
+scheduling_policies.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/530/trunk/studysolution/cpp/unixstudycode/thread_lock/boost/threadpool/scheduling_policies.hpp
+END
+task_adaptors.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/530/trunk/studysolution/cpp/unixstudycode/thread_lock/boost/threadpool/task_adaptors.hpp
+END
+size_policies.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/530/trunk/studysolution/cpp/unixstudycode/thread_lock/boost/threadpool/size_policies.hpp
+END
+shutdown_policies.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/!svn/ver/530/trunk/studysolution/cpp/unixstudycode/thread_lock/boost/threadpool/shutdown_policies.hpp
+END
+pool_adaptors.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/530/trunk/studysolution/cpp/unixstudycode/thread_lock/boost/threadpool/pool_adaptors.hpp
+END

@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/530/trunk/studysolution/cpp/unixstudycode/thread_lock/boost/threadpool/detail
+END
+future.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/530/trunk/studysolution/cpp/unixstudycode/thread_lock/boost/threadpool/detail/future.hpp
+END
+locking_ptr.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/!svn/ver/530/trunk/studysolution/cpp/unixstudycode/thread_lock/boost/threadpool/detail/locking_ptr.hpp
+END
+scope_guard.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/!svn/ver/530/trunk/studysolution/cpp/unixstudycode/thread_lock/boost/threadpool/detail/scope_guard.hpp
+END
+worker_thread.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/530/trunk/studysolution/cpp/unixstudycode/thread_lock/boost/threadpool/detail/worker_thread.hpp
+END
+pool_core.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/!svn/ver/530/trunk/studysolution/cpp/unixstudycode/thread_lock/boost/threadpool/detail/pool_core.hpp
+END

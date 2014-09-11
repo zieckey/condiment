@@ -1,0 +1,2 @@
+IP ADDRESS - - [01/Sep/2010:00:00:00 +0800] "GET /v3/XXXXXXXXX?field1=value1&field2=value2&mid=825f8c7953542947e7ee7c31a4362320&ver=7.3.0.2001&field5=value5&field6=value6 HTTP/1.1" 200 22315
+IP ADDRESS - - [12/Feb/2011:02:23:21 +0800] "GET /safe/safeup.cab?src=softmgr&t=8082421&ver=1.2.0.1006&uid=1&pid=h_home&m=7a5546d8005f43d1cbc03b7cae377391 HTTP/1.1" 200 3645

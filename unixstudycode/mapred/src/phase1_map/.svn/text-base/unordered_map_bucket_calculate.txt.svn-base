@@ -1,0 +1,23 @@
+typedef std::tr1::unordered_set<std::string> stringset; //sizeof=48
+typedef std::tr1::unordered_map<std::string, stringset> string_stringset_map;
+
+mid_count=173154812
+mid_len=32
+ver_len=12
+log_average_len=230
+gz_compress_rate=600/4000=0.15
+*** phase1_map ***
+file_size=300M/gz_compress_rate=2000M
+every file :extracted mid/ver total size= file_size * (mid_len+ver_len)/log_average_len=382M
+every file :mid/ver pair count=8.8M, after uniq(0.5):4.4M
+
+bucket_count=4400000(4.4M)
+
+
+*** phase1_reduce ***
+reduce_tasks=70
+total_ver_count=800
+bucket_count=173154812/70=2473640
+
+assume every mid has 2 version, string_stringset_map's element_size=32+48+12*2=104
+total memory=mid_count*element_size/reduce_tasks=104*173154812/70=257258577=250M bytes

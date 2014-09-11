@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/76/trunk/studysolution/cpp/unixstudycode/protobuf/google/protobuf/compiler
+END
+plugin.proto
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/76/trunk/studysolution/cpp/unixstudycode/protobuf/google/protobuf/compiler/plugin.proto
+END
+parser.h
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/76/trunk/studysolution/cpp/unixstudycode/protobuf/google/protobuf/compiler/parser.h
+END
+plugin.h
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/76/trunk/studysolution/cpp/unixstudycode/protobuf/google/protobuf/compiler/plugin.h
+END
+plugin.pb.h
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/76/trunk/studysolution/cpp/unixstudycode/protobuf/google/protobuf/compiler/plugin.pb.h
+END
+code_generator.h
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/!svn/ver/76/trunk/studysolution/cpp/unixstudycode/protobuf/google/protobuf/compiler/code_generator.h
+END
+importer.h
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/76/trunk/studysolution/cpp/unixstudycode/protobuf/google/protobuf/compiler/importer.h
+END
+command_line_interface.h
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/!svn/ver/76/trunk/studysolution/cpp/unixstudycode/protobuf/google/protobuf/compiler/command_line_interface.h
+END
