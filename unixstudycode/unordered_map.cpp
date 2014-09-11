@@ -1,6 +1,8 @@
+#include <string.h>
 #include <iostream>
 #include <string>
 #include <tr1/unordered_map>
+#include <tr1/functional_hash.h>
 #include <tr1/unordered_set>
 
 #include "common.h"
@@ -85,11 +87,16 @@ namespace zl
         {
             std::size_t
                 operator()(const char* __s) const
-#ifdef __linux__
-                { return std::tr1::Fnv_hash<>::hash(__s, strlen(__s)); }
-#else
-                { return std::tr1::_Fnv_hash<>::hash(__s, strlen(__s)); }
-#endif
+                { 
+                    const std::string s(__s, strlen(__s));
+                    return std::tr1::hash<std::string>()(s); 
+                }
+//#ifdef __linux__
+//                { return std::tr1::Fnv_hash<>::hash(__s, strlen(__s)); }
+//                { return std::tr1::Fnv_hash<>::hash(__s, strlen(__s)); }
+//#else
+//                { return std::tr1::_Fnv_hash<>::hash(__s, strlen(__s)); }
+//#endif
         };
 }
 
