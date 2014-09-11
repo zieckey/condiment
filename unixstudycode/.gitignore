@@ -1,0 +1,9 @@
+endian
+closeonexec
+fork_big_memory
+zero_derive
+boost_program_options/main
+boost_ptree/main
+gethostbyname
+getip
+thread_sync_test

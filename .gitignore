@@ -15,3 +15,8 @@
 
 # vim swp file
 *.swp
+
+*.out
+
+ind/inspector_test
+ind/pingpong_server
