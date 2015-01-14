@@ -24,20 +24,22 @@ int main()
 
     sigprocmask(SIG_BLOCK, &newmask, &oldmask);//将newmask中的SIGQUIT阻塞掉，并保存当前信号屏蔽字到Oldmask
 
+    kill(getpid(), SIGQUIT);
+    printf("Send a QUIT sig this pid=%d\n", getpid());
+    
     printf("sleeping ...\n");
-    sleep (15);//休眠15秒钟，这里做说明:在休眠期间，接收到的SIGQUIT信号都会被阻塞，此时会把这些信息存在内核的队列中，等待15s结束后，再处理此信号。 
+    sleep (5);//休眠5秒钟，这里做说明:在休眠期间，接收到的SIGQUIT信号都会被阻塞，此时会把这些信息存在内核的队列中，等待休眠结束后，再处理此信号。 
     printf("awaked\n");
 
-    sigpending(&pendmask);//检查信号是悬而未决的,
-
+    //检查悬而未决的信号
+    sigpending(&pendmask);
     if (sigismember(&pendmask, SIGQUIT))//SIGQUIT是悬而未决的。所谓悬而未决，是指SIGQUIT被阻塞还没有被处理
     {
         printf("SIGQUIT pending\n");
     }
 
-    printf("unblock SIGQUIT\n");
-    sigprocmask(SIG_SETMASK, &oldmask, NULL);//恢复被屏蔽的信号SIGQUIT
-
+    printf("unblocking SIGQUIT\n");
+    sigprocmask(SIG_SETMASK, &oldmask, NULL);//恢复被屏蔽的信号SIGQUIT, 在此之后，就可以处理该信号了
     /**开始处理信号，调用信号处理函数*/ 
 
     printf("exited\n");
