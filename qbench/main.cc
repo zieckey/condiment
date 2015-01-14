@@ -19,10 +19,10 @@ void usage(char** argv)
 
 int main(int argc, char* argv[])
 {
-    int loopCount = 100;
-    int threadCount = 4;
+    int loopCount = 1;
+    int threadCount = 1;
     const char* ip = "127.0.0.1";
-    uint16_t port = 7000;
+    uint16_t port = 80;
     int messageSize = 512;
     int sessionCount = 1;
     int timeout = 1;

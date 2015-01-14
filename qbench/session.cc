@@ -1,7 +1,7 @@
 #include "session.h"
 #include "client.h"
 
-AtomicInt32 Session::totalSession_ = 0;
+AtomicInt32 Session::totalSession_;
 
 void Session::onConnection(const TcpConnectionPtr& conn)
 {
