@@ -108,3 +108,4 @@ test_map_performance/hashmap_map_unorderedmap
 unordered_map
 url_extractor/unittest_proxy_url
 zlib
+wait
