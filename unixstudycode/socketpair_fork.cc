@@ -10,9 +10,9 @@
 int main(int argc,char **argv)
 {
     int z;
-    int s[2];
-    const char *msgp;
-    int mlen;
+    int s[2]; // child use s[1], parent use s[0]
+    const char *msgp = "%A %d-%b-%Y %l:%M %p";
+    int mlen=strlen(msgp);
     char buf[80] = {0};
     pid_t chpid;
     //create a pair of TCP socket
@@ -33,11 +33,8 @@ int main(int argc,char **argv)
     {
         //the child process(client)
         char rxbuf[80] = {0}; //receive buffer
-        printf("parent id:%d\n",getppid());
-        close(s[0]);//server uses s[1],so there is no usage.
-        s[0]=-1;//forget it
-        msgp="%A %d-%b-%Y %l:%M %p";
-        mlen=strlen(msgp);
+        printf("in child process, pid=%d ppid=%d\n", getpid(), getppid());
+        close(s[0]); s[0]=-1;
         printf("child sending request: '%s'\n",msgp);
         fflush(stdout);
         //write a quest to server
@@ -47,12 +44,7 @@ int main(int argc,char **argv)
             printf("write error:%s\n",strerror(errno));
             exit(1);
         }
-        //close the write side of the socket
-        if(shutdown(s[1],SHUT_WR)==-1)
-        {
-            printf("shutdown ShUT_WR error:%s\n",strerror(errno));
-            exit(1);
-        }
+        
         //receive the reply from server
         z=read(s[1],rxbuf,sizeof(rxbuf));
         if(z<0)
@@ -74,8 +66,7 @@ int main(int argc,char **argv)
         time_t td;
         printf("mypid=%d Child pid:%d\n", getpid(), chpid);
         fflush(stdout);
-        close(s[1]);
-        s[1]=-1;
+        close(s[1]); s[1]=-1;
         //wait for a request from server
         z=read(s[0],buf,sizeof(buf));
         printf("parent mypid=%d read:%s\n", getpid(), buf);
