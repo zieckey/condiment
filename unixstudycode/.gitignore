@@ -110,3 +110,5 @@ url_extractor/unittest_proxy_url
 zlib
 wait
 sigprocmask
+sigwaitinfo
+sigprocmask2
