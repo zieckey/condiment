@@ -30,7 +30,7 @@ void checkset()
 {
 
     sigset_t set;
-    printf("\nchecksetstart:\n");
+    printf("checkset start ...\n");
 
     // get the current sigmask of the process
     if(sigprocmask(0,NULL,&set)<0)
@@ -40,11 +40,34 @@ void checkset()
     }
 
     if(sigismember(&set,SIGINT))
-      printf("sigint\n");
+      printf("\tsigint\n");
     if(sigismember(&set,SIGTSTP))
-      printf("sigtstp\n");
-
+      printf("\tsigtstp\n");
     if(sigismember(&set,SIGTERM))
-      printf("sigterm\n");
-    printf("checksetend\n");
+      printf("\tsigterm\n");
+
+    printf("checkset end\n\n");
 }
+
+/* output :
+
+checkset start ...
+checkset end
+
+checkset start ...
+        sigint
+        sigtstp
+checkset end
+
+checkset start ...
+        sigint
+        sigtstp
+        sigterm
+checkset end
+
+checkset start ...
+        sigterm
+checkset end
+*/
+
+
