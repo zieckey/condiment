@@ -3,7 +3,7 @@
 #include "fd_event.h"
 #include "libevent_headers.h"
 
-namespace evqing {
+namespace evpp {
 
     FdEvent::FdEvent(struct event_base* loop)
         : loop_(loop)
@@ -58,7 +58,7 @@ namespace evqing {
         struct timeval tv;
         struct timeval * ptv = NULL;
         if (timeout_us > 0) {
-            tv = evqing::timevalconv(timeout_us);
+            tv = evpp::timevalconv(timeout_us);
             ptv = &tv;
         }
 

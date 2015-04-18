@@ -13,7 +13,7 @@
 struct event;
 struct event_base;
 
-namespace evqing {
+namespace evpp {
 
 
     class _EXPORT_LIBEVENTPP EventWatcher {

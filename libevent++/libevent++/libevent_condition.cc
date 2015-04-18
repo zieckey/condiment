@@ -3,7 +3,7 @@
 
 #include "libevent_headers.h"
 
-namespace evqing
+namespace evpp
 {
 
 // #ifndef _DERIVED_FROM_PIPED_EVENT_WATCHER

@@ -16,7 +16,7 @@ namespace
         event_base_loopexit(base, 0);
     }
 
-    static void MyEventThread(struct event_base* base, evqing::Condition* ev)
+    static void MyEventThread(struct event_base* base, evpp::Condition* ev)
     {
         if (ev->Init(base))
         {
@@ -29,7 +29,7 @@ namespace
 TEST_UNIT(http_Event_test)
 {
     struct event_base* base = event_base_new();
-    evqing::Condition ev(std::tr1::bind(Handle, base));
+    evpp::Condition ev(std::tr1::bind(Handle, base));
     std::thread th(MyEventThread, base, &ev);
     ::usleep(1000 * 100);
     ev.Notify();

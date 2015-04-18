@@ -8,7 +8,7 @@
 struct event;
 struct event_base;
 
-namespace evqing {
+namespace evpp {
 
 // #ifndef _DERIVED_FROM_PIPED_EVENT_WATCHER
 // 

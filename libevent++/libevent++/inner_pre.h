@@ -28,7 +28,7 @@
 
 #endif
 
-namespace evqing
+namespace evpp
 {
     //! Module symbol export
 #ifdef H_WINDOWS_API

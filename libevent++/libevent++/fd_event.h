@@ -5,8 +5,8 @@
 
 struct event_base;
 struct event;
-namespace evqing {
 
+namespace evpp {
     class _EXPORT_LIBEVENTPP FdEvent {
         static const int kTimedOut = 4;
     public:

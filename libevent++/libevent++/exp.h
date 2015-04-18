@@ -11,7 +11,7 @@
 H_LINK_LIB( "libevent++")
 #endif // end of #ifdef H_OS_WINDOWS
 
-namespace evqing
+namespace evpp
 {
 
     //! Module symbol export

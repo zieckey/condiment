@@ -3,7 +3,7 @@
 #include "libevent_watcher.h"
 #include "libevent_headers.h"
 
-namespace evqing
+namespace evpp
 {
 
     EventWatcher::EventWatcher(struct event_base* evbase, const Handler& handler)

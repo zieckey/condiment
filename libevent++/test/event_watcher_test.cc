@@ -18,7 +18,7 @@ namespace timed
         event_base_loopexit(base, 0);
     }
 
-    static void MyEventThread(struct event_base* base, evqing::TimedEventWatcher* ev)
+    static void MyEventThread(struct event_base* base, evpp::TimedEventWatcher* ev)
     {
         ev->Init();
         ev->Watch(g_timeout_us);
@@ -30,11 +30,11 @@ TEST_UNIT(TimedEventWatcher_test)
 {
     using namespace timed;
     struct event_base* base = event_base_new();
-    evqing::TimedEventWatcher ev(base, std::tr1::bind(Handle, base));
+    evpp::TimedEventWatcher ev(base, std::tr1::bind(Handle, base));
     std::thread th(MyEventThread, base, &ev);
-    uint64_t start = evqing::utcmicrosecond();
+    uint64_t start = evpp::utcmicrosecond();
     th.join();
-    uint64_t end = evqing::utcmicrosecond();
+    uint64_t end = evpp::utcmicrosecond();
     H_TEST_ASSERT(end - start >= g_timeout_us);
     H_TEST_ASSERT(g_event_handler_called);
     event_base_free(base);
