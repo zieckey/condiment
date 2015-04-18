@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include <string.h>
+#include <stdint.h>
+#include <stdlib.h>
 
 #include <sys/time.h>
 #include <assert.h>
@@ -73,7 +76,7 @@ void test1_random()
         << timebuf << std::endl;
 
     {
-        const int sz = 100;
+        const uint32_t sz = 100;
         char a[sz] = {};
         Random rnd( sz );
         for ( int i = 0; i < sz; ++i )

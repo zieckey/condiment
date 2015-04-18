@@ -4,7 +4,8 @@ CC=gcc
 CXX=g++
 AR=ar
 ARFLAGS=cru
-MUDUOPATH=$(HOME)/mcx/3rdparty/muduo
+#MUDUOPATH=$(HOME)/mcx/3rdparty/muduo
+MUDUOPATH=$(HOME)/muduo
 CFLAGS= -g -c -fPIC \
 	   -Wshadow -Wcast-qual -Wcast-align \
 	   -Wwrite-strings -Wsign-compare \

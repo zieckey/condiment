@@ -16,9 +16,16 @@
 # vim swp file
 *.swp
 
+<<<<<<< HEAD
 
 libevent++/msvc/Debug/
 libevent++/msvc/Release/
 libevent++/msvc/bin/
 libevent++/msvc/libevent++.opensdf
 unixstudycode.tar.gz
+=======
+*.out
+
+ind/inspector_test
+ind/pingpong_server
+>>>>>>> 1d849d38d53958dfabbd101e5091a1e1bba0c2e1

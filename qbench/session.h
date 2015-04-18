@@ -2,7 +2,7 @@
 #define BETCH_SESSION_H
 
 #include <muduo/net/TcpClient.h>
-
+#include <muduo/base/Atomic.h>
 #include <muduo/base/Logging.h>
 #include <muduo/base/Thread.h>
 #include <muduo/net/EventLoop.h>
@@ -35,7 +35,7 @@ class Session : boost::noncopyable
     : tcp_client_(loop, serverAddr, name),
       owner_(owner),
       lastSendTime_us_(Timestamp::now().microSecondsSinceEpoch()),
-      sendMsgInterval_us_(sendMsgInterval * 1000 * 1000),
+      sendMsgInterval_us_(int64_t(sendMsgInterval * 1000 * 1000)),
       loopCount_(loopCount),
       bytesRead_(0),
       bytesWritten_(0),

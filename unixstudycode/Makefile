@@ -12,16 +12,32 @@ AR=ar
 ARFLAGS=cru
 CFLAGS=-g -D_DEBUG -D_TRACE -pg -fPIC -Wshadow -Wcast-qual -Wcast-align -Wwrite-strings -Wsign-compare -Winvalid-pch -fms-extensions -Wall -I/usr/local/include -I.
 CPPFLAGS=-Woverloaded-virtual -Wsign-promo -fno-gnu-keywords 
-LDFLAGS=-lstdc++ -L/usr/local/lib -lpthread
+LDFLAGS=-lstdc++ -L/usr/local/lib -lpthread -ldl
 
 C_SRCS=$(wildcard *.c)
 CPP_SRCS=$(wildcard *.cpp) 
+CC_SRCS=$(wildcard *.cc) 
 
 OBJS=$(patsubst %.c, %.o, $(C_SRCS) )		
 OBJS+=$(patsubst %.cpp, %.o, $(CPP_SRCS) )
+OBJS+=$(patsubst %.cc, %.o, $(CC_SRCS) )
 PROGRAMS=$(patsubst %.o, %, $(OBJS) )		
 		
-SUBDIRS=c_call_cpp rsa protobuf shared_ptr libevent boost test_map_performance thread_lock
+SUBDIRS=echo-server \
+				evhttp \
+				c_call_cpp \
+				rsa \
+				protobuf \
+				shared_ptr \
+				libevent \
+				test_map_performance \
+				boost \
+				boost_asio \
+				boost_program_options \
+				boost_ptree \
+				boost_shared_memory_map \
+				url_extractor \
+				string_copy 
 
     
 TOPDIR=`pwd`
@@ -32,10 +48,19 @@ all: $(OBJS) $(PROGRAMS)
 zlib : zlib.o 
 	$(CC) $(LDFLAGS)  -lz zlib.o -o $@
 	
+pcre_test: pcre_test.o
+	$(CC) $(LDFLAGS) $^ -lpcre -o $@
+	
+genrsakey: genrsakey.o
+	$(CC) $(LDFLAGS) $^ -lcrypto -o $@
+	
 %.o : %.c
 	$(CC) -c $(CFLAGS) $< -o $@
 	
 %.o : %.cpp
+	$(CXX) -c $(CFLAGS) $(CPPFLAGS) $< -o $@
+
+%.o : %.cc
 	$(CXX) -c $(CFLAGS) $(CPPFLAGS) $< -o $@
 
 clean:

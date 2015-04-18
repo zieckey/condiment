@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <stdint.h>
+#include <string.h>
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -9,7 +12,7 @@
 #include <tr1/unordered_set>
 
 namespace zl
-{ //{{{
+{ //
     struct equal_to
     {
         bool operator()(const char* s1, const char* s2) const
@@ -23,11 +26,7 @@ namespace zl
         {
             std::size_t
                 operator()(const std::string& __s) const
-#ifdef __linux__
-                { return std::tr1::Fnv_hash<>::hash(__s.data(), __s.length()); }
-#else
-                { return std::tr1::_Fnv_hash<>::hash(__s.data(), __s.length()); }
-#endif
+                { return std::tr1::hash<const std::string&>()(__s); }
         };
 
     
@@ -36,13 +35,9 @@ namespace zl
         {
             std::size_t
                 operator()(const char* __s) const
-#ifdef __linux__
-                { return std::tr1::Fnv_hash<>::hash(__s, strlen(__s)); }
-#else
-                { return std::tr1::_Fnv_hash<>::hash(__s, strlen(__s)); }
-#endif
+                { return std::tr1::hash<const std::string&>()(std::string(__s, strlen(__s))); }
         };
-}//}}}
+}//
 
 typedef std::list<std::string> string_list;
 typedef std::map<std::string, int> string_map;

@@ -58,7 +58,7 @@ namespace evqing {
         struct timeval tv;
         struct timeval * ptv = NULL;
         if (timeout_us > 0) {
-            tv = osl::timevalconv(timeout_us);
+            tv = evqing::timevalconv(timeout_us);
             ptv = &tv;
         }
 

@@ -54,5 +54,8 @@
 #   define H_LINK_LIB( filename )
 #endif
 
+#ifdef H_OS_WINDOWS
+#define usleep(us) Sleep((us)/1000);
+#endif
 
 #endif

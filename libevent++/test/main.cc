@@ -1,7 +1,6 @@
-
-
 #include "test_common.h"
 
+#include "libevent++/libevent_headers.h"
 
 #ifdef WIN32
 #   ifdef _DEBUG
@@ -17,9 +16,22 @@
 namespace
 {
 #ifdef WIN32
-    struct OnAppExit
+    struct OnApp
     {
-        ~OnAppExit()
+        OnApp()
+        {
+            // Initialize net work.
+            WSADATA wsaData;
+            // Initialize Winsock 2.2
+            int nError = WSAStartup(MAKEWORD(2, 2), &wsaData);
+
+            if (nError)
+            {
+                std::cout << "WSAStartup() failed with error: %d" << nError;
+            }
+
+        }
+        ~OnApp()
         {
             system("pause");
         }

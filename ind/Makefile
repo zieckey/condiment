@@ -4,7 +4,8 @@ CC=gcc
 CXX=g++
 AR=ar
 ARFLAGS=cru
-MUDUOPATH=$(HOME)/mcx/3rdparty/muduo
+#MUDUOPATH=$(HOME)/mcx/3rdparty/muduo
+MUDUOPATH=/home/weizili/workspace/muduo.zieckey/muduo
 CFLAGS= -g -O3 -c -fPIC \
 	   -Wshadow -Wcast-qual -Wcast-align \
 	   -Wwrite-strings -Wsign-compare \
@@ -19,7 +20,7 @@ LDFLAGS=-L/usr/local/lib \
 		$(MUDUOLIBPATH)/libmuduo_http.a \
 		$(MUDUOLIBPATH)/libmuduo_net.a \
 		$(MUDUOLIBPATH)/libmuduo_base.a \
-		-lpthread 
+		-lpthread -ltcmalloc_and_profiler
 
 SRCS := $(wildcard *.cc)
 OBJS := $(patsubst %.cc, .obj/%.o, $(SRCS))

@@ -44,13 +44,14 @@ namespace evqing
     {
         struct timeval tv;
         struct timeval* timeoutval = NULL;
-        if (timeout_us != 0)
+
+        if (timeout_us > 0)
         {
-            tv.tv_sec  = (long)timeout_us / 1000000;
+            tv.tv_sec = (long)timeout_us / 1000000;
             tv.tv_usec = (long)timeout_us % 1000000;
             timeoutval = &tv;
         }
-
+        
         if (event_add(event_, timeoutval) != 0) {
             return false;
         }
@@ -87,6 +88,7 @@ namespace evqing
         if (evutil_socketpair(AF_UNIX, SOCK_STREAM, 0, pipe_) < 0) {
             goto failed;
         }
+
         if (evutil_make_socket_nonblocking(pipe_[0]) < 0 ||
             evutil_make_socket_nonblocking(pipe_[1]) < 0) {
             goto failed;

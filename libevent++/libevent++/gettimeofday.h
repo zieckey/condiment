@@ -105,7 +105,7 @@ inline int gettimeofday(struct timeval *tp, void *tzp)
 
 #endif //end of WIN32
 
-namespace osl
+namespace evqing
 {
     inline double utcsecond()
     {
