@@ -5,9 +5,11 @@
 
 #ifdef WIN32
 #   ifdef _DEBUG
-// #		pragma comment(lib, "qhsec.lib")
+#		pragma comment(lib, "libevent++.lib")
+#		pragma comment(lib,"libevent_d.lib")
 #   else
-// #		pragma comment(lib, "qhsec.lib")
+#		pragma comment(lib, "libevent++.lib")
+#		pragma comment(lib,"libevent.lib")
 #   endif
 #	pragma comment(lib,"Ws2_32.lib")
 #endif

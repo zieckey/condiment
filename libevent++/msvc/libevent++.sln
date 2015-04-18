@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libevent++", "libevent++.vcxproj", "{4877AA94-AD55-407F-9ED3-D4503FAB2A7F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libevent++-test", "libevent++-test.vcxproj", "{13C5E832-391B-47E7-9907-182553B0175E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4877AA94-AD55-407F-9ED3-D4503FAB2A7F} = {4877AA94-AD55-407F-9ED3-D4503FAB2A7F}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -24,6 +24,9 @@
     <ClCompile Include="..\test\main.cc">
       <Filter>gtest</Filter>
     </ClCompile>
+    <ClCompile Include="..\test\event_watcher_test.cc">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\test\test_common.h">

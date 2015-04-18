@@ -10,4 +10,53 @@
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\libevent++\fd_event.cc">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libevent++\inner_pre.cc">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libevent++\libevent_compact.cc">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libevent++\libevent_condition.cc">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libevent++\libevent_watcher.cc">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libevent++\pch.cc">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\libevent++\exp.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libevent++\fd_event.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libevent++\inner_pre.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libevent++\libevent_condition.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libevent++\libevent_headers.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libevent++\libevent_watcher.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libevent++\mx_pipe.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libevent++\platform_config.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libevent++\gettimeofday.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>
