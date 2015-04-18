@@ -15,3 +15,10 @@
 
 # vim swp file
 *.swp
+
+
+libevent++/msvc/Debug/
+libevent++/msvc/Release/
+libevent++/msvc/bin/
+libevent++/msvc/libevent++.opensdf
+unixstudycode.tar.gz
