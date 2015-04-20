@@ -17,10 +17,10 @@ void usage(char* argv[]) {
 }
 
 /**
- * 1. 关闭读：不会触发任何事件。
- * 2. 关闭写：会触发 POLLIN 事件
- * 3. 关闭读和写：会触发 POLLIN|POLLHUP 事件
- * 4. 如果先后关闭读写(或写读)，后面的那个动作就会触发 POLLIN|POLLHUP 事件，相当于只调用一次 close
+ * 1. 关闭读：不会触发对方任何事件。
+ * 2. 关闭写：会触发对方 POLLIN 事件，对方然后调用 read/recv 返回 0.
+ * 3. 关闭读和写：会触发对方 POLLIN|POLLHUP 事件
+ * 4. 如果先后关闭读写(或写读)，后面的那个动作就会触发对方 POLLIN|POLLHUP 事件，相当于只调用一次 close
  */
 
 int main(int argc, char* argv[])

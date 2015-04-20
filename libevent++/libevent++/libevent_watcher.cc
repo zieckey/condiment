@@ -1,5 +1,7 @@
 #include "inner_pre.h"
 
+#include <string.h>
+
 #include "libevent_watcher.h"
 #include "libevent_headers.h"
 
