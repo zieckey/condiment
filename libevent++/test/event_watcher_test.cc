@@ -6,7 +6,6 @@
 #include "libevent++/libevent_condition.h"
 #include "libevent++/libevent_watcher.h"
 #include <boost/thread.hpp>
-#include <thread>
 
 namespace timed
 {

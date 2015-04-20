@@ -4,8 +4,7 @@
 
 #include "libevent++/libevent_headers.h"
 #include "libevent++/libevent_condition.h"
-//#include <boost/thread.hpp>
-#include <thread>
+#include <boost/thread.hpp>
 
 namespace
 {
@@ -30,7 +29,7 @@ TEST_UNIT(http_Event_test)
 {
     struct event_base* base = event_base_new();
     evpp::Condition ev(std::tr1::bind(Handle, base));
-    std::thread th(MyEventThread, base, &ev);
+    boost::thread th(MyEventThread, base, &ev);
     ::usleep(1000 * 100);
     ev.Notify();
     th.join();

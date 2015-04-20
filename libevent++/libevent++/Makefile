@@ -1,4 +1,3 @@
-# weizili@360.cn 
 
 CC=gcc
 CXX=g++
@@ -54,7 +53,4 @@ install: $(TARGET_A) $(TARGET_SO)
 
 clean:
 	rm -rf src/*.o src/*.d $(OBJS) $(DEPS) $(TARGET_SO) $(TARGET_A)
-	$(MAKE) clean -C test
-	$(MAKE) clean -C quick_test
-	$(MAKE) clean -C quick_gtest
 

@@ -5,7 +5,7 @@
 
 /**
 *    How to write a unit test:
-*    Please see <code>test/*.cc</code>
+*    Please see <code>*_test.cc</code>
 *
 *    Usage:
 *
