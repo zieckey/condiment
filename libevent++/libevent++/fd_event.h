@@ -10,11 +10,11 @@ namespace evpp {
     class _EXPORT_LIBEVENTPP FdEvent {
         static const int kTimedOut = 4;
     public:
-        enum Type {
+        enum EventType {
             kReadable = 1,
             kWritable = 2,
         };
-        typedef std::tr1::function<void(int /*Type*/)> Functor;
+        typedef std::tr1::function<void(int /*enum EventType*/)> Functor;
 
         FdEvent(struct event_base* loop);
         ~FdEvent();

@@ -42,7 +42,6 @@ extern "C" {
     struct event * event_new(struct event_base *base, int fd, short events, void(*cb)(int, short, void *), void *arg);
     void event_free(struct event *ev);
 }
-
 #endif
 
 #endif // #ifndef LIBEVENTPP_ALL_LIBEVENT_HEADERS_H_

@@ -75,7 +75,6 @@ namespace evpp {
         LOG_INFO << "FdEvent Cancel called";
 
         if (!active_) {
-            //DLOG(INFO) << "FdEvent Cancel called, not active, obj: " << this;
             return;
         }
 
@@ -99,10 +98,7 @@ namespace evpp {
     }
 
     void FdEvent::Notify(int fd, short what, void *arg) {
-
         CHECK_NOTNULL(arg);
-
-        //DLOG(INFO) << "Notify called";
 
         FdEvent *self = static_cast<FdEvent *>(arg);
 
@@ -123,30 +119,18 @@ namespace evpp {
             return;
         }
 
-        //DLOG(INFO) << "call try catch block";
 
-        try {
-            LOG_INFO << "active: "
-                << self->active_
-                << ", fd: " << fd;
+        LOG_INFO << "active: "
+            << self->active_
+            << ", fd: " << fd;
 
-            if (self->active_) {
-                LOG_INFO << "Notify call handler, fd: " << fd;
-                self->handler_(self->flags_);
-            }
-            else {
-                LOG_WARN << "FDEvent, Notify nothing to do, fd: " << fd;
-            }
-
+        if (self->active_) {
+            LOG_INFO << "Notify call handler, fd: " << fd;
+            self->handler_(self->flags_);
         }
-        catch (const std::exception& e) {
-            LOG_ERROR << "FdEvent handler exception: " << e.what();
+        else {
+            LOG_WARN << "FDEvent, Notify nothing to do, fd: " << fd;
         }
-        catch (...) {
-            LOG_ERROR << "FdEvent handler error";
-        }
-
-        //LOG(INFO) << "Notify completed and call cancel";
     }
 
     void FdEvent::AsyncWait(int fd, int events, const Functor& handler, uint32_t timeout_us) {
