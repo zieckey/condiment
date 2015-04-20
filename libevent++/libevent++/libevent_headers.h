@@ -14,12 +14,14 @@
 	#include <WinSock2.h>
 	#include <event/event.h>
 	#include <event/evhttp.h>
+    #include <event/evutil.h>
     #define _LIBEVENT14 1
 #else
 	#include <sys/queue.h>
     #ifdef _LIBEVENT14
         #include <event.h>
         #include <evhttp.h>
+        #include <event/evutil.h>
     #else
         #include <event2/event.h>
         #include <event2/event_struct.h>

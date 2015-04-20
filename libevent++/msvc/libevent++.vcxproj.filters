@@ -49,9 +49,6 @@
     <ClInclude Include="..\libevent++\libevent_watcher.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="..\libevent++\mx_pipe.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="..\libevent++\platform_config.h">
       <Filter>include</Filter>
     </ClInclude>

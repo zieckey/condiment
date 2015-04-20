@@ -5,7 +5,7 @@
 #include "libevent++/libevent_headers.h"
 #include "libevent++/libevent_condition.h"
 #include "libevent++/libevent_watcher.h"
-//#include <boost/thread.hpp>
+#include <boost/thread.hpp>
 #include <thread>
 
 namespace timed
@@ -31,7 +31,7 @@ TEST_UNIT(TimedEventWatcher_test)
     using namespace timed;
     struct event_base* base = event_base_new();
     evpp::TimedEventWatcher ev(base, std::tr1::bind(Handle, base));
-    std::thread th(MyEventThread, base, &ev);
+    boost::thread th(MyEventThread, base, &ev);
     uint64_t start = evpp::utcmicrosecond();
     th.join();
     uint64_t end = evpp::utcmicrosecond();
@@ -42,10 +42,12 @@ TEST_UNIT(TimedEventWatcher_test)
 
 TEST_UNIT(evutil_socketpair_test)
 {
-    int pipe_[2];
-    memset(pipe_, 0, sizeof(pipe_[0] * 2));
+    int sockpair[2];
+    memset(sockpair, 0, sizeof(sockpair[0] * 2));
 
-    int r = evutil_socketpair(AF_UNIX, SOCK_STREAM, 0, pipe_);
+    int r = evutil_socketpair(AF_UNIX, SOCK_STREAM, 0, sockpair);
     H_TEST_ASSERT(r >= 0);
+    EVUTIL_CLOSESOCKET(sockpair[0]);
+    EVUTIL_CLOSESOCKET(sockpair[1]);
 }
 

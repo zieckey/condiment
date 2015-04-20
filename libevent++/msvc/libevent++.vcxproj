@@ -26,7 +26,6 @@
     <ClInclude Include="..\libevent++\libevent_condition.h" />
     <ClInclude Include="..\libevent++\libevent_headers.h" />
     <ClInclude Include="..\libevent++\libevent_watcher.h" />
-    <ClInclude Include="..\libevent++\mx_pipe.h" />
     <ClInclude Include="..\libevent++\platform_config.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
