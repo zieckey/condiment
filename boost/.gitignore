@@ -1,1 +1,3 @@
-test/libevent++
+msvc/bin/
+msvc/boost.opensdf
+msvc/boost.sdf
