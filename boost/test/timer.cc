@@ -22,3 +22,12 @@ TEST_UNIT(time_duration_test)
     boost::posix_time::time_duration t;
     std::cout << "sizeof(boost::posix_time::time_duration)=" << sizeof(t) << std::endl;
 }
+
+
+#include <boost/date_time/posix_time/ptime.hpp>
+
+TEST_UNIT(ptime_test)
+{
+    boost::posix_time::ptime t;
+    std::cout << "sizeof(boost::posix_time::ptime)=" << sizeof(t) << std::endl;
+}
