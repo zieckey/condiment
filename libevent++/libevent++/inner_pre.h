@@ -4,30 +4,6 @@
 
 #include "platform_config.h"
 
-#include <assert.h>
-#include <stdint.h>
-#include <iostream>
-
-#include "gettimeofday.h"
-
-#ifdef H_OS_WINDOWS
-#include <functional>
-#else
-#include <tr1/functional>
-#endif
-
-#ifndef IMPORT_LOGGER_H
-#define LOG_TRACE std::cout << __FILE__ << ":" << __LINE__
-#define LOG_DEBUG std::cout << __FILE__ << ":" << __LINE__
-#define LOG_INFO  std::cout << __FILE__ << ":" << __LINE__
-#define LOG_WARN  std::cout << __FILE__ << ":" << __LINE__
-#define LOG_ERROR std::cout << __FILE__ << ":" << __LINE__
-
-#define CHECK_NOTNULL(val) \
-    LOG_ERROR << "'" #val "' Must be non NULL";
-
-#endif
-
 namespace evpp
 {
     //! Module symbol export

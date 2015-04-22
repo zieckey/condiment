@@ -1,7 +1,8 @@
-#ifndef _OSLIB_GETTIMEOFDAY_H_
-#define _OSLIB_GETTIMEOFDAY_H_
+#ifndef LIBEVENTPP_GETTIMEOFDAY_H_
+#define LIBEVENTPP_GETTIMEOFDAY_H_
 
 #include <time.h>
+
 #ifdef WIN32
 #define _WINSOCKAPI_  
 #include <windows.h>

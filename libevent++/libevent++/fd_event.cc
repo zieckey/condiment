@@ -1,9 +1,13 @@
 #include "inner_pre.h"
 
+#include <boost/static_assert.hpp>
+
 #include "fd_event.h"
 #include "libevent_headers.h"
 
 namespace evpp {
+    BOOST_STATIC_ASSERT(FdEvent::kReadable == EV_READ);
+    BOOST_STATIC_ASSERT(FdEvent::kWritable == EV_WRITE);
 
     FdEvent::FdEvent(struct event_base* loop)
         : loop_(loop)

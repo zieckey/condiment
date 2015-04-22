@@ -20,7 +20,6 @@ namespace evpp {
     public:
         typedef std::tr1::function<void()> Handler;
 
-        EventWatcher(struct event_base* evbase, const Handler& handler);
         virtual ~EventWatcher();
 
         bool Init();
@@ -35,6 +34,8 @@ namespace evpp {
         }
 
     protected:
+        EventWatcher(struct event_base* evbase, const Handler& handler);
+
         void Close();
 
         virtual bool DoInit() = 0;
@@ -48,7 +49,7 @@ namespace evpp {
         Handler handler_;
     };
 
-
+    //////////////////////////////////////////////////////////////////////////
     class _EXPORT_LIBEVENTPP PipedEventWatcher : public EventWatcher {
     public:
         PipedEventWatcher(struct event_base *event_base,
@@ -63,6 +64,7 @@ namespace evpp {
         int pipe_[2];
     };
 
+    //////////////////////////////////////////////////////////////////////////
     class _EXPORT_LIBEVENTPP TimedEventWatcher : public EventWatcher {
     public:
         TimedEventWatcher(struct event_base *event_base,
@@ -77,6 +79,7 @@ namespace evpp {
 
 	typedef TimedEventWatcher EventTimer;
 
+    //////////////////////////////////////////////////////////////////////////
 #ifdef H_OS_LINUX
     class SignalEventWatcher : public EventWatcher {
     public:

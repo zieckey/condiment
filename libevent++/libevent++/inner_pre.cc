@@ -16,8 +16,8 @@
 #	endif
 #endif
 
-//! linked in osl
 #	pragma comment(lib,"Ws2_32.lib")
+#	pragma comment(lib,"libglog_static.lib")
 #endif
 
 
@@ -37,8 +37,4 @@ void sig_child( int )
 }
 
 #endif
-
-namespace http
-{
-};
 

@@ -11,8 +11,8 @@ namespace evpp {
         static const int kTimedOut = 4;
     public:
         enum EventType {
-            kReadable = 1,
-            kWritable = 2,
+            kReadable = 0x02,
+            kWritable = 0x04,
         };
         typedef std::tr1::function<void(int /*enum EventType*/)> Functor;
 
@@ -26,12 +26,12 @@ namespace evpp {
         //! param[in] - uint32_t timeout_us - the maximum amount of time to wait for the event, 
         //!             or 0 to wait forever
         //! return - void
-        void AsyncWait(int fd, int events, const Functor& handler, uint32_t timeout_us = 0);
+        void AsyncWait(int fd, int events/*enum EventType*/, const Functor& handler, uint32_t timeout_us = 0);
         void Cancel();
 
     protected:
-        void Start(int fd, int events, uint32_t timeout_us);
-        static void Notify(int fd, short what, void *arg);
+        void Start(int fd, int events/*enum EventType*/, uint32_t timeout_us);
+        static void Notify(int fd, short what/*enum EventType*/, void *arg);
 
         struct event_base* loop_;
         struct event *ev_;

@@ -9,6 +9,12 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="util">
+      <UniqueIdentifier>{ff5db783-2ed0-41c4-9543-d05587140e55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net">
+      <UniqueIdentifier>{eee53411-c7a0-4552-85ab-81e36a0b66cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\libevent++\fd_event.cc">
@@ -28,6 +34,9 @@
     </ClCompile>
     <ClCompile Include="..\libevent++\pch.cc">
       <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libevent++\fd_event_watcher.cc">
+      <Filter>net</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -54,6 +63,21 @@
     </ClInclude>
     <ClInclude Include="..\libevent++\fd_event.h">
       <Filter>condition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libevent++\timestamp.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libevent++\timestamp.inl.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libevent++\duration.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libevent++\duration.inl.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libevent++\fd_event_watcher.h">
+      <Filter>net</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

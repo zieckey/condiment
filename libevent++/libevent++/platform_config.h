@@ -17,6 +17,40 @@
 #endif
 #endif
 
+
+#include <assert.h>
+#include <stdint.h>
+#include <iostream>
+
+#include "gettimeofday.h"
+
+#define GOOGLE_GLOG_DLL_DECL           // 使用静态glog库时，必须定义这个
+#define GLOG_NO_ABBREVIATED_SEVERITIES // 没这个编译会出错,传说因为和Windows.h冲突
+#include <glog/logging.h>
+
+#ifdef H_OS_WINDOWS
+#include <functional>
+#else
+#include <tr1/functional>
+#endif
+
+#ifdef GOOGLE_LOG_INFO
+#define LOG_TRACE LOG(INFO)
+#define LOG_DEBUG LOG(INFO)
+#define LOG_INFO  LOG(INFO)
+#define LOG_WARN  LOG(WARNING)
+#define LOG_ERROR LOG(ERROR)
+#else
+#define LOG_TRACE std::cout << __FILE__ << ":" << __LINE__
+#define LOG_DEBUG std::cout << __FILE__ << ":" << __LINE__
+#define LOG_INFO  std::cout << __FILE__ << ":" << __LINE__
+#define LOG_WARN  std::cout << __FILE__ << ":" << __LINE__
+#define LOG_ERROR std::cout << __FILE__ << ":" << __LINE__
+
+#define CHECK_NOTNULL(val) \
+    LOG_ERROR << "'" #val "' Must be non NULL";
+#endif
+
 //////////////////////////////////////////////////////////////////////////
 //                              Link Helper Macro                       //
 //  Use: H_LINK_LIB(libname) to import a library.                       //
@@ -56,6 +90,10 @@
 
 #ifdef H_OS_WINDOWS
 #define usleep(us) Sleep((us)/1000);
+#endif
+
+#ifdef H_OS_WINDOWS
+#pragma warning( disable: 4251 )
 #endif
 
 #endif
