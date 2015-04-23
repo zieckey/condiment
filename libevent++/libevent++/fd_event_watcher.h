@@ -14,6 +14,7 @@ namespace evpp {
     class _EXPORT_LIBEVENTPP FdEventWatcher : public EventWatcher {
     public:
         enum EventType {
+            kNone     = 0x00,
             kReadable = 0x02,
             kWritable = 0x04,
         };
@@ -30,6 +31,8 @@ namespace evpp {
             write_cb_ = cb;
         }
 
+        int fd() const { return fd_; }
+
     private:
         virtual bool DoInit();
         virtual void DoClose();
@@ -43,6 +46,7 @@ namespace evpp {
         EventCallback close_cb_;
         EventCallback error_cb_;
 
+        int events_;
         int fd_;
     };
 

@@ -12,12 +12,12 @@ namespace evpp
 
     FdEventWatcher::FdEventWatcher(struct event_base *event_base,
         int fd)
-        : EventWatcher(event_base, Handler()), fd_(fd)
+        : EventWatcher(event_base, Handler()), events_(kWritable | kReadable), fd_(fd)
     {
     }
 
     bool FdEventWatcher::DoInit() {
-        event_set(event_, fd_, EV_READ | EV_WRITE | EV_PERSIST,
+        event_set(event_, fd_, events_ | EV_PERSIST,
             FdEventWatcher::HandlerFn, this);
         return true;
     }

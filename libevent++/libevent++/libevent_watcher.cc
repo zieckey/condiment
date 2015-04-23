@@ -116,10 +116,7 @@ namespace evpp
         char buf[128];
         int n = 0;
         if ((n = recv(e->pipe_[1], buf, sizeof(buf), 0)) > 0) {
-            try {
-                e->handler_();
-            }
-            catch (...) {}
+            e->handler_();
         }
     }
 
