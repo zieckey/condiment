@@ -11,28 +11,26 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\libevent++\fd_event_watcher.cc" />
-    <ClCompile Include="..\libevent++\fd_event.cc" />
-    <ClCompile Include="..\libevent++\inner_pre.cc" />
-    <ClCompile Include="..\libevent++\libevent_compact.cc" />
-    <ClCompile Include="..\libevent++\libevent_condition.cc" />
-    <ClCompile Include="..\libevent++\libevent_watcher.cc" />
-    <ClCompile Include="..\libevent++\pch.cc" />
+    <ClCompile Include="..\libeventcpp\fd_event_watcher.cc" />
+    <ClCompile Include="..\libeventcpp\fd_event.cc" />
+    <ClCompile Include="..\libeventcpp\inner_pre.cc" />
+    <ClCompile Include="..\libeventcpp\libevent_compact.cc" />
+    <ClCompile Include="..\libeventcpp\libevent_watcher.cc" />
+    <ClCompile Include="..\libeventcpp\pch.cc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\libevent++\duration.h" />
-    <ClInclude Include="..\libevent++\duration.inl.h" />
-    <ClInclude Include="..\libevent++\exp.h" />
-    <ClInclude Include="..\libevent++\fd_event.h" />
-    <ClInclude Include="..\libevent++\fd_event_watcher.h" />
-    <ClInclude Include="..\libevent++\gettimeofday.h" />
-    <ClInclude Include="..\libevent++\inner_pre.h" />
-    <ClInclude Include="..\libevent++\libevent_condition.h" />
-    <ClInclude Include="..\libevent++\libevent_headers.h" />
-    <ClInclude Include="..\libevent++\libevent_watcher.h" />
-    <ClInclude Include="..\libevent++\platform_config.h" />
-    <ClInclude Include="..\libevent++\timestamp.h" />
-    <ClInclude Include="..\libevent++\timestamp.inl.h" />
+    <ClInclude Include="..\libeventcpp\duration.h" />
+    <ClInclude Include="..\libeventcpp\duration.inl.h" />
+    <ClInclude Include="..\libeventcpp\exp.h" />
+    <ClInclude Include="..\libeventcpp\fd_event.h" />
+    <ClInclude Include="..\libeventcpp\fd_event_watcher.h" />
+    <ClInclude Include="..\libeventcpp\gettimeofday.h" />
+    <ClInclude Include="..\libeventcpp\inner_pre.h" />
+    <ClInclude Include="..\libeventcpp\libevent_headers.h" />
+    <ClInclude Include="..\libeventcpp\libevent_watcher.h" />
+    <ClInclude Include="..\libeventcpp\platform_config.h" />
+    <ClInclude Include="..\libeventcpp\timestamp.h" />
+    <ClInclude Include="..\libeventcpp\timestamp.inl.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4877AA94-AD55-407F-9ED3-D4503FAB2A7F}</ProjectGuid>

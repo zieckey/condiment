@@ -1,10 +1,9 @@
 
-#include "libevent++/exp.h"
+#include "libeventcpp/exp.h"
 #include "test_common.h"
 
-#include "libevent++/libevent_headers.h"
-#include "libevent++/libevent_condition.h"
-#include "libevent++/libevent_watcher.h"
+#include "libeventcpp/libevent_headers.h"
+#include "libeventcpp/libevent_watcher.h"
 #include <boost/thread.hpp>
 
 namespace timed

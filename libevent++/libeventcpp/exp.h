@@ -3,7 +3,6 @@
 
 #include "platform_config.h"
 
-#include "libevent_condition.h"
 #include "libevent_watcher.h"
 
 #ifdef H_OS_WINDOWS

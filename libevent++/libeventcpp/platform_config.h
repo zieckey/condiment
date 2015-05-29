@@ -22,6 +22,7 @@
 #include <stdint.h>
 #include <iostream>
 
+#ifdef __cplusplus
 #include "gettimeofday.h"
 
 #define GOOGLE_GLOG_DLL_DECL           // 使用静态glog库时，必须定义这个
@@ -50,6 +51,8 @@
 #define CHECK_NOTNULL(val) \
     LOG_ERROR << "'" #val "' Must be non NULL";
 #endif
+
+#endif // end of define __cplusplus
 
 //////////////////////////////////////////////////////////////////////////
 //                              Link Helper Macro                       //

@@ -17,66 +17,60 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\libevent++\fd_event.cc">
+    <ClCompile Include="..\libeventcpp\fd_event.cc">
       <Filter>condition</Filter>
     </ClCompile>
-    <ClCompile Include="..\libevent++\libevent_condition.cc">
+    <ClCompile Include="..\libeventcpp\libevent_watcher.cc">
       <Filter>condition</Filter>
     </ClCompile>
-    <ClCompile Include="..\libevent++\libevent_watcher.cc">
-      <Filter>condition</Filter>
-    </ClCompile>
-    <ClCompile Include="..\libevent++\inner_pre.cc">
+    <ClCompile Include="..\libeventcpp\inner_pre.cc">
       <Filter>base</Filter>
     </ClCompile>
-    <ClCompile Include="..\libevent++\libevent_compact.cc">
+    <ClCompile Include="..\libeventcpp\libevent_compact.cc">
       <Filter>base</Filter>
     </ClCompile>
-    <ClCompile Include="..\libevent++\pch.cc">
+    <ClCompile Include="..\libeventcpp\pch.cc">
       <Filter>base</Filter>
     </ClCompile>
-    <ClCompile Include="..\libevent++\fd_event_watcher.cc">
+    <ClCompile Include="..\libeventcpp\fd_event_watcher.cc">
       <Filter>net</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\libevent++\exp.h">
+    <ClInclude Include="..\libeventcpp\exp.h">
       <Filter>base</Filter>
     </ClInclude>
-    <ClInclude Include="..\libevent++\inner_pre.h">
+    <ClInclude Include="..\libeventcpp\inner_pre.h">
       <Filter>base</Filter>
     </ClInclude>
-    <ClInclude Include="..\libevent++\libevent_headers.h">
+    <ClInclude Include="..\libeventcpp\libevent_headers.h">
       <Filter>base</Filter>
     </ClInclude>
-    <ClInclude Include="..\libevent++\platform_config.h">
+    <ClInclude Include="..\libeventcpp\platform_config.h">
       <Filter>base</Filter>
     </ClInclude>
-    <ClInclude Include="..\libevent++\gettimeofday.h">
+    <ClInclude Include="..\libeventcpp\gettimeofday.h">
       <Filter>base</Filter>
     </ClInclude>
-    <ClInclude Include="..\libevent++\libevent_condition.h">
+    <ClInclude Include="..\libeventcpp\libevent_watcher.h">
       <Filter>condition</Filter>
     </ClInclude>
-    <ClInclude Include="..\libevent++\libevent_watcher.h">
+    <ClInclude Include="..\libeventcpp\fd_event.h">
       <Filter>condition</Filter>
     </ClInclude>
-    <ClInclude Include="..\libevent++\fd_event.h">
-      <Filter>condition</Filter>
-    </ClInclude>
-    <ClInclude Include="..\libevent++\timestamp.h">
+    <ClInclude Include="..\libeventcpp\timestamp.h">
       <Filter>util</Filter>
     </ClInclude>
-    <ClInclude Include="..\libevent++\timestamp.inl.h">
+    <ClInclude Include="..\libeventcpp\timestamp.inl.h">
       <Filter>util</Filter>
     </ClInclude>
-    <ClInclude Include="..\libevent++\duration.h">
+    <ClInclude Include="..\libeventcpp\duration.h">
       <Filter>util</Filter>
     </ClInclude>
-    <ClInclude Include="..\libevent++\duration.inl.h">
+    <ClInclude Include="..\libeventcpp\duration.inl.h">
       <Filter>util</Filter>
     </ClInclude>
-    <ClInclude Include="..\libevent++\fd_event_watcher.h">
+    <ClInclude Include="..\libeventcpp\fd_event_watcher.h">
       <Filter>net</Filter>
     </ClInclude>
   </ItemGroup>
