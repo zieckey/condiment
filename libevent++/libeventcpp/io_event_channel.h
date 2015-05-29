@@ -10,8 +10,11 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/weak_ptr.hpp>
 
+struct event;
+struct event_base;
+
 namespace evpp {
-    class _EXPORT_LIBEVENTPP FdEventWatcher : public EventWatcher {
+    class _EXPORT_LIBEVENTPP IOEventChannel {
     public:
         enum EventType {
             kNone     = 0x00,
@@ -22,7 +25,10 @@ namespace evpp {
         typedef boost::function<void(Timestamp)> ReadEventCallback;
 
     public:
-        FdEventWatcher(struct event_base *evbase, int fd);
+        IOEventChannel(struct event_base *evbase, int fd, bool r, bool w);
+
+        bool Start();
+        void Close();
 
         void set_read_callback(const ReadEventCallback& cb) {
             read_cb_ = cb;
@@ -32,12 +38,8 @@ namespace evpp {
         }
 
         int fd() const { return fd_; }
-
     private:
-        virtual bool DoInit();
-        virtual void DoClose();
         void HandlerFn(int fd, short which);
-
         static void HandlerFn(int fd, short which, void *v);
 
     private:
@@ -45,6 +47,9 @@ namespace evpp {
         EventCallback write_cb_;
         EventCallback close_cb_;
         EventCallback error_cb_;
+
+        struct event*      event_;
+        struct event_base* evbase_;
 
         int events_;
         int fd_;

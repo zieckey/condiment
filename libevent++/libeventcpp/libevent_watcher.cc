@@ -65,6 +65,7 @@ namespace evpp
     void EventWatcher::Cancel() {
         if (event_initialized(event_)) {
             event_del(event_);
+            delete (event_);
             event_ = NULL;
         }
     }

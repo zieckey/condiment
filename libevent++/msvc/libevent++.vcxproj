@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\libeventcpp\fd_event_watcher.cc" />
+    <ClCompile Include="..\libeventcpp\io_event_channel.cc" />
     <ClCompile Include="..\libeventcpp\fd_event.cc" />
     <ClCompile Include="..\libeventcpp\inner_pre.cc" />
     <ClCompile Include="..\libeventcpp\libevent_compact.cc" />
@@ -23,7 +23,7 @@
     <ClInclude Include="..\libeventcpp\duration.inl.h" />
     <ClInclude Include="..\libeventcpp\exp.h" />
     <ClInclude Include="..\libeventcpp\fd_event.h" />
-    <ClInclude Include="..\libeventcpp\fd_event_watcher.h" />
+    <ClInclude Include="..\libeventcpp\io_event_channel.h" />
     <ClInclude Include="..\libeventcpp\gettimeofday.h" />
     <ClInclude Include="..\libeventcpp\inner_pre.h" />
     <ClInclude Include="..\libeventcpp\libevent_headers.h" />

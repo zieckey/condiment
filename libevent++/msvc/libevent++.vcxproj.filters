@@ -32,7 +32,7 @@
     <ClCompile Include="..\libeventcpp\pch.cc">
       <Filter>base</Filter>
     </ClCompile>
-    <ClCompile Include="..\libeventcpp\fd_event_watcher.cc">
+    <ClCompile Include="..\libeventcpp\io_event_channel.cc">
       <Filter>net</Filter>
     </ClCompile>
   </ItemGroup>
@@ -70,7 +70,7 @@
     <ClInclude Include="..\libeventcpp\duration.inl.h">
       <Filter>util</Filter>
     </ClInclude>
-    <ClInclude Include="..\libeventcpp\fd_event_watcher.h">
+    <ClInclude Include="..\libeventcpp\io_event_channel.h">
       <Filter>net</Filter>
     </ClInclude>
   </ItemGroup>
