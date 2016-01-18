@@ -11,26 +11,26 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\libeventcpp\io_event_channel.cc" />
-    <ClCompile Include="..\libeventcpp\fd_event.cc" />
-    <ClCompile Include="..\libeventcpp\inner_pre.cc" />
-    <ClCompile Include="..\libeventcpp\libevent_compact.cc" />
-    <ClCompile Include="..\libeventcpp\libevent_watcher.cc" />
-    <ClCompile Include="..\libeventcpp\pch.cc" />
+    <ClCompile Include="..\src\io_event_channel.cc" />
+    <ClCompile Include="..\src\fd_event.cc" />
+    <ClCompile Include="..\src\inner_pre.cc" />
+    <ClCompile Include="..\src\libevent_compact.cc" />
+    <ClCompile Include="..\src\libevent_watcher.cc" />
+    <ClCompile Include="..\src\pch.cc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\libeventcpp\duration.h" />
-    <ClInclude Include="..\libeventcpp\duration.inl.h" />
-    <ClInclude Include="..\libeventcpp\exp.h" />
-    <ClInclude Include="..\libeventcpp\fd_event.h" />
-    <ClInclude Include="..\libeventcpp\io_event_channel.h" />
-    <ClInclude Include="..\libeventcpp\gettimeofday.h" />
-    <ClInclude Include="..\libeventcpp\inner_pre.h" />
-    <ClInclude Include="..\libeventcpp\libevent_headers.h" />
-    <ClInclude Include="..\libeventcpp\libevent_watcher.h" />
-    <ClInclude Include="..\libeventcpp\platform_config.h" />
-    <ClInclude Include="..\libeventcpp\timestamp.h" />
-    <ClInclude Include="..\libeventcpp\timestamp.inl.h" />
+    <ClInclude Include="..\src\duration.h" />
+    <ClInclude Include="..\src\duration.inl.h" />
+    <ClInclude Include="..\src\exp.h" />
+    <ClInclude Include="..\src\fd_event.h" />
+    <ClInclude Include="..\src\io_event_channel.h" />
+    <ClInclude Include="..\src\gettimeofday.h" />
+    <ClInclude Include="..\src\inner_pre.h" />
+    <ClInclude Include="..\src\libevent_headers.h" />
+    <ClInclude Include="..\src\libevent_watcher.h" />
+    <ClInclude Include="..\src\platform_config.h" />
+    <ClInclude Include="..\src\timestamp.h" />
+    <ClInclude Include="..\src\timestamp.inl.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4877AA94-AD55-407F-9ED3-D4503FAB2A7F}</ProjectGuid>
