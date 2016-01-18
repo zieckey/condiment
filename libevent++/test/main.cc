@@ -1,6 +1,6 @@
 #include "test_common.h"
 
-#include "libeventcpp/libevent_headers.h"
+#include "src/libevent_headers.h"
 
 #ifdef WIN32
 #   ifdef _DEBUG

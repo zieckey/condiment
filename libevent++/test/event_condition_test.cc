@@ -1,9 +1,9 @@
 
-#include "libeventcpp/exp.h"
+#include "src/exp.h"
 #include "test_common.h"
 
-#include "libeventcpp/libevent_headers.h"
-#include "libeventcpp/libevent_watcher.h"
+#include "src/libevent_headers.h"
+#include "src/libevent_watcher.h"
 #include <boost/thread.hpp>
 
 namespace
@@ -15,7 +15,7 @@ namespace
         event_base_loopexit(base, 0);
     }
 
-    static void MyEventThread(struct event_base* base, evpp::PipedEventWatcher* ev)
+    static void MyEventThread(struct event_base* base, evpp::PipeEventWatcher* ev)
     {
         if (ev->Init())
         {
@@ -28,7 +28,7 @@ namespace
 TEST_UNIT(http_Event_test)
 {
     struct event_base* base = event_base_new();
-    evpp::PipedEventWatcher ev(base, std::tr1::bind(Handle, base));
+    evpp::PipeEventWatcher ev(base, std::tr1::bind(Handle, base));
     boost::thread th(MyEventThread, base, &ev);
     ::usleep(1000 * 100);
     ev.Notify();

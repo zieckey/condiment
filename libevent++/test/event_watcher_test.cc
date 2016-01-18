@@ -1,9 +1,9 @@
 
-#include "libeventcpp/exp.h"
+#include "src/exp.h"
 #include "test_common.h"
 
-#include "libeventcpp/libevent_headers.h"
-#include "libeventcpp/libevent_watcher.h"
+#include "src/libevent_headers.h"
+#include "src/libevent_watcher.h"
 #include <boost/thread.hpp>
 
 namespace timed
@@ -16,7 +16,7 @@ namespace timed
         event_base_loopexit(base, 0);
     }
 
-    static void MyEventThread(struct event_base* base, evpp::TimedEventWatcher* ev)
+    static void MyEventThread(struct event_base* base, evpp::TimerEventWatcher* ev)
     {
         ev->Init();
         ev->Watch(g_timeout_us);
@@ -28,7 +28,7 @@ TEST_UNIT(TimedEventWatcher_test)
 {
     using namespace timed;
     struct event_base* base = event_base_new();
-    evpp::TimedEventWatcher ev(base, std::tr1::bind(Handle, base));
+    evpp::TimerEventWatcher ev(base, std::tr1::bind(Handle, base));
     boost::thread th(MyEventThread, base, &ev);
     uint64_t start = evpp::utcmicrosecond();
     th.join();

@@ -76,14 +76,14 @@ namespace evpp
     //////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////
     
-    PipedEventWatcher::PipedEventWatcher(struct event_base *event_base,
+    PipeEventWatcher::PipeEventWatcher(struct event_base *event_base,
         const Handler& handler)
         : EventWatcher(event_base, handler)
     {
         memset(pipe_, 0, sizeof(pipe_[0] * 2));
     }
 
-    bool PipedEventWatcher::DoInit() {
+    bool PipeEventWatcher::DoInit() {
         assert(pipe_[0] == 0);
 
         if (evutil_socketpair(AF_UNIX, SOCK_STREAM, 0, pipe_) < 0) {
@@ -97,14 +97,14 @@ namespace evpp
         }
 
         event_set(event_, pipe_[1], EV_READ | EV_PERSIST,
-            PipedEventWatcher::HandlerFn, this);
+            PipeEventWatcher::HandlerFn, this);
         return true;
     failed:
         Close();
         return false;
     }
 
-    void PipedEventWatcher::DoClose() {
+    void PipeEventWatcher::DoClose() {
         if (pipe_[0] > 0) {
             EVUTIL_CLOSESOCKET(pipe_[0]);
             EVUTIL_CLOSESOCKET(pipe_[1]);
@@ -112,8 +112,8 @@ namespace evpp
         }
     }
 
-    void PipedEventWatcher::HandlerFn(int fd, short which, void *v) {
-        PipedEventWatcher *e = (PipedEventWatcher*)v;
+    void PipeEventWatcher::HandlerFn(int fd, short which, void *v) {
+        PipeEventWatcher *e = (PipeEventWatcher*)v;
         char buf[128];
         int n = 0;
         if ((n = recv(e->pipe_[1], buf, sizeof(buf), 0)) > 0) {
@@ -121,7 +121,7 @@ namespace evpp
         }
     }
 
-    void PipedEventWatcher::Notify() {
+    void PipeEventWatcher::Notify() {
         char buf[1] = {};
         if (send(pipe_[0], buf, sizeof(buf), 0) < 0) {
             return;
@@ -134,19 +134,19 @@ namespace evpp
     //////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////
 
-    TimedEventWatcher::TimedEventWatcher(struct event_base *event_base,
+    TimerEventWatcher::TimerEventWatcher(struct event_base *event_base,
         const Handler& handler)
         : EventWatcher(event_base, handler)
     {
     }
 
-    bool TimedEventWatcher::DoInit() {
-        event_set(event_, -1, 0, TimedEventWatcher::HandlerFn, this);
+    bool TimerEventWatcher::DoInit() {
+        event_set(event_, -1, 0, TimerEventWatcher::HandlerFn, this);
         return true;
     }
 
-    void TimedEventWatcher::HandlerFn(int fd, short which, void *v) {
-        TimedEventWatcher *h = (TimedEventWatcher*)v;
+    void TimerEventWatcher::HandlerFn(int fd, short which, void *v) {
+        TimerEventWatcher *h = (TimerEventWatcher*)v;
         h->handler_();
     }
 

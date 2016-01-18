@@ -50,9 +50,9 @@ namespace evpp {
     };
 
     //////////////////////////////////////////////////////////////////////////
-    class _EXPORT_LIBEVENTPP PipedEventWatcher : public EventWatcher {
+    class _EXPORT_LIBEVENTPP PipeEventWatcher : public EventWatcher {
     public:
-        PipedEventWatcher(struct event_base *event_base,
+        PipeEventWatcher(struct event_base *event_base,
             const Handler& handler);
 
         void Notify();
@@ -65,9 +65,9 @@ namespace evpp {
     };
 
     //////////////////////////////////////////////////////////////////////////
-    class _EXPORT_LIBEVENTPP TimedEventWatcher : public EventWatcher {
+    class _EXPORT_LIBEVENTPP TimerEventWatcher : public EventWatcher {
     public:
-        TimedEventWatcher(struct event_base *event_base,
+        TimerEventWatcher(struct event_base *event_base,
             const Handler& handler);
 
 		bool AsyncWait(uint64_t timeout_us) { return Watch(timeout_us); }
@@ -77,7 +77,7 @@ namespace evpp {
         static void HandlerFn(int fd, short which, void *v);
     };
 
-	typedef TimedEventWatcher EventTimer;
+	typedef TimerEventWatcher EventTimer;
 
     //////////////////////////////////////////////////////////////////////////
 #ifdef H_OS_LINUX
