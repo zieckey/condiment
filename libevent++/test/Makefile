@@ -28,11 +28,11 @@ CPPFLAGS= -g -c -fPIC \
 RTFLAGS := \
     -Wl,-rpath=. \
     -Wl,-rpath=$(GCC472_PATH)/lib64 \
-    -Wl,-rpath=$(CURRENT_DIR)/../libevent++
+    -Wl,-rpath=$(CURRENT_DIR)/../src
 
 LDFLAGS= $(RTFLAGS) -lpthread \
-		 -levent++ -L $(CURRENT_DIR)/../libevent++ \
-		 -lboost_system-mt -lboost_filesystem-mt -lboost_thread-mt
+		 -levent++ -L $(CURRENT_DIR)/../src \
+		 -lboost_system-mt -lboost_filesystem-mt -lboost_thread-mt 
 
 DIRNAME=$(shell basename `pwd`)
 

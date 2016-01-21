@@ -11,7 +11,7 @@ CFLAGS=$(TOP_CFLAGS) -g -c -fPIC \
 	   -Winvalid-pch -fms-extensions -Wfloat-equal -Wextra \
 	   -I .. -I include -MMD
 CPPFLAGS= $(CFLAGS) -Woverloaded-virtual -Wsign-promo -fno-gnu-keywords
-LDFLAGS=$(TOP_LDFLAGS) -lpthread -levent
+LDFLAGS=$(TOP_LDFLAGS) -lpthread -levent -lglog
 LIBNAME=event++
 
 SRCS := $(wildcard *.cc)

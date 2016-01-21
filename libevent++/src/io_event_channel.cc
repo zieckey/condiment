@@ -11,8 +11,8 @@ namespace evpp
     BOOST_STATIC_ASSERT(IOEventChannel::kWritable == EV_WRITE);
 
     IOEventChannel::IOEventChannel(struct event_base *event_base,
-        int fd, bool r, bool w)
-        : events_((w?kWritable:0) | (r?kReadable:0) | EV_PERSIST), fd_(fd)
+        int f, bool r, bool w)
+        : events_((w?kWritable:0) | (r?kReadable:0) | EV_PERSIST), fd_(f)
     {
         event_ = new event;
         memset(event_, 0, sizeof(struct event));
@@ -42,7 +42,7 @@ namespace evpp
         e->HandlerFn(fd, which);
     }
 
-    void IOEventChannel::HandlerFn(int fd, short which) {
+    void IOEventChannel::HandlerFn(int f, short which) {
         if ((which & EV_READ) && read_cb_)
         {
             read_cb_(Timestamp::Now());
