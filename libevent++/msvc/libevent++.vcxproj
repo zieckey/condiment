@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\io_event_channel.cc" />
+    <ClCompile Include="..\src\fd_channel.cc" />
     <ClCompile Include="..\src\fd_event.cc" />
     <ClCompile Include="..\src\inner_pre.cc" />
     <ClCompile Include="..\src\libevent_compact.cc" />
@@ -23,7 +23,7 @@
     <ClInclude Include="..\src\duration.inl.h" />
     <ClInclude Include="..\src\exp.h" />
     <ClInclude Include="..\src\fd_event.h" />
-    <ClInclude Include="..\src\io_event_channel.h" />
+    <ClInclude Include="..\src\fd_channel.h" />
     <ClInclude Include="..\src\gettimeofday.h" />
     <ClInclude Include="..\src\inner_pre.h" />
     <ClInclude Include="..\src\libevent_headers.h" />

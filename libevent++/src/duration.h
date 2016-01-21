@@ -1,8 +1,6 @@
 #ifndef LIBEVENTPP_UTIL_TIME_DURATION_H_
 #define LIBEVENTPP_UTIL_TIME_DURATION_H_
 
-#include <boost/operators.hpp>
-
 #include "inner_pre.h"
 #include "gettimeofday.h"
 
@@ -49,7 +47,6 @@ namespace evpp {
         bool operator< (const Duration& rhs) const;
         bool operator==(const Duration& rhs) const;
 
-        // Math operator
         Duration operator+=(const Duration& rhs);
         Duration operator-=(const Duration& rhs);
         Duration operator*=(int n);

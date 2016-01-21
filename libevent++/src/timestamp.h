@@ -32,7 +32,6 @@ namespace evpp {
         bool operator< (const Timestamp& rhs) const;
         bool operator==(const Timestamp& rhs) const;
 
-        // Math operator
         Timestamp operator+=(const Duration& rhs);
         Timestamp operator+ (const Duration& rhs) const;
         Timestamp operator-=(const Duration& rhs);
@@ -40,7 +39,7 @@ namespace evpp {
         Duration operator- (const Timestamp& rhs) const;
 
     private:
-        // us_ gives the number of nanoseconds elapsed since 
+        // ns_ gives the number of nanoseconds elapsed since 
         // January 1, year 1 00:00:00 UTC. 
         // Approximately to year 2260.
         int64_t ns_;

@@ -14,7 +14,7 @@ struct event;
 struct event_base;
 
 namespace evpp {
-    class _EXPORT_LIBEVENTPP IOEventChannel {
+    class _EXPORT_LIBEVENTPP FdChannel {
     public:
         enum EventType {
             kNone     = 0x00,
@@ -25,16 +25,18 @@ namespace evpp {
         typedef boost::function<void(Timestamp)> ReadEventCallback;
 
     public:
-        IOEventChannel(struct event_base *evbase, int fd, bool r, bool w);
+        FdChannel(struct event_base *evbase, int fd, 
+            bool watch_read_event, bool watch_write_event);
 
         bool Start();
         void Close();
 
         void set_read_callback(const ReadEventCallback& cb) {
-            read_cb_ = cb;
+            read_fn_ = cb;
         }
+
         void set_write_callback(const EventCallback& cb) {
-            write_cb_ = cb;
+            write_fn_ = cb;
         }
 
         int fd() const { return fd_; }
@@ -43,10 +45,10 @@ namespace evpp {
         static void HandlerFn(int fd, short which, void *v);
 
     private:
-        ReadEventCallback read_cb_;
-        EventCallback write_cb_;
-        EventCallback close_cb_;
-        EventCallback error_cb_;
+        ReadEventCallback read_fn_;
+        EventCallback write_fn_;
+        EventCallback close_fn_;
+        EventCallback error_fn_;
 
         struct event*      event_;
         struct event_base* evbase_;

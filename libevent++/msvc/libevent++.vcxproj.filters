@@ -32,7 +32,7 @@
     <ClCompile Include="..\src\pch.cc">
       <Filter>base</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\io_event_channel.cc">
+    <ClCompile Include="..\src\fd_channel.cc">
       <Filter>net</Filter>
     </ClCompile>
   </ItemGroup>
@@ -70,7 +70,7 @@
     <ClInclude Include="..\src\duration.inl.h">
       <Filter>time</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\io_event_channel.h">
+    <ClInclude Include="..\src\fd_channel.h">
       <Filter>net</Filter>
     </ClInclude>
   </ItemGroup>
