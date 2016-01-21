@@ -10,8 +10,12 @@ namespace evpp {
         : ns_(t.tv_sec*kSecond + t.tv_usec*kMicrosecond)
     {}
 
-    inline Duration::Duration(int64_t nonaseconds)
-        : ns_(nonaseconds)
+    inline Duration::Duration(int64_t nanoseconds)
+        : ns_(nanoseconds)
+    {}
+
+    inline Duration::Duration(int nanoseconds)
+        : ns_(nanoseconds)
     {}
 
     inline Duration::Duration(double seconds)
@@ -33,27 +37,29 @@ namespace evpp {
         t->tv_usec = (long)(ns_ % kSecond) / kMicrosecond;
     }
 
-    // Comparator
     inline bool Duration::operator< (const Duration& rhs) const {
         return ns_ < rhs.ns_;
     }
+
     inline bool Duration::operator==(const Duration& rhs) const {
         return ns_ == rhs.ns_;
     }
 
-    // Math operator
     inline Duration Duration::operator+=(const Duration& rhs) {
         ns_ += rhs.ns_;
         return *this;
     }
+
     inline Duration Duration::operator-=(const Duration& rhs) {
         ns_ -= rhs.ns_;
         return *this;
     }
+
     inline Duration Duration::operator*=(int n) {
         ns_ *= n;
         return *this;
     }
+
     inline Duration Duration::operator/=(int n) {
         ns_ /= n;
         return *this;

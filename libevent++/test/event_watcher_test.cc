@@ -24,7 +24,7 @@ namespace timed
     }
 }
 
-TEST_UNIT(TimedEventWatcher_test)
+TEST_UNIT(TimerEventWatcher_test)
 {
     using namespace timed;
     struct event_base* base = event_base_new();

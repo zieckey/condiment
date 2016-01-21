@@ -23,7 +23,8 @@ namespace evpp {
     public:
         Duration();
         Duration(const struct timeval& t);
-        Duration(int64_t nonaseconds);
+        Duration(int64_t nanoseconds);
+        Duration(int nanoseconds);
         Duration(double seconds);
 
         // Nanoseconds returns the duration as an integer nanosecond count.
@@ -35,6 +36,7 @@ namespace evpp {
 
         // Seconds returns the duration as a floating point number of seconds.
         double Seconds() const;
+
         double Milliseconds() const;
         double Microseconds() const;
         double Minutes() const;

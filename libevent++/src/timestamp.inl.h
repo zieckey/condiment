@@ -3,70 +3,84 @@
 
 namespace evpp {
     inline Timestamp::Timestamp()
-        : d_(int64_t(0))
+        : ns_(0)
     {
     }
 
     inline Timestamp::Timestamp(int64_t nanoseconds)
-        : d_(nanoseconds)
+        : ns_(nanoseconds)
     {
     }
 
     inline bool Timestamp::IsEpoch() const {
-        return d_.IsZero();
+        return ns_ == 0;
     }
 
 
     inline Timestamp::Timestamp(const struct timeval& t)
-        : d_(t)
+        : ns_(t.tv_sec*Duration::kSecond + t.tv_usec*Duration::kMicrosecond)
     {
     }
 
     inline Timestamp Timestamp::Now() {
-        return Timestamp(Duration(int64_t(utcmicrosecond()*Duration::kMicrosecond)));
+        return Timestamp(int64_t(utcmicrosecond()*Duration::kMicrosecond));
+    }
+
+    inline void Timestamp::Add(Duration d) {
+        ns_ += d.Nanoseconds();
     }
 
     inline void Timestamp::To(struct timeval* t) const {
-        d_.To(t);
+        t->tv_sec = (long)(ns_ / Duration::kSecond);
+        t->tv_usec = (long)(ns_ % Duration::kSecond) / Duration::kMicrosecond;
     }
     
     inline struct timeval Timestamp::TimeVal() const {
-        return d_.TimeVal();
+        struct timeval t;
+        To(&t);
+        return t;
     }
 
-    // Comparator
+    inline int64_t Timestamp::Unix() const {
+        return ns_ / Duration::kSecond;
+    }
+
+    inline int64_t Timestamp::UnixNano() const {
+        return ns_;
+    }
+
     inline bool Timestamp::operator< (const Timestamp& rhs) const {
-        return d_ < rhs.d_;
-    }
-    inline bool Timestamp::operator==(const Timestamp& rhs) const {
-        return d_ == rhs.d_;
+        return ns_ < rhs.ns_;
     }
 
-    // Math operator
+    inline bool Timestamp::operator==(const Timestamp& rhs) const {
+        return ns_ == rhs.ns_;
+    }
+
     inline Timestamp Timestamp::operator+=(const Duration& rhs) {
-        d_ += rhs;
+        ns_ += rhs.Nanoseconds();
         return *this;
     }
 
-    inline Timestamp Timestamp::operator+ (const Duration& rhs) const {
+    inline Timestamp Timestamp::operator+(const Duration& rhs) const {
         Timestamp temp(*this);
         temp += rhs;
         return temp;
     }
 
     inline Timestamp Timestamp::operator-=(const Duration& rhs) {
-        d_ -= rhs;
+        ns_ -= rhs.Nanoseconds();
         return *this;
     }
 
-    inline Timestamp Timestamp::operator- (const Duration& rhs) const {
+    inline Timestamp Timestamp::operator-(const Duration& rhs) const {
         Timestamp temp(*this);
         temp -= rhs;
         return temp;
     }
 
-    inline Duration  Timestamp::operator- (const Timestamp& rhs) const {
-        int64_t ns = d_.Nanoseconds() - rhs.d_.Nanoseconds();
+    inline Duration Timestamp::operator-(const Timestamp& rhs) const {
+        int64_t ns = ns_ - rhs.ns_;
         return Duration(ns);
     }
 
