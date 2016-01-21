@@ -3,78 +3,64 @@
 
 namespace evpp {
     inline Duration::Duration()
-        : us_(0)
-    {
-    }
+        : ns_(0)
+    {}
+
+    inline Duration::Duration(const struct timeval& t)
+        : ns_(t.tv_sec*kSecond + t.tv_usec*kMicrosecond)
+    {}
+
+    inline Duration::Duration(int64_t nonasecond)
+        : ns_(nonasecond)
+    {}
+
+    inline Duration::Duration(double second)
+        : ns_(second*kSecond)
+    {}
 
     inline bool Duration::IsZero() const {
-        return us_ == 0;
+        return ns_ == 0;
     }
 
 
     inline Duration::Duration(int64_t us)
-        : us_(us)
-    {
+        : ns_(us)
+    {}
+
+    inline struct timeval Duration::TimeVal() const {
+        struct timeval t;
+        To(&t);
+        return t;
     }
 
-    inline Duration::Duration(const struct timeval& t)
-        : us_(t.tv_sec*kMicrosecond + t.tv_usec)
-    {
-    }
-
-    // Factory methods from *seconds
-    inline Duration Duration::Seconds(int64_t s) {
-        return Duration(s * kMicrosecond);
-    }
-    inline Duration Duration::Milliseconds(int64_t ms) {
-        return Duration(ms * kMillisecond);
-    }
-    inline Duration Duration::Microseconds(int64_t us) {
-        return Duration(us);
-    }
-
-    // Property getters
-    inline int64_t Duration::ToSeconds() const {
-        return us_ / kMicrosecond;
-    }
-    inline int64_t Duration::ToMilliseconds() const {
-        return us_ / kMillisecond;
-    }
-    inline int64_t Duration::ToMicroseconds() const {
-        return us_;
-    }
-    inline int64_t Duration::ToMinutes() const {
-        return ToSeconds() / kMunite;
-    }
-    // Converters
     inline void Duration::To(struct timeval* t) const {
-        t->tv_sec = (long)us_ / kMicrosecond;
-        t->tv_usec = (long)us_ % kMicrosecond;
+        t->tv_sec = (long)(ns_ / kSecond);
+        t->tv_usec = (long)(ns_ % kSecond) / kMicrosecond;
     }
 
     // Comparator
     inline bool Duration::operator< (const Duration& rhs) const {
-        return us_ < rhs.us_;
+        return ns_ < rhs.ns_;
     }
     inline bool Duration::operator==(const Duration& rhs) const {
-        return us_ == rhs.us_;
+        return ns_ == rhs.ns_;
     }
 
     // Math operator
     inline Duration Duration::operator+=(const Duration& rhs) {
-        us_ += rhs.us_;
+        ns_ += rhs.ns_;
         return *this;
     }
     inline Duration Duration::operator-=(const Duration& rhs) {
-        us_ -= rhs.us_;
+        ns_ -= rhs.ns_;
         return *this;
     }
     inline Duration Duration::operator*=(int n) {
-        us_ *= n;
+        ns_ *= n;
         return *this;
     }
     inline Duration Duration::operator/=(int n) {
-        us_ /= n;
+        ns_ /= n;
         return *this;
     }
 

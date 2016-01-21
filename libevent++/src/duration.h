@@ -7,44 +7,37 @@
 #include "gettimeofday.h"
 
 namespace evpp {
-    class Duration : boost::less_than_comparable<Duration>,
-        boost::equality_comparable<Duration>,
-        boost::addable<Duration>,
-        boost::subtractable<Duration>,
-        boost::multipliable<Duration, int>,
-        boost::dividable<Duration, int>
+
+    // A Duration represents the elapsed time between two instants
+    // as an int64 nanosecond count.  The representation limits the
+    // largest representable duration to approximately 290 years.
+    class Duration
     {
-        friend class Timestamp;
     public:
         enum Unit {
-            kMunite = 60LL,
-            kSecond = 1LL,
-            kMillisecond = 1000LL,
-            kMicrosecond = 1000000LL,
-            kNanosecond = 1000000000LL,
+            kNanosecond = 1L,
+            kMicrosecond = 1000 * kNanosecond,
+            kMillisecond = 1000 * kMicrosecond,
+            kSecond = 1000 * kMillisecond,
+            kMinute = 60 * kSecond,
+            kHour = 60 * kMinute,
         };
-
     public:
         Duration();
-
-        // Constructors from timeval
         Duration(const struct timeval& t);
+        Duration(int64_t nonasecond);
+        Duration(double second);
 
-        // Factory methods from *seconds
-        static Duration Seconds(int64_t s);
-        static Duration Milliseconds(int64_t ms);
-        static Duration Microseconds(int64_t us);
+        int64_t Nanoseconds() const;
+        double Seconds() const;
+        double Milliseconds() const;
+        double Microseconds() const;
+        double Minutes() const;
+        double Hours() const;
 
-        // Property getters
-        int64_t ToMinutes() const;
-        int64_t ToSeconds() const;
-        int64_t ToMilliseconds() const;
-        int64_t ToMicroseconds() const;
-
-        // Converters
+        struct timeval TimeVal() const;
         void To(struct timeval* t) const;
 
-        // Comparator
         bool IsZero() const;
         bool operator< (const Duration& rhs) const;
         bool operator==(const Duration& rhs) const;
@@ -56,8 +49,7 @@ namespace evpp {
         Duration operator/=(int n);
 
     private:
-        explicit Duration(int64_t us);
-        int64_t us_;
+        int64_t ns_; // nanoseconds
     };
 } // namespace evpp
 
