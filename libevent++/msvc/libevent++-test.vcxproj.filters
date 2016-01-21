@@ -33,10 +33,13 @@
     <ClCompile Include="..\test\glog_test.cc">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\test\time_test.cc">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\test\test_common.h">
-      <Filter>gtest</Filter>
+      <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

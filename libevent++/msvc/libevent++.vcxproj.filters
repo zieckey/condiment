@@ -9,11 +9,11 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="util">
-      <UniqueIdentifier>{ff5db783-2ed0-41c4-9543-d05587140e55}</UniqueIdentifier>
-    </Filter>
     <Filter Include="net">
       <UniqueIdentifier>{eee53411-c7a0-4552-85ab-81e36a0b66cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="time">
+      <UniqueIdentifier>{ff5db783-2ed0-41c4-9543-d05587140e55}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -59,16 +59,16 @@
       <Filter>condition</Filter>
     </ClInclude>
     <ClInclude Include="..\src\timestamp.h">
-      <Filter>util</Filter>
+      <Filter>time</Filter>
     </ClInclude>
     <ClInclude Include="..\src\timestamp.inl.h">
-      <Filter>util</Filter>
+      <Filter>time</Filter>
     </ClInclude>
     <ClInclude Include="..\src\duration.h">
-      <Filter>util</Filter>
+      <Filter>time</Filter>
     </ClInclude>
     <ClInclude Include="..\src\duration.inl.h">
-      <Filter>util</Filter>
+      <Filter>time</Filter>
     </ClInclude>
     <ClInclude Include="..\src\io_event_channel.h">
       <Filter>net</Filter>
