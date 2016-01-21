@@ -1,4 +1,4 @@
-#include <src/exp.h>
+#include <include/exp.h>
 #include "test_common.h"
 
 #ifdef H_WINDOWS_API

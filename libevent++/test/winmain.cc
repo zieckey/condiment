@@ -1,6 +1,6 @@
 #include "test_common.h"
 
-#include "src/libevent_headers.h"
+#include "include/libevent_headers.h"
 
 #ifdef WIN32
 #   ifdef _DEBUG
@@ -38,3 +38,5 @@ namespace
     } __s_onexit_pause;
 #endif
 }
+
+// main function is defined on gtest_main.cc

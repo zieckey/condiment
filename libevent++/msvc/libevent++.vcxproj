@@ -19,18 +19,19 @@
     <ClCompile Include="..\src\pch.cc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\duration.h" />
-    <ClInclude Include="..\src\duration.inl.h" />
-    <ClInclude Include="..\src\exp.h" />
-    <ClInclude Include="..\src\fd_event.h" />
-    <ClInclude Include="..\src\fd_channel.h" />
-    <ClInclude Include="..\src\gettimeofday.h" />
-    <ClInclude Include="..\src\inner_pre.h" />
-    <ClInclude Include="..\src\libevent_headers.h" />
-    <ClInclude Include="..\src\libevent_watcher.h" />
-    <ClInclude Include="..\src\platform_config.h" />
-    <ClInclude Include="..\src\timestamp.h" />
-    <ClInclude Include="..\src\timestamp.inl.h" />
+    <ClInclude Include="..\include\duration.h" />
+    <ClInclude Include="..\include\duration.inl.h" />
+    <ClInclude Include="..\include\event_loop.h" />
+    <ClInclude Include="..\include\exp.h" />
+    <ClInclude Include="..\include\fd_channel.h" />
+    <ClInclude Include="..\include\fd_event.h" />
+    <ClInclude Include="..\include\gettimeofday.h" />
+    <ClInclude Include="..\include\inner_pre.h" />
+    <ClInclude Include="..\include\libevent_headers.h" />
+    <ClInclude Include="..\include\libevent_watcher.h" />
+    <ClInclude Include="..\include\platform_config.h" />
+    <ClInclude Include="..\include\timestamp.h" />
+    <ClInclude Include="..\include\timestamp.inl.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4877AA94-AD55-407F-9ED3-D4503FAB2A7F}</ProjectGuid>
@@ -76,7 +77,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions);H_WINDOWS_API;H_LIBEVENTPP_EXPORTS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../3rdparty/wininclude;../3rdparty/wininclude/event;../3rdparty/glog-0.3.4/src/windows;E:/boost_1_58_0</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../3rdparty/wininclude;../3rdparty/wininclude/event;../3rdparty/glog-0.3.4/src/windows;E:/boost_1_58_0;..</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -94,7 +95,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions);H_WINDOWS_API;H_LIBEVENTPP_EXPORTS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../3rdparty/wininclude;../3rdparty/wininclude/event;../3rdparty/glog-0.3.4/src/windows;E:/boost_1_58_0</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../3rdparty/wininclude;../3rdparty/wininclude/event;../3rdparty/glog-0.3.4/src/windows;E:/boost_1_58_0;..</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

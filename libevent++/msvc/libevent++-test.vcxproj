@@ -94,7 +94,7 @@
     <ClCompile Include="..\test\event_condition_test.cc" />
     <ClCompile Include="..\test\event_watcher_test.cc" />
     <ClCompile Include="..\test\glog_test.cc" />
-    <ClCompile Include="..\test\main.cc" />
+    <ClCompile Include="..\test\winmain.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\test\test_common.h" />

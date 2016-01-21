@@ -1,9 +1,9 @@
 
-#include "src/exp.h"
+#include "include/exp.h"
 #include "test_common.h"
 
-#include "src/libevent_headers.h"
-#include "src/libevent_watcher.h"
+#include "include/libevent_headers.h"
+#include "include/libevent_watcher.h"
 #include <boost/thread.hpp>
 
 namespace timed
