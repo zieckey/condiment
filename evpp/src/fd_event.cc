@@ -15,7 +15,6 @@ namespace evpp {
         , flags_(0)
         , active_(false)
     {
-
     }
 
     FdEvent::~FdEvent() {
@@ -93,8 +92,7 @@ namespace evpp {
             }
             event_free(ev_);
             ev_ = NULL;
-        }
-        else {
+        } else {
             LOG_INFO << "ev_ is NULL, nothing to do";
         }
 
@@ -109,15 +107,12 @@ namespace evpp {
         if (what & EV_READ) {
             LOG_INFO << "read event occurred, fd: " << fd;
             self->flags_ |= kReadable;
-        }
-        else if (what & EV_WRITE) {
+        } else if (what & EV_WRITE) {
             LOG_INFO << "write event occurred, fd: " << fd;
             self->flags_ |= kWritable;
-        }
-        else if (what & EV_TIMEOUT) {
+        } else if (what & EV_TIMEOUT) {
             LOG_INFO << "timeout event occurred, fd: " << fd;
-        }
-        else {
+        } else {
             LOG_ERROR << "invalid event type:" << what
                 << ", fd: " << fd;
             return;
@@ -131,8 +126,7 @@ namespace evpp {
         if (self->active_) {
             LOG_INFO << "Notify call handler, fd: " << fd;
             self->handler_(self->flags_);
-        }
-        else {
+        } else {
             LOG_WARN << "FDEvent, Notify nothing to do, fd: " << fd;
         }
     }
