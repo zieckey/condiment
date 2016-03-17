@@ -1,8 +1,8 @@
 
-#include "include/exp.h"
+#include "evpp/exp.h"
 #include "./test_common.h"
-#include "include/duration.h"
-#include "include/timestamp.h"
+#include "evpp/duration.h"
+#include "evpp/timestamp.h"
 
 TEST_UNIT(Duration_Compare)
 {

@@ -1,9 +1,9 @@
-#include "include/inner_pre.h"
+#include "evpp/inner_pre.h"
 
 #include <boost/static_assert.hpp>
 
-#include "include/fd_event.h"
-#include "include/libevent_headers.h"
+#include "evpp/fd_event.h"
+#include "evpp/libevent_headers.h"
 
 namespace evpp {
     BOOST_STATIC_ASSERT(FdEvent::kReadable == EV_READ);

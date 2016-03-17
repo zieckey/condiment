@@ -1,10 +1,10 @@
-#include "include/inner_pre.h"
+#include "evpp/inner_pre.h"
 
 #include <string.h>
 #include <boost/static_assert.hpp>
 
-#include "include/libevent_watcher.h"
-#include "include/libevent_headers.h"
+#include "evpp/libevent_watcher.h"
+#include "evpp/libevent_headers.h"
 
 namespace evpp
 {

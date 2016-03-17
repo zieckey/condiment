@@ -22,7 +22,7 @@ CPPFLAGS= -g -c -fPIC \
 		  -Wsign-compare -Winvalid-pch -fms-extensions -Wall \
 		  -MMD -Woverloaded-virtual -Wsign-promo -fno-gnu-keywords \
 		  -I ./$(GTESTDIR) \
-		  -I ..\
+		  -I ../include\
 		  -I $(SOURCE_DIR)/../3rdparty \
 
 RTFLAGS := \
