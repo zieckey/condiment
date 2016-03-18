@@ -20,22 +20,21 @@ namespace evpp {
         }
 
         ~InvokeTimer() {
-            if (watcher_) {
-                delete watcher_;
-                watcher_ = NULL;
+            LOG_INFO << "InvokeTimer::~InvokeTimer tid=" << boost::this_thread::get_id();
+            if (timer_) {
+                delete timer_;
+                timer_ = NULL;
             }
         }
 
         void Start() {
-            watcher_ = new TimerEventWatcher(loop_->event_base(), xstd::bind(&InvokeTimer::OnTimeout, this));
-            watcher_->set_cancel_callback(xstd::bind(&InvokeTimer::OnCanceled, this));
-            watcher_->Init();
-
             loop_->RunInLoop(xstd::bind(&InvokeTimer::AsyncWait, shared_from_this(), timeout_us_));
         }
 
         void Cancel() {
-            loop_->RunInLoop(xstd::bind(&TimerEventWatcher::Cancel, watcher_));
+            if (timer_) {
+                loop_->RunInLoop(xstd::bind(&TimerEventWatcher::Cancel, timer_));
+            }
         }
 
         EventLoop* loop() {
@@ -44,29 +43,30 @@ namespace evpp {
 
     private:
         InvokeTimer(EventLoop* evloop, double timeout_ms, const Functor& f)
-            : loop_(evloop), timeout_us_((uint64_t)(timeout_ms * 1000)), functor_(f), watcher_(NULL)
+            : loop_(evloop), timeout_us_((uint64_t)(timeout_ms * 1000)), functor_(f), timer_(NULL)
         {}
 
         void AsyncWait(uint64_t timeout_us) {
-            watcher_->AsyncWait(timeout_us);
+            LOG_INFO << "InvokeTimer::AsyncWait tid=" << boost::this_thread::get_id();
+            timer_ = new TimerEventWatcher(loop_->event_base(), xstd::bind(&InvokeTimer::OnTimeout, this));
+            timer_->set_cancel_callback(xstd::bind(&InvokeTimer::OnCanceled, this));
+            timer_->Init();
+            timer_->AsyncWait(timeout_us);
         }
 
-        void OnCanceled()
-        {
+        void OnCanceled() {
         }
 
-        void OnTimeout()
-        {
+        void OnTimeout() {
+            LOG_INFO << "InvokeTimer::OnTimeout tid=" << boost::this_thread::get_id();
             functor_();
         }
-
-
 
     private:
         EventLoop* loop_;
         uint64_t timeout_us_;
         Functor functor_;
-        TimerEventWatcher* watcher_;
+        TimerEventWatcher* timer_;
     };
 }
 #endif

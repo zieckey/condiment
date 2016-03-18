@@ -28,13 +28,14 @@ TEST_UNIT(TimerEventWatcher_test)
 {
     using namespace evtimer;
     struct event_base* base = event_base_new();
-    evpp::TimerEventWatcher ev(base, std::tr1::bind(Handle, base));
-    boost::thread th(MyEventThread, base, &ev);
+    boost::shared_ptr<evpp::TimerEventWatcher> ev(new evpp::TimerEventWatcher(base, std::tr1::bind(Handle, base)));
+    boost::thread th(MyEventThread, base, ev.get());
     uint64_t start = evpp::utcmicrosecond();
     th.join();
     uint64_t end = evpp::utcmicrosecond();
     H_TEST_ASSERT(end - start >= g_timeout_us);
     H_TEST_ASSERT(g_event_handler_called);
+    ev.reset();
     event_base_free(base);
 }
 

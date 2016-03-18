@@ -13,12 +13,13 @@ namespace evloop
     static boost::shared_ptr<evpp::EventLoop> loop;
     static double delay_ms = 1000.0;
     static bool g_event_handler_called = false;
-    static void Handle(evpp::EventLoop* evloop) {
+    static void Handle() {
         g_event_handler_called = true;
-        evloop->Stop();
+        loop->Stop();
     }
 
     static void MyEventThread() {
+        LOG_INFO << "EventLoop is running ...";
         loop = boost::shared_ptr<evpp::EventLoop>(new evpp::EventLoop);
         loop->Run();
     }
@@ -30,8 +31,8 @@ TEST_UNIT(EventLoop_test)
     boost::thread th(MyEventThread);
     uint64_t start = evpp::utcmicrosecond();
     usleep(delay_ms*1000);
-    //loop->RunAfter(delay_ms, xstd::bind(&Handle, loop.get(), start));
-    Handle(loop.get());
+    //loop->RunAfter(delay_ms, &Handle);
+    loop->RunInLoop(&Handle);
     th.join();
     uint64_t end = evpp::utcmicrosecond();
     H_TEST_ASSERT(end - start >= delay_ms*1000);

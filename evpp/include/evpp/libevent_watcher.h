@@ -76,8 +76,7 @@ namespace evpp {
     //////////////////////////////////////////////////////////////////////////
     class _EXPORT_LIBEVENTPP TimerEventWatcher : public EventWatcher {
     public:
-        TimerEventWatcher(struct event_base *event_base,
-            const Handler& handler);
+        TimerEventWatcher(struct event_base *event_base, const Handler& handler);
 
 		bool AsyncWait(uint64_t timeout_us) { return Watch(timeout_us); }
 

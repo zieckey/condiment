@@ -40,11 +40,9 @@ namespace evpp
 
 
     void EventLoop::Run() {
-
         tid_ = boost::this_thread::get_id();
 
-        //int rc = event_base_dispatch(event_base_);
-        int rc = event_base_loop(event_base_, 0);
+        int rc = event_base_dispatch(event_base_);
         DoAfterLoopFunctors();
         if (rc == 1) {
             LOG_ERROR << "event_base_dispatch error: no event registered";
@@ -105,8 +103,7 @@ namespace evpp
         //CHECK(rc == 0) << "event_reinit" << rc;
     }
 
-    void EventLoop::RunAfter(double delay_ms, const Functor& f)
-    {
+    void EventLoop::RunAfter(double delay_ms, const Functor& f) {
         boost::shared_ptr<InvokeTimer> t = InvokeTimer::Create(this, delay_ms, f);
         t->Start();
     }
