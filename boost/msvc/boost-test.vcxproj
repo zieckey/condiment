@@ -94,6 +94,7 @@
     <ClCompile Include="..\test\date.cc" />
     <ClCompile Include="..\test\timer.cc" />
     <ClCompile Include="..\test\main.cc" />
+    <ClCompile Include="..\test\weak_ptr.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\test\test_common.h" />
