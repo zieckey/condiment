@@ -29,7 +29,7 @@ TEST_UNIT(EventLoop_test)
 {
     using namespace evloop;
     boost::thread th(MyEventThread);
-    usleep(delay_ms * 1000);
+    usleep((uint32_t)(delay_ms * 1000));
     uint64_t start = evpp::utcmicrosecond();
     loop->RunAfter(delay_ms, &Handle);
     //loop->RunInLoop(&Handle);

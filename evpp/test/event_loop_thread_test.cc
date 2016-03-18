@@ -28,16 +28,14 @@ TEST_UNIT(EventLoopThread_test)
     g_count.store(0);
     evpp::EventLoopThread t;
     t.Start();
-#if 0
-    double begin_us = evpp::utcmicrosecond();
+    uint64_t begin_us = evpp::utcmicrosecond();
     t.event_loop()->RunAfter(1000 * 2, &OnTimeout);
     while (!g_timeout)
     {
         usleep(1);
     }
-    double end_us = evpp::utcmicrosecond();
+    uint64_t end_us = evpp::utcmicrosecond();
     H_TEST_ASSERT(end_us - begin_us >= 2000 * 1000);
-#endif
     t.event_loop()->RunInLoop(&OnCount);
     t.event_loop()->RunInLoop(&OnCount);
     t.event_loop()->RunInLoop(&OnCount);
