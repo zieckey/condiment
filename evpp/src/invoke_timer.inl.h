@@ -28,17 +28,8 @@ namespace evpp {
         }
 
         void Start() {
-            loop_->RunInLoop(xstd::bind(&InvokeTimer::AsyncWait, shared_from_this(), timeout_us_));
-        }
-
-        void Cancel() {
-            if (timer_) {
-                loop_->RunInLoop(xstd::bind(&TimerEventWatcher::Cancel, timer_));
-            }
-        }
-
-        EventLoop* loop() {
-            return loop_;
+            boost::shared_ptr<InvokeTimer> ref = shared_from_this(); // reference count +1
+            loop_->RunInLoop(xstd::bind(&InvokeTimer::AsyncWait, ref, timeout_us_));
         }
 
     private:
@@ -48,13 +39,10 @@ namespace evpp {
 
         void AsyncWait(uint64_t timeout_us) {
             LOG_INFO << "InvokeTimer::AsyncWait tid=" << boost::this_thread::get_id();
-            timer_ = new TimerEventWatcher(loop_->event_base(), xstd::bind(&InvokeTimer::OnTimeout, this));
-            timer_->set_cancel_callback(xstd::bind(&InvokeTimer::OnCanceled, this));
+            boost::shared_ptr<InvokeTimer> ref = shared_from_this(); // reference count +1
+            timer_ = new TimerEventWatcher(loop_->event_base(), xstd::bind(&InvokeTimer::OnTimeout, ref));
             timer_->Init();
             timer_->AsyncWait(timeout_us);
-        }
-
-        void OnCanceled() {
         }
 
         void OnTimeout() {

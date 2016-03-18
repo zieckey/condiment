@@ -29,10 +29,10 @@ TEST_UNIT(EventLoop_test)
 {
     using namespace evloop;
     boost::thread th(MyEventThread);
+    usleep(delay_ms * 1000);
     uint64_t start = evpp::utcmicrosecond();
-    usleep(delay_ms*1000);
-    //loop->RunAfter(delay_ms, &Handle);
-    loop->RunInLoop(&Handle);
+    loop->RunAfter(delay_ms, &Handle);
+    //loop->RunInLoop(&Handle);
     th.join();
     uint64_t end = evpp::utcmicrosecond();
     H_TEST_ASSERT(end - start >= delay_ms*1000);
