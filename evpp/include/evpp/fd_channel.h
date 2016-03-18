@@ -47,8 +47,6 @@ namespace evpp {
     private:
         ReadEventCallback read_fn_;
         EventCallback write_fn_;
-        EventCallback close_fn_;
-        EventCallback error_fn_;
 
         struct event*      event_;
         struct event_base* evbase_;

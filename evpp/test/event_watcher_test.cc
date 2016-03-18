@@ -6,7 +6,7 @@
 #include "evpp/libevent_watcher.h"
 #include <boost/thread.hpp>
 
-namespace timed
+namespace evtimer
 {
     static uint64_t g_timeout_us = 1000000;
     static bool g_event_handler_called = false;
@@ -26,7 +26,7 @@ namespace timed
 
 TEST_UNIT(TimerEventWatcher_test)
 {
-    using namespace timed;
+    using namespace evtimer;
     struct event_base* base = event_base_new();
     evpp::TimerEventWatcher ev(base, std::tr1::bind(Handle, base));
     boost::thread th(MyEventThread, base, &ev);

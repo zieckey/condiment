@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\event_loop.cc" />
     <ClCompile Include="..\src\fd_channel.cc" />
     <ClCompile Include="..\src\fd_event.cc" />
     <ClCompile Include="..\src\inner_pre.cc" />
@@ -32,6 +33,7 @@
     <ClInclude Include="..\include\evpp\platform_config.h" />
     <ClInclude Include="..\include\evpp\timestamp.h" />
     <ClInclude Include="..\include\evpp\timestamp.inl.h" />
+    <ClInclude Include="..\src\invoke_timer.inl.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4877AA94-AD55-407F-9ED3-D4503FAB2A7F}</ProjectGuid>
@@ -82,7 +84,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir);d:\cppworkspace\boost_1_58_0\output\lib</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>libcmtd.lib</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
@@ -102,7 +104,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir);d:\cppworkspace\boost_1_58_0\output\lib</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>LIBCMT.lib</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>

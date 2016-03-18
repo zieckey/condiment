@@ -18,15 +18,23 @@ namespace evpp {
 
     class _EXPORT_LIBEVENTPP EventWatcher {
     public:
-        typedef std::tr1::function<void()> Handler;
+        typedef xstd::function<void()> Handler;
 
         virtual ~EventWatcher();
 
         bool Init();
 
+        // @note It MUST be called in the event thread.
         bool Watch(uint64_t timeout_us /*= 0*/);
 
+        // @note It MUST be called in the event thread.
         void Cancel();
+
+    public:
+        //! @brief : set_cancel_callback 
+        //! @param[IN] const Handler & cb - The callback which will be called when this event is canceled.
+        //! @return void - 
+        void set_cancel_callback(const Handler& cb);
 
     protected:
         void set_evbase(struct event_base* evbase) {
@@ -47,6 +55,7 @@ namespace evpp {
         struct event*      event_;
         struct event_base* evbase_;
         Handler handler_;
+        Handler cancel_callback_;
     };
 
     //////////////////////////////////////////////////////////////////////////

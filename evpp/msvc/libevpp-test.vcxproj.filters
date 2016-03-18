@@ -36,6 +36,9 @@
     <ClCompile Include="..\test\winmain.cc">
       <Filter>gtest</Filter>
     </ClCompile>
+    <ClCompile Include="..\test\event_loop_test.cc">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\test\test_common.h">

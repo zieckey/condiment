@@ -48,8 +48,7 @@ namespace evpp
         struct timeval tv;
         struct timeval* timeoutval = NULL;
 
-        if (timeout_us > 0)
-        {
+        if (timeout_us > 0) {
             tv.tv_sec = (long)timeout_us / 1000000;
             tv.tv_usec = (long)timeout_us % 1000000;
             timeoutval = &tv;
@@ -63,13 +62,23 @@ namespace evpp
     }
 
     void EventWatcher::Cancel() {
-        if (event_initialized(event_)) {
+        if (event_initialized(event_)) { //TODO how to do : if (event_ != NULL && !event_initialized(event_))
             event_del(event_);
             delete (event_);
             event_ = NULL;
         }
+
+        if (cancel_callback_) {
+            cancel_callback_();
+        }
     }
-    
+
+    void EventWatcher::set_cancel_callback(const Handler& cb)
+    {
+        cancel_callback_ = cb;
+    }
+
+
     //////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////
@@ -116,14 +125,14 @@ namespace evpp
         PipeEventWatcher *e = (PipeEventWatcher*)v;
         char buf[128];
         int n = 0;
-        if ((n = recv(e->pipe_[1], buf, sizeof(buf), 0)) > 0) {
+        if ((n = ::recv(e->pipe_[1], buf, sizeof(buf), 0)) > 0) {
             e->handler_();
         }
     }
 
     void PipeEventWatcher::Notify() {
         char buf[1] = {};
-        if (send(pipe_[0], buf, sizeof(buf), 0) < 0) {
+        if (::send(pipe_[0], buf, sizeof(buf), 0) < 0) {
             return;
         }
     }

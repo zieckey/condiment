@@ -14,7 +14,7 @@ namespace evpp {
             kReadable = 0x02,
             kWritable = 0x04,
         };
-        typedef std::tr1::function<void(int /*enum EventType*/)> Functor;
+        typedef xstd::function<void(int /*enum EventType*/)> Functor;
 
         FdEvent(struct event_base* loop);
         ~FdEvent();

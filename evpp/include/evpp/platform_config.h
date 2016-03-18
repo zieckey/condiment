@@ -41,15 +41,64 @@
 #define LOG_INFO  LOG(INFO)
 #define LOG_WARN  LOG(WARNING)
 #define LOG_ERROR LOG(ERROR)
+#define LOG_FATAL LOG(FATAL)
 #else
 #define LOG_TRACE std::cout << __FILE__ << ":" << __LINE__
 #define LOG_DEBUG std::cout << __FILE__ << ":" << __LINE__
 #define LOG_INFO  std::cout << __FILE__ << ":" << __LINE__
 #define LOG_WARN  std::cout << __FILE__ << ":" << __LINE__
 #define LOG_ERROR std::cout << __FILE__ << ":" << __LINE__
+#define LOG_FATAL std::cout << __FILE__ << ":" << __LINE__
 
 #define CHECK_NOTNULL(val) \
     LOG_ERROR << "'" #val "' Must be non NULL";
+#endif
+
+
+
+
+//! Finds the compiler type and version.
+#if defined( _MSC_VER )
+#	ifndef H_COMPILER_MSVC
+#		define H_COMPILER_MSVC
+#	endif
+#	ifndef H_COMPILER_VERSION
+#		define H_COMPILER_VERSION _MSC_VER
+#	endif
+#	if H_COMPILER_VERSION < 1300
+#		pragma error "Not supported compiler version. Abort! Abort!"
+#	endif
+#elif defined( __GNUC__ )
+#	ifndef H_COMPILER_GNUC
+#		define H_COMPILER_GNUC
+#	endif
+#	ifndef H_COMPILER_VERSION
+#		define H_COMPILER_VERSION (((__GNUC__)*100) + \
+                                    (__GNUC_MINOR__ * 10) + \
+                                    __GNUC_PATCHLEVEL__)
+#	endif
+#else
+#   pragma error "No known compiler. Abort! Abort!"
+#endif
+
+
+#ifdef xstd
+    #error "xstd is already defined in another place. Please check it!"
+#endif
+#ifdef H_OS_WINDOWS
+    #include <memory>
+    #include <functional>
+    #define xstd std
+#else
+    #if H_COMPILER_VERSION >= 472
+        #include <memory>
+        #include <functional>
+        #define xstd std
+    #else
+        #include <tr1/memory>
+        #include <tr1/functional>
+        #define xstd std::tr1
+    #endif
 #endif
 
 #endif // end of define __cplusplus
@@ -99,4 +148,4 @@
 #pragma warning( disable: 4251 )
 #endif
 
-#endif
+#endif // end of #ifndef LIBEVENTPP_PLATFROM_CONFIG_H_

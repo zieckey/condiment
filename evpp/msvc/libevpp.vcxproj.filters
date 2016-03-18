@@ -11,17 +11,20 @@
     <Filter Include="time">
       <UniqueIdentifier>{ff5db783-2ed0-41c4-9543-d05587140e55}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ev">
+    <Filter Include="evloop">
+      <UniqueIdentifier>{6a94d149-6f7b-47af-94e3-19d9eab3d441}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="event">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\fd_event.cc">
-      <Filter>ev</Filter>
+      <Filter>event</Filter>
     </ClCompile>
     <ClCompile Include="..\src\libevent_watcher.cc">
-      <Filter>ev</Filter>
+      <Filter>event</Filter>
     </ClCompile>
     <ClCompile Include="..\src\inner_pre.cc">
       <Filter>base</Filter>
@@ -34,6 +37,9 @@
     </ClCompile>
     <ClCompile Include="..\src\fd_channel.cc">
       <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\event_loop.cc">
+      <Filter>evloop</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -68,13 +74,16 @@
       <Filter>net</Filter>
     </ClInclude>
     <ClInclude Include="..\include\evpp\fd_event.h">
-      <Filter>ev</Filter>
+      <Filter>event</Filter>
     </ClInclude>
     <ClInclude Include="..\include\evpp\libevent_watcher.h">
-      <Filter>ev</Filter>
+      <Filter>event</Filter>
     </ClInclude>
     <ClInclude Include="..\include\evpp\event_loop.h">
-      <Filter>ev</Filter>
+      <Filter>evloop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\invoke_timer.inl.h">
+      <Filter>evloop</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
