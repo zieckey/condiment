@@ -44,6 +44,9 @@
     <ClCompile Include="..\src\event_loop_thread.cc">
       <Filter>evloop</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\event_loop_thread_pool.cc">
+      <Filter>evloop</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\evpp\exp.h">
@@ -89,6 +92,9 @@
       <Filter>evloop</Filter>
     </ClInclude>
     <ClInclude Include="..\include\evpp\event_loop_thread.h">
+      <Filter>evloop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\evpp\event_loop_thread_pool.h">
       <Filter>evloop</Filter>
     </ClInclude>
   </ItemGroup>

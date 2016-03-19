@@ -39,7 +39,9 @@ using namespace boost;
 class self_shared : public enable_shared_from_this<self_shared>
 {
 public:
-    self_shared(int n) :x(n){}
+    self_shared(int n) 
+        : x(n) {
+    }
     void print()
     {
         std::cout << " self_shared:" << x << std::endl;
