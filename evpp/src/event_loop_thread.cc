@@ -71,7 +71,6 @@ namespace evpp
     }
 
     void EventLoopThread::Impl::Run(const Functor& pre, const Functor& post) {
-        LOG_INFO << "Thread tid=" << boost::this_thread::get_id() << " is running ...";
         state_ = kRunning;
         if (pre) {
             pre();
@@ -81,7 +80,6 @@ namespace evpp
             post();
         }
         state_ = kStopped;
-        LOG_INFO << "Thread tid=" << boost::this_thread::get_id() << " is stopped ...";
     }
 
     void EventLoopThread::Impl::Stop(bool wait_thread_exit) {
