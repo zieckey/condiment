@@ -90,6 +90,7 @@
   <ItemGroup>
     <ClCompile Include="..\3rdparty\gtest\src\gtest-all.cc" />
     <ClCompile Include="..\3rdparty\gtest\src\gtest_main.cc" />
+    <ClCompile Include="..\test\buffer_test.cc" />
     <ClCompile Include="..\test\event_loop_test.cc" />
     <ClCompile Include="..\test\event_loop_thread_pool_test.cc" />
     <ClCompile Include="..\test\event_loop_thread_test.cc" />

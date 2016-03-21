@@ -45,6 +45,9 @@
     <ClCompile Include="..\test\event_loop_thread_pool_test.cc">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\test\buffer_test.cc">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\test\test_common.h">

@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\buffer.cc" />
     <ClCompile Include="..\src\event_loop.cc" />
     <ClCompile Include="..\src\event_loop_thread.cc" />
     <ClCompile Include="..\src\event_loop_thread_pool.cc" />
@@ -22,6 +23,7 @@
     <ClCompile Include="..\src\pch.cc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\evpp\buffer.h" />
     <ClInclude Include="..\include\evpp\duration.h" />
     <ClInclude Include="..\include\evpp\duration.inl.h" />
     <ClInclude Include="..\include\evpp\event_loop.h" />
@@ -35,8 +37,10 @@
     <ClInclude Include="..\include\evpp\libevent_headers.h" />
     <ClInclude Include="..\include\evpp\libevent_watcher.h" />
     <ClInclude Include="..\include\evpp\platform_config.h" />
+    <ClInclude Include="..\include\evpp\slice.h" />
     <ClInclude Include="..\include\evpp\timestamp.h" />
     <ClInclude Include="..\include\evpp\timestamp.inl.h" />
+    <ClInclude Include="..\include\evpp\sockets.h" />
     <ClInclude Include="..\src\invoke_timer.inl.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

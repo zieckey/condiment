@@ -18,6 +18,9 @@
     <Filter Include="sockets">
       <UniqueIdentifier>{eee53411-c7a0-4552-85ab-81e36a0b66cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{1c4d9814-0cfc-4b4c-a095-ffe63e2c5779}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\fd_event.cc">
@@ -46,6 +49,9 @@
     </ClCompile>
     <ClCompile Include="..\src\event_loop_thread_pool.cc">
       <Filter>evloop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\buffer.cc">
+      <Filter>common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -96,6 +102,15 @@
     </ClInclude>
     <ClInclude Include="..\include\evpp\event_loop_thread_pool.h">
       <Filter>evloop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\evpp\buffer.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\evpp\sockets.h">
+      <Filter>sockets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\evpp\slice.h">
+      <Filter>common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
