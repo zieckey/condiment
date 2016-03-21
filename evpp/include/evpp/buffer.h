@@ -310,7 +310,6 @@ namespace evpp {
 
         void shrink(size_t reserve)
         {
-            // FIXME: use vector::shrink_to_fit() in C++ 11 if possible.
             Buffer other;
             other.ensureWritableBytes(readableBytes() + reserve);
             other.append(toStringPiece());
