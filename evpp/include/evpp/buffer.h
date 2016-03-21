@@ -15,9 +15,9 @@ namespace evpp {
         static const size_t kInitialSize = 1024;
 
         explicit Buffer(size_t initialSize = kInitialSize)
-            : readerIndex_(kCheapPrepend),
-            writerIndex_(kCheapPrepend),
-            capacity_(kCheapPrepend + kInitialSize)
+            : capacity_(kCheapPrepend + kInitialSize),
+            readerIndex_(kCheapPrepend),
+            writerIndex_(kCheapPrepend)
         {
             buffer_ = new char[capacity_];
             assert(readableBytes() == 0);

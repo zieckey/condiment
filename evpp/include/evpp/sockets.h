@@ -4,10 +4,10 @@
 #include "evpp/inner_pre.h"
 
 #ifdef H_OS_WINDOWS
-    #   include <ws2tcpip.h>
-    #   include <WinSock2.h>
-    #   include <io.h>
-    #   include <ws2ipdef.h>
+    #include <ws2tcpip.h>
+    #include <WinSock2.h>
+    #include <io.h>
+    #include <ws2ipdef.h>
 
     typedef int ssize_t;
     #define iovec       _WSABUF
@@ -15,6 +15,8 @@
     #define iov_len         len
 
 #else
+    #include <arpa/inet.h>
+    #include <sys/uio.h>
     #ifndef SOCKET
     #	define SOCKET int		    /**< SOCKET definition */
     #endif
@@ -40,7 +42,7 @@ inline int readv(SOCKET sockfd, struct iovec *iov, int iovcnt)
 //         //set error state.
 //     }
     return -1;
-#endif
 }
+#endif
 
 #endif
