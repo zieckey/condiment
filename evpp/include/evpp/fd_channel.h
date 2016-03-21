@@ -25,7 +25,7 @@ namespace evpp {
         typedef boost::function<void(Timestamp)> ReadEventCallback;
 
     public:
-        FdChannel(struct event_base *evbase, int fd, 
+        FdChannel(struct event_base *evbase, int fd,
             bool watch_read_event, bool watch_write_event);
 
         bool Start();
