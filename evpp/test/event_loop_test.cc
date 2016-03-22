@@ -25,7 +25,7 @@ namespace evloop
     }
 }
 
-TEST_UNIT(EventLoop_test)
+TEST_UNIT(testEventLoop)
 {
     using namespace evloop;
     boost::thread th(MyEventThread);

@@ -25,7 +25,7 @@ namespace
     }
 }
 
-TEST_UNIT(http_Event_test)
+TEST_UNIT(testPipeEventWatcher)
 {
     struct event_base* base = event_base_new();
     evpp::PipeEventWatcher ev(base, std::tr1::bind(Handle, base));

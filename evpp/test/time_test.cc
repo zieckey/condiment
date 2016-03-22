@@ -4,7 +4,7 @@
 #include "evpp/duration.h"
 #include "evpp/timestamp.h"
 
-TEST_UNIT(Duration_Compare)
+TEST_UNIT(testDuration)
 {
     evpp::Duration d0(0);
     evpp::Duration d1(1);
@@ -16,7 +16,7 @@ TEST_UNIT(Duration_Compare)
     H_TEST_ASSERT(d0.IsZero());
 }
 
-TEST_UNIT(Timestamp)
+TEST_UNIT(testTimestamp)
 {
 }
 

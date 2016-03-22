@@ -31,7 +31,7 @@ namespace
     }
 }
 
-TEST_UNIT(EventLoopThreadPool_test)
+TEST_UNIT(testEventLoopThreadPool)
 {
     evpp::EventLoopThread loop;
     loop.Start(true);

@@ -24,7 +24,7 @@ namespace evtimer
     }
 }
 
-TEST_UNIT(TimerEventWatcher_test)
+TEST_UNIT(testTimerEventWatcher)
 {
     using namespace evtimer;
     struct event_base* base = event_base_new();
@@ -39,7 +39,7 @@ TEST_UNIT(TimerEventWatcher_test)
     event_base_free(base);
 }
 
-TEST_UNIT(evutil_socketpair_test)
+TEST_UNIT(testsocketpair)
 {
     int sockpair[2];
     memset(sockpair, 0, sizeof(sockpair[0] * 2));

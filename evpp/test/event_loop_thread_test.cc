@@ -23,7 +23,7 @@ namespace
 }
 
 
-TEST_UNIT(EventLoopThread_test)
+TEST_UNIT(testEventLoopThread)
 {
     g_count.store(0);
     evpp::EventLoopThread t;

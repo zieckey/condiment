@@ -5,7 +5,7 @@
 #	pragma comment(lib,"libglog_static.lib")
 #endif
 
-TEST_UNIT(glog_test)
+TEST_UNIT(testglog)
 {
     google::InitGoogleLogging("xxx");
     FLAGS_stderrthreshold = 0;
