@@ -15,12 +15,12 @@ namespace evpp {
 
         explicit Buffer(size_t initialSize = kInitialSize)
             : capacity_(kCheapPrepend + initialSize),
-            readerIndex_(kCheapPrepend),
-            writerIndex_(kCheapPrepend) {
+            read_index_(kCheapPrepend),
+            write_index_(kCheapPrepend) {
             buffer_ = new char[capacity_];
             assert(length() == 0);
-            assert(writableBytes() == initialSize);
-            assert(prependableBytes() == kCheapPrepend);
+            assert(WritableBytes() == initialSize);
+            assert(PrependableBytes() == kCheapPrepend);
         }
 
         ~Buffer() {
@@ -29,74 +29,18 @@ namespace evpp {
             capacity_ = 0;
         }
 
-        // implicit copy-ctor, move-ctor, dtor and assignment are fine
-        // NOTE: implicit move-ctor is added in g++ 4.6
-
-        void swap(Buffer& rhs) {
+        void Swap(Buffer& rhs) {
             std::swap(buffer_, rhs.buffer_);
             std::swap(capacity_, rhs.capacity_);
-            std::swap(readerIndex_, rhs.readerIndex_);
-            std::swap(writerIndex_, rhs.writerIndex_);
+            std::swap(read_index_, rhs.read_index_);
+            std::swap(write_index_, rhs.write_index_);
         }
 
-        size_t writableBytes() const {
-            assert(capacity_ >= writerIndex_);
-            return capacity_ - writerIndex_;
-        }
-
-        size_t prependableBytes() const {
-            return readerIndex_;
-        }
-
-        const char* peek() const {
-            return begin() + readerIndex_;
-        }
-
-        const char* findCRLF() const {
-            const char* crlf = std::search(peek(), beginWrite(), kCRLF, kCRLF + 2);
-            return crlf == beginWrite() ? NULL : crlf;
-        }
-
-        const char* findCRLF(const char* start) const {
-            assert(peek() <= start);
-            assert(start <= beginWrite());
-            const char* crlf = std::search(start, beginWrite(), kCRLF, kCRLF + 2);
-            return crlf == beginWrite() ? NULL : crlf;
-        }
-
-        const char* findEOL() const {
-            const void* eol = memchr(peek(), '\n', length());
-            return static_cast<const char*>(eol);
-        }
-
-        const char* findEOL(const char* start) const {
-            assert(peek() <= start);
-            assert(start <= beginWrite());
-            const void* eol = memchr(start, '\n', beginWrite() - start);
-            return static_cast<const char*>(eol);
-        }
-
-        // retrieve returns void, to prevent
+        // Retrieve returns void, to prevent
         // string str(retrieve(readableBytes()), readableBytes());
         // the evaluation of two functions are unspecified
-        void retrieve(size_t len) {
+        void Retrieve(size_t len) {
             Next(len);
-        }
-
-        void retrieveInt64() {
-            retrieve(sizeof(int64_t));
-        }
-
-        void retrieveInt32() {
-            retrieve(sizeof(int32_t));
-        }
-
-        void retrieveInt16() {
-            retrieve(sizeof(int16_t));
-        }
-
-        void retrieveInt8() {
-            retrieve(sizeof(int8_t));
         }
 
         // Truncate discards all but the first n unread bytes from the buffer
@@ -104,10 +48,10 @@ namespace evpp {
         // It does nothing if n is greater than the length of the buffer.
         void Truncate(size_t n) {
             if (n == 0) {
-                readerIndex_ = kCheapPrepend;
-                writerIndex_ = kCheapPrepend;
-            } else if (writerIndex_ > readerIndex_ + n) {
-                writerIndex_ = readerIndex_ + n;
+                read_index_ = kCheapPrepend;
+                write_index_ = kCheapPrepend;
+            } else if (write_index_ > read_index_ + n) {
+                write_index_ = read_index_ + n;
             }
         }
 
@@ -117,137 +61,117 @@ namespace evpp {
         void Reset() {
             Truncate(0);
         }
-        
-        void append(const Slice& str) {
-            append(str.data(), str.size());
+
+        // Increase the capacity of the container to a value that's greater
+        // or equal to len. If len is greater than the current capacity(),
+        // new storage is allocated, otherwise the method does nothing.
+        void Reserve(size_t len) {
+            if (capacity_ >= len + kCheapPrepend) {
+                return;
+            }
+
+            grow(len + kCheapPrepend - capacity_);
         }
 
-        void append(const char* /*restrict*/ data, size_t len) {
+        // Write
+    public:
+        void Write(const void* /*restrict*/ data, size_t len) {
             ensureWritableBytes(len);
             memcpy(beginWrite(), data, len);
-            hasWritten(len);
+            assert(write_index_ + len <= capacity_);
+            write_index_ += len;
         }
 
-        void append(const void* /*restrict*/ data, size_t len) {
-            append(static_cast<const char*>(data), len);
+        void Append(const Slice& str) {
+            Write(str.data(), str.size());
         }
 
-        void ensureWritableBytes(size_t len) {
-            if (writableBytes() < len) {
-                grow(len);
-            }
-            assert(writableBytes() >= len);
+        void Append(const char* /*restrict*/ data, size_t len) {
+            Write(data, len);
         }
 
-        char* beginWrite() {
-            return begin() + writerIndex_;
+        void Append(const void* /*restrict*/ data, size_t len) {
+            Write(data, len);
         }
 
-        const char* beginWrite() const {
-            return begin() + writerIndex_;
-        }
-
-        void hasWritten(size_t len) {
-            assert(len <= writableBytes());
-            writerIndex_ += len;
-        }
-
-        void unwrite(size_t len) {
-            assert(len <= length());
-            writerIndex_ -= len;
-        }
-
-        ///
-        /// Append int32_t using network endian
-        ///
-        void appendInt32(int32_t x) {
+        // Append int32_t using network endian
+        void AppendInt32(int32_t x) {
             int32_t be32 = ::htonl(x);
-            append(&be32, sizeof be32);
+            Write(&be32, sizeof be32);
         }
 
-        void appendInt16(int16_t x) {
+        // Append int16_t using network endian
+        void AppendInt16(int16_t x) {
             int16_t be16 = ::htons(x);
-            append(&be16, sizeof be16);
+            Write(&be16, sizeof be16);
         }
 
-        void appendInt8(int8_t x) {
-            append(&x, sizeof x);
+        void AppendInt8(int8_t x) {
+            Write(&x, sizeof x);
         }
 
-        ///
-        /// Read int32_t from network endian
-        ///
-        /// Require: buf->readableBytes() >= sizeof(int32_t)
-        int32_t readInt32() {
-            int32_t result = peekInt32();
-            retrieveInt32();
-            return result;
-        }
-
-        int16_t readInt16() {
-            int16_t result = peekInt16();
-            retrieveInt16();
-            return result;
-        }
-
-        int8_t readInt8() {
-            int8_t result = peekInt8();
-            retrieveInt8();
-            return result;
-        }
-
-        ///
-        /// Peek int32_t from network endian
-        ///
-        /// Require: buf->readableBytes() >= sizeof(int32_t)
-        int32_t peekInt32() const {
-            assert(length() >= sizeof(int32_t));
-            int32_t be32 = 0;
-            ::memcpy(&be32, peek(), sizeof be32);
-            return ::ntohl(be32);
-        }
-
-        int16_t peekInt16() const {
-            assert(length() >= sizeof(int16_t));
-            int16_t be16 = 0;
-            ::memcpy(&be16, peek(), sizeof be16);
-            return ::ntohs(be16);
-        }
-
-        int8_t peekInt8() const {
-            assert(length() >= sizeof(int8_t));
-            int8_t x = *peek();
-            return x;
-        }
-
-        ///
-        /// Prepend int32_t using network endian
-        ///
-        void prependInt32(int32_t x) {
+        // Prepend int32_t using network endian
+        void PrependInt32(int32_t x) {
             int32_t be32 = ::htonl(x);
-            prepend(&be32, sizeof be32);
+            Prepend(&be32, sizeof be32);
         }
 
-        void prependInt16(int16_t x) {
+        // Prepend int16_t using network endian
+        void PrependInt16(int16_t x) {
             int16_t be16 = ::htons(x);
-            prepend(&be16, sizeof be16);
+            Prepend(&be16, sizeof be16);
         }
 
-        void prependInt8(int8_t x) {
-            prepend(&x, sizeof x);
+        void PrependInt8(int8_t x) {
+            Prepend(&x, sizeof x);
         }
 
-        void prepend(const void* /*restrict*/ data, size_t len) {
-            assert(len <= prependableBytes());
-            readerIndex_ -= len;
+        void Prepend(const void* /*restrict*/ data, size_t len) {
+            assert(len <= PrependableBytes());
+            read_index_ -= len;
             const char* d = static_cast<const char*>(data);
-            memcpy(begin() + readerIndex_, d, len);
+            memcpy(begin() + read_index_, d, len);
+        }
+
+        void UnwriteBytes(size_t n) {
+            assert(n <= length());
+            write_index_ -= n;
+        }
+
+        //Read
+    public:
+        // Read int32_t from network endian
+        // Require: buf->size() >= sizeof(int32_t)
+        int32_t ReadInt32() {
+            assert(size() >= sizeof int32_t);
+            int32_t result = PeekInt32();
+            Next(sizeof result);
+            return result;
+        }
+
+        // Read int16_t from network endian
+        // Require: buf->size() >= sizeof(int16_t)
+        int16_t ReadInt16() {
+            assert(size() >= sizeof int16_t);
+            int16_t result = PeekInt16();
+            Next(sizeof result);
+            return result;
+        }
+
+        int8_t ReadInt8() {
+            int8_t result = PeekInt8();
+            Next(sizeof result);
+            return result;
+        }
+
+        Slice ToSlice() const {
+            return Slice(data(), static_cast<int>(length()));
         }
 
         void Shrink(size_t reserve) {
             Buffer other(length() + reserve);
-            other.append(ToSlice());
-            swap(other);
+            other.Append(ToSlice());
+            Swap(other);
         }
 
         /// Read data directly into buffer.
@@ -262,8 +186,8 @@ namespace evpp {
         // The slice is only valid until the next call to a read or write method.
         Slice Next(size_t len) {
             if (len < length()) {
-                Slice result(peek(), len);
-                readerIndex_ += len;
+                Slice result(data(), len);
+                read_index_ += len;
                 return result;
             }
             return NextAll();
@@ -272,7 +196,7 @@ namespace evpp {
         // NextAll returns a slice containing all the unread portion of the buffer,
         // advancing the buffer as if the bytes had been returned by Read.
         Slice NextAll() {
-            Slice result(peek(), length());
+            Slice result(data(), length());
             Reset();
             return result;
         }
@@ -287,10 +211,6 @@ namespace evpp {
             return std::string(s.data(), s.size());
         }
 
-        Slice ToSlice() const {
-            return Slice(peek(), static_cast<int>(length()));
-        }
-
         // ReadByte reads and returns the next byte from the buffer.
         // If no byte is available, it returns '\0'.
         char ReadByte() {
@@ -298,22 +218,54 @@ namespace evpp {
             if (length() == 0) {
                 return '\0';
             }
-            return buffer_[readerIndex_++];
+            return buffer_[read_index_++];
         }
 
+        // UnreadBytes unreads the last n bytes returned
+        // by the most recent read operation.
+        void UnreadBytes(size_t n) {
+            assert(n < read_index_);
+            read_index_ -= n;
+        }
+
+        // Peek
+    public:
+        // Peek int32_t from network endian
+        // Require: buf->size() >= sizeof(int32_t)
+        int32_t PeekInt32() const {
+            assert(length() >= sizeof(int32_t));
+            int32_t be32 = 0;
+            ::memcpy(&be32, data(), sizeof be32);
+            return ::ntohl(be32);
+        }
+
+        int16_t PeekInt16() const {
+            assert(length() >= sizeof(int16_t));
+            int16_t be16 = 0;
+            ::memcpy(&be16, data(), sizeof be16);
+            return ::ntohs(be16);
+        }
+
+        int8_t PeekInt8() const {
+            assert(length() >= sizeof(int8_t));
+            int8_t x = *data();
+            return x;
+        }
+
+    public:
         // data returns a pointer of length Buffer.length() holding the unread portion of the buffer.
         // The data is valid for use only until the next buffer modification (that is,
         // only until the next call to a method like Read, Write, Reset, or Truncate).
         // The data aliases the buffer content at least until the next buffer modification,
         // so immediate changes to the slice will affect the result of future reads.
         const char* data() const {
-            return buffer_ + readerIndex_;
+            return buffer_ + read_index_;
         }
 
         // length returns the number of bytes of the unread portion of the buffer
         size_t length() const {
-            assert(writerIndex_ >= readerIndex_);
-            return writerIndex_ - readerIndex_;
+            assert(write_index_ >= read_index_);
+            return write_index_ - read_index_;
         }
 
         // size returns the number of bytes of the unread portion of the buffer.
@@ -328,7 +280,50 @@ namespace evpp {
             return capacity_;
         }
 
+
+        size_t WritableBytes() const {
+            assert(capacity_ >= write_index_);
+            return capacity_ - write_index_;
+        }
+
+        size_t PrependableBytes() const {
+            return read_index_;
+        }
+
+        // Helpers
+    public:
+        const char* FindCRLF() const {
+            const char* crlf = std::search(data(), beginWrite(), kCRLF, kCRLF + 2);
+            return crlf == beginWrite() ? NULL : crlf;
+        }
+
+        const char* FindCRLF(const char* start) const {
+            assert(data() <= start);
+            assert(start <= beginWrite());
+            const char* crlf = std::search(start, beginWrite(), kCRLF, kCRLF + 2);
+            return crlf == beginWrite() ? NULL : crlf;
+        }
+
+        const char* FindEOL() const {
+            const void* eol = memchr(data(), '\n', length());
+            return static_cast<const char*>(eol);
+        }
+
+        const char* FindEOL(const char* start) const {
+            assert(data() <= start);
+            assert(start <= beginWrite());
+            const void* eol = memchr(start, '\n', beginWrite() - start);
+            return static_cast<const char*>(eol);
+        }
     private:
+        char* beginWrite() {
+            return begin() + write_index_;
+        }
+
+        const char* beginWrite() const {
+            return begin() + write_index_;
+        }
+
         char* begin() {
             return buffer_;
         }
@@ -337,35 +332,42 @@ namespace evpp {
             return buffer_;
         }
 
+        void ensureWritableBytes(size_t len) {
+            if (WritableBytes() < len) {
+                grow(len);
+            }
+            assert(WritableBytes() >= len);
+        }
+
         void grow(size_t len) {
-            if (writableBytes() + prependableBytes() < len + kCheapPrepend) {
+            if (WritableBytes() + PrependableBytes() < len + kCheapPrepend) {
                 //grow the capacity
                 size_t n = (capacity_ << 1) + len;
                 size_t m = length();
                 char* d = new char[n];
-                memcpy(d + kCheapPrepend, begin() + readerIndex_, m);
-                writerIndex_ = m + kCheapPrepend;
-                readerIndex_ = kCheapPrepend;
+                memcpy(d + kCheapPrepend, begin() + read_index_, m);
+                write_index_ = m + kCheapPrepend;
+                read_index_ = kCheapPrepend;
                 capacity_ = n;
                 delete[] buffer_;
                 buffer_ = d;
             } else {
                 // move readable data to the front, make space inside buffer
-                assert(kCheapPrepend < readerIndex_);
+                assert(kCheapPrepend < read_index_);
                 size_t readable = length();
-                memcpy(begin() + kCheapPrepend, begin() + readerIndex_, length());
-                readerIndex_ = kCheapPrepend;
-                writerIndex_ = readerIndex_ + readable;
+                memcpy(begin() + kCheapPrepend, begin() + read_index_, length());
+                read_index_ = kCheapPrepend;
+                write_index_ = read_index_ + readable;
                 assert(readable == length());
-                assert(writableBytes() >= len);
+                assert(WritableBytes() >= len);
             }
         }
 
     private:
         char* buffer_;
         size_t capacity_;
-        size_t readerIndex_;
-        size_t writerIndex_;
+        size_t read_index_;
+        size_t write_index_;
 
         static const char kCRLF[];
     };
