@@ -76,9 +76,9 @@ namespace evpp {
 
         // Write
     public:
-        void Write(const void* /*restrict*/ data, size_t len) {
+        void Write(const void* /*restrict*/ d, size_t len) {
             ensureWritableBytes(len);
-            memcpy(beginWrite(), data, len);
+            memcpy(beginWrite(), d, len);
             assert(write_index_ + len <= capacity_);
             write_index_ += len;
         }
@@ -87,12 +87,12 @@ namespace evpp {
             Write(str.data(), str.size());
         }
 
-        void Append(const char* /*restrict*/ data, size_t len) {
-            Write(data, len);
+        void Append(const char* /*restrict*/ d, size_t len) {
+            Write(d, len);
         }
 
-        void Append(const void* /*restrict*/ data, size_t len) {
-            Write(data, len);
+        void Append(const void* /*restrict*/ d, size_t len) {
+            Write(d, len);
         }
 
         // Append int32_t using network endian
@@ -127,11 +127,11 @@ namespace evpp {
             Prepend(&x, sizeof x);
         }
 
-        void Prepend(const void* /*restrict*/ data, size_t len) {
+        void Prepend(const void* /*restrict*/ d, size_t len) {
             assert(len <= PrependableBytes());
             read_index_ -= len;
-            const char* d = static_cast<const char*>(data);
-            memcpy(begin() + read_index_, d, len);
+            const char* p = static_cast<const char*>(d);
+            memcpy(begin() + read_index_, p, len);
         }
 
         void UnwriteBytes(size_t n) {
@@ -144,7 +144,7 @@ namespace evpp {
         // Read int32_t from network endian
         // Require: buf->size() >= sizeof(int32_t)
         int32_t ReadInt32() {
-            assert(size() >= sizeof int32_t);
+            assert(size() >= sizeof(int32_t));
             int32_t result = PeekInt32();
             Next(sizeof result);
             return result;
@@ -153,7 +153,7 @@ namespace evpp {
         // Read int16_t from network endian
         // Require: buf->size() >= sizeof(int16_t)
         int16_t ReadInt16() {
-            assert(size() >= sizeof int16_t);
+            assert(size() >= sizeof(int16_t));
             int16_t result = PeekInt16();
             Next(sizeof result);
             return result;
