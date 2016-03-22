@@ -23,6 +23,8 @@ msvc/*.opensdf
 msvc/*.sdf
 msvc/*.suo
 
+test/evpp
+
 unixstudycode.tar.gz
 *.out
 
