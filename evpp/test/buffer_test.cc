@@ -6,8 +6,7 @@
 using evpp::Buffer;
 using std::string;
 
-TEST_UNIT(testBufferAppendRetrieve)
-{
+TEST_UNIT(testBufferAppendRead) {
     Buffer buf;
     H_TEST_EQUAL(buf.length(), 0);
     H_TEST_EQUAL(buf.WritableBytes(), Buffer::kInitialSize);
@@ -24,6 +23,7 @@ TEST_UNIT(testBufferAppendRetrieve)
     H_TEST_EQUAL(buf.length(), str.size() - str2.size());
     H_TEST_EQUAL(buf.WritableBytes(), Buffer::kInitialSize - str.size());
     H_TEST_EQUAL(buf.PrependableBytes(), Buffer::kCheapPrepend + str2.size());
+    H_TEST_EQUAL(str2, string(50, 'x'));
 
     buf.Append(str);
     H_TEST_EQUAL(buf.length(), 2 * str.size() - str2.size());
@@ -35,10 +35,10 @@ TEST_UNIT(testBufferAppendRetrieve)
     H_TEST_EQUAL(buf.length(), 0);
     H_TEST_EQUAL(buf.WritableBytes(), Buffer::kInitialSize);
     H_TEST_EQUAL(buf.PrependableBytes(), Buffer::kCheapPrepend);
+    H_TEST_EQUAL(str3, string(350, 'x'));
 }
 
-TEST_UNIT(testBufferGrow)
-{
+TEST_UNIT(testBufferGrow) {
     Buffer buf;
     buf.Append(string(400, 'y'));
     H_TEST_EQUAL(buf.length(), 400);
@@ -57,11 +57,10 @@ TEST_UNIT(testBufferGrow)
     buf.Reset();
     H_TEST_EQUAL(buf.length(), 0);
     H_TEST_EQUAL(buf.PrependableBytes(), Buffer::kCheapPrepend);
-    H_TEST_ASSERT(buf.WritableBytes() >= Buffer::kInitialSize*2);
+    H_TEST_ASSERT(buf.WritableBytes() >= Buffer::kInitialSize * 2);
 }
 
-TEST_UNIT(testBufferInsideGrow)
-{
+TEST_UNIT(testBufferInsideGrow) {
     Buffer buf;
     buf.Append(string(800, 'y'));
     H_TEST_EQUAL(buf.length(), 800);
@@ -78,8 +77,7 @@ TEST_UNIT(testBufferInsideGrow)
     H_TEST_EQUAL(buf.PrependableBytes(), Buffer::kCheapPrepend);
 }
 
-TEST_UNIT(testBufferShrink)
-{
+TEST_UNIT(testBufferShrink) {
     Buffer buf;
     buf.Append(string(2000, 'y'));
     H_TEST_EQUAL(buf.length(), 2000);
@@ -98,8 +96,7 @@ TEST_UNIT(testBufferShrink)
     H_TEST_EQUAL(buf.PrependableBytes(), Buffer::kCheapPrepend);
 }
 
-TEST_UNIT(testBufferPrepend)
-{
+TEST_UNIT(testBufferPrepend) {
     Buffer buf;
     buf.Append(string(200, 'y'));
     H_TEST_EQUAL(buf.length(), 200);
@@ -113,8 +110,7 @@ TEST_UNIT(testBufferPrepend)
     H_TEST_EQUAL(buf.PrependableBytes(), Buffer::kCheapPrepend - 4);
 }
 
-TEST_UNIT(testBufferReadInt)
-{
+TEST_UNIT(testBufferReadInt) {
     Buffer buf;
     buf.Append("HTTP");
 
@@ -140,11 +136,103 @@ TEST_UNIT(testBufferReadInt)
     H_TEST_EQUAL(buf.length(), 0);
 }
 
-TEST_UNIT(testBufferFindEOL)
-{
+TEST_UNIT(testBufferFindEOL) {
     Buffer buf;
     buf.Append(string(100000, 'x'));
     const char* null = NULL;
     H_TEST_EQUAL(buf.FindEOL(), null);
     H_TEST_EQUAL(buf.FindEOL(buf.data() + 90000), null);
+}
+
+
+TEST_UNIT(testBufferTruncate) {
+    Buffer buf;
+    buf.Append("HTTP");
+
+    H_TEST_EQUAL(buf.length(), 4);
+    buf.Truncate(3);
+    H_TEST_EQUAL(buf.length(), 3);
+    buf.Truncate(2);
+    H_TEST_EQUAL(buf.length(), 2);
+    buf.Truncate(1);
+    H_TEST_EQUAL(buf.length(), 1);
+    H_TEST_EQUAL(buf.WritableBytes(), Buffer::kInitialSize - 1);
+    H_TEST_EQUAL(buf.PrependableBytes(), Buffer::kCheapPrepend);
+    buf.Truncate(0);
+    H_TEST_EQUAL(buf.length(), 0);
+    H_TEST_EQUAL(buf.WritableBytes(), Buffer::kInitialSize);
+    H_TEST_EQUAL(buf.PrependableBytes(), Buffer::kCheapPrepend);
+
+    buf.Append("HTTP");
+    buf.Reset();
+    H_TEST_EQUAL(buf.length(), 0);
+    H_TEST_EQUAL(buf.WritableBytes(), Buffer::kInitialSize);
+    H_TEST_EQUAL(buf.PrependableBytes(), Buffer::kCheapPrepend);
+
+    buf.Append("HTTP");
+    buf.Truncate(Buffer::kInitialSize + 1000);
+    H_TEST_EQUAL(buf.length(), 4);
+    H_TEST_EQUAL(buf.WritableBytes(), Buffer::kInitialSize - 4);
+    H_TEST_EQUAL(buf.PrependableBytes(), Buffer::kCheapPrepend);
+
+    buf.Append("HTTPS");
+    H_TEST_EQUAL(buf.length(), 9);
+    H_TEST_EQUAL(buf.WritableBytes(), Buffer::kInitialSize - 9);
+    H_TEST_EQUAL(buf.PrependableBytes(), Buffer::kCheapPrepend);
+
+    buf.Next(4);
+    H_TEST_EQUAL(buf.length(), 5);
+    H_TEST_EQUAL(buf.WritableBytes(), Buffer::kInitialSize - 9);
+    H_TEST_EQUAL(buf.PrependableBytes(), Buffer::kCheapPrepend + 4);
+    buf.Truncate(5);
+    H_TEST_EQUAL(buf.length(), 5);
+    H_TEST_EQUAL(buf.WritableBytes(), Buffer::kInitialSize - 9);
+    H_TEST_EQUAL(buf.PrependableBytes(), Buffer::kCheapPrepend + 4);
+    buf.Truncate(6);
+    H_TEST_EQUAL(buf.length(), 5);
+    H_TEST_EQUAL(buf.WritableBytes(), Buffer::kInitialSize - 9);
+    H_TEST_EQUAL(buf.PrependableBytes(), Buffer::kCheapPrepend + 4);
+    buf.Truncate(4);
+    H_TEST_EQUAL(buf.length(), 4);
+    H_TEST_EQUAL(buf.WritableBytes(), Buffer::kInitialSize - 8);
+    H_TEST_EQUAL(buf.PrependableBytes(), Buffer::kCheapPrepend + 4);
+}
+
+
+TEST_UNIT(testBufferReserve) {
+    Buffer buf;
+    buf.Append("HTTP");
+    H_TEST_EQUAL(buf.length(), 4);
+    H_TEST_EQUAL(buf.WritableBytes(), Buffer::kInitialSize - 4);
+    H_TEST_EQUAL(buf.PrependableBytes(), Buffer::kCheapPrepend);
+
+    buf.Reserve(100);
+    H_TEST_EQUAL(buf.length(), 4);
+    H_TEST_EQUAL(buf.WritableBytes(), Buffer::kInitialSize - 4);
+    H_TEST_EQUAL(buf.PrependableBytes(), Buffer::kCheapPrepend);
+
+
+    buf.Reserve(Buffer::kInitialSize);
+    H_TEST_EQUAL(buf.length(), 4);
+    H_TEST_EQUAL(buf.WritableBytes(), Buffer::kInitialSize - 4);
+    H_TEST_EQUAL(buf.PrependableBytes(), Buffer::kCheapPrepend);
+
+    buf.Reserve(2 * Buffer::kInitialSize);
+    H_TEST_EQUAL(buf.length(), 4);
+    H_TEST_ASSERT(buf.WritableBytes() >= 2 * Buffer::kInitialSize - 4);
+    H_TEST_EQUAL(buf.PrependableBytes(), Buffer::kCheapPrepend);
+
+    buf.Append("HTTPS");
+    H_TEST_EQUAL(buf.length(), 9);
+    H_TEST_ASSERT(buf.WritableBytes() >= 2 * Buffer::kInitialSize - 9);
+    H_TEST_EQUAL(buf.PrependableBytes(), Buffer::kCheapPrepend);
+
+    buf.Next(4);
+    H_TEST_EQUAL(buf.length(), 5);
+    H_TEST_EQUAL(buf.PrependableBytes(), Buffer::kCheapPrepend + 4);
+
+    buf.Reserve(8 * Buffer::kInitialSize);
+    H_TEST_EQUAL(buf.length(), 5);
+    H_TEST_ASSERT(buf.WritableBytes() >= 8 * Buffer::kInitialSize - 5);
+    H_TEST_EQUAL(buf.PrependableBytes(), Buffer::kCheapPrepend);
 }

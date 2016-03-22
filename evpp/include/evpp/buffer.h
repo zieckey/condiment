@@ -70,7 +70,8 @@ namespace evpp {
                 return;
             }
 
-            grow(len + kCheapPrepend - capacity_);
+            // TODO add the implementation logic here
+            grow(len + kCheapPrepend);
         }
 
         // Write
