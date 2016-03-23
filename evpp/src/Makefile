@@ -12,7 +12,7 @@ CFLAGS=$(TOP_CFLAGS) -g -c -fPIC \
 	   -I .. -I ../include -MMD
 CPPFLAGS= $(CFLAGS) -Woverloaded-virtual -Wsign-promo -fno-gnu-keywords
 LDFLAGS=$(TOP_LDFLAGS) -lpthread -levent -lglog
-LIBNAME=event++
+LIBNAME=evpp
 
 SRCS := $(wildcard *.cc)
 OBJS := $(patsubst %.cc, %.o, $(SRCS)) $(CCOBJS)
