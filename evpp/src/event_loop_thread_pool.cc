@@ -3,10 +3,8 @@
 
 #include <boost/atomic.hpp>
 
-namespace evpp
-{
-    class EventLoopThreadPool::Impl
-    {
+namespace evpp {
+    class EventLoopThreadPool::Impl {
     public:
         Impl(EventLoop* base_loop);
         ~Impl();
@@ -36,16 +34,11 @@ namespace evpp
         : base_loop_(base_loop),
         started_(false),
         threads_num_(0),
-        next_(0)
-    {
-    }
+        next_(0) {}
 
-    EventLoopThreadPool::Impl::~Impl()
-    {
-    }
+    EventLoopThreadPool::Impl::~Impl() {}
 
-    bool EventLoopThreadPool::Impl::Start(bool wait_until_thread_started)
-    {
+    bool EventLoopThreadPool::Impl::Start(bool wait_until_thread_started) {
         assert(!started_);
         if (started_) {
             return true;
@@ -68,8 +61,7 @@ namespace evpp
         return true;
     }
 
-    void EventLoopThreadPool::Impl::Stop(bool wait_thread_exit)
-    {
+    void EventLoopThreadPool::Impl::Stop(bool wait_thread_exit) {
         for (int i = 0; i < threads_num_; ++i) {
             EventLoopThreadPtr& t = threads_[i];
             t->Stop();
@@ -82,8 +74,7 @@ namespace evpp
         }
     }
 
-    bool EventLoopThreadPool::Impl::IsRunning() const
-    {
+    bool EventLoopThreadPool::Impl::IsRunning() const {
         for (int i = 0; i < threads_num_; ++i) {
             const EventLoopThreadPtr& t = threads_[i];
             if (!t->IsRunning()) {
@@ -94,8 +85,7 @@ namespace evpp
         return true;
     }
 
-    bool EventLoopThreadPool::Impl::IsStopped() const
-    {
+    bool EventLoopThreadPool::Impl::IsStopped() const {
         for (int i = 0; i < threads_num_; ++i) {
             const EventLoopThreadPtr& t = threads_[i];
             if (!t->IsStopped()) {
@@ -106,8 +96,7 @@ namespace evpp
         return true;
     }
 
-    EventLoop* EventLoopThreadPool::Impl::GetNextLoop()
-    {
+    EventLoop* EventLoopThreadPool::Impl::GetNextLoop() {
         EventLoop* loop = base_loop_;
 
         if (!threads_.empty()) {
@@ -121,8 +110,7 @@ namespace evpp
         return loop;
     }
 
-    EventLoop* EventLoopThreadPool::Impl::GetNextLoopWithHash(uint64_t hash)
-    {
+    EventLoop* EventLoopThreadPool::Impl::GetNextLoopWithHash(uint64_t hash) {
         EventLoop* loop = base_loop_;
 
         if (!threads_.empty()) {
@@ -138,51 +126,39 @@ namespace evpp
     //////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////
     EventLoopThreadPool::EventLoopThreadPool(EventLoop* base_loop)
-        : impl_(new Impl(base_loop))
-    {
-    }
+        : impl_(new Impl(base_loop)) {}
 
-    EventLoopThreadPool::~EventLoopThreadPool()
-    {
-    }
+    EventLoopThreadPool::~EventLoopThreadPool() {}
 
-    void EventLoopThreadPool::SetThreadNum(int thread_num)
-    {
+    void EventLoopThreadPool::SetThreadNum(int thread_num) {
         impl_->SetThreadNum(thread_num);
     }
 
-    bool EventLoopThreadPool::Start(bool wait_until_thread_started)
-    {
+    bool EventLoopThreadPool::Start(bool wait_until_thread_started) {
         return impl_->Start(wait_until_thread_started);
     }
 
-    void EventLoopThreadPool::Stop(bool wait_thread_exit)
-    {
+    void EventLoopThreadPool::Stop(bool wait_thread_exit) {
         impl_->Stop(wait_thread_exit);
     }
 
-    EventLoop* EventLoopThreadPool::GetNextLoop()
-    {
+    EventLoop* EventLoopThreadPool::GetNextLoop() {
         return impl_->GetNextLoop();
     }
 
-    EventLoop* EventLoopThreadPool::GetNextLoopWithHash(uint64_t hash)
-    {
+    EventLoop* EventLoopThreadPool::GetNextLoopWithHash(uint64_t hash) {
         return impl_->GetNextLoopWithHash(hash);
     }
 
-    bool EventLoopThreadPool::IsRunning() const
-    {
+    bool EventLoopThreadPool::IsRunning() const {
         return impl_->IsRunning();
     }
 
-    bool EventLoopThreadPool::IsStopped() const
-    {
+    bool EventLoopThreadPool::IsStopped() const {
         return impl_->IsStopped();
     }
 
-    std::vector<EventLoopThreadPool::EventLoopThreadPtr>* EventLoopThreadPool::threads()
-    {
+    std::vector<EventLoopThreadPool::EventLoopThreadPtr>* EventLoopThreadPool::threads() {
         return impl_->threads();
     }
 }

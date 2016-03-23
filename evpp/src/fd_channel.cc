@@ -6,14 +6,12 @@
 #include "evpp/fd_channel.h"
 #include "evpp/libevent_headers.h"
 
-namespace evpp
-{
+namespace evpp {
     BOOST_STATIC_ASSERT(FdChannel::kReadable == EV_READ);
     BOOST_STATIC_ASSERT(FdChannel::kWritable == EV_WRITE);
 
     FdChannel::FdChannel(struct event_base *event_base, int f, bool r, bool w)
-        : fd_(f)
-    {
+        : fd_(f) {
         events_ = (w ? kWritable : 0) | (r ? kReadable : 0) | EV_PERSIST;
         event_ = new event;
         memset(event_, 0, sizeof(struct event));
@@ -21,8 +19,7 @@ namespace evpp
         event_base_set(evbase_, event_);
     }
 
-    bool FdChannel::Start()
-    {
+    bool FdChannel::Start() {
         if (event_add(event_, NULL) != 0) {
             return false;
         }

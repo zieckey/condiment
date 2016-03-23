@@ -4,8 +4,7 @@
 #include "evpp/event_loop_thread.h"
 
 namespace evpp {
-    class _EXPORT_LIBEVENTPP EventLoopThreadPool
-    {
+    class EVPP_EXPORT EventLoopThreadPool {
     public:
         EventLoopThreadPool(EventLoop* base_loop);
         ~EventLoopThreadPool();

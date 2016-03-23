@@ -8,30 +8,25 @@
 #include <boost/thread/lock_guard.hpp>
 
 
-namespace evpp
-{
-    EventLoop::EventLoop()
-    {
+namespace evpp {
+    EventLoop::EventLoop() {
         event_base_ = event_base_new();
 
         Init();
     }
 
     EventLoop::EventLoop(struct event_base *base)
-        : event_base_(base)
-    {
+        : event_base_(base) {
         Init();
     }
 
-    EventLoop::~EventLoop()
-    {
+    EventLoop::~EventLoop() {
         if (event_base_ != NULL) {
             event_base_free(event_base_);
         }
     }
 
-    void EventLoop::Init(void)
-    {
+    void EventLoop::Init(void) {
         calling_pending_functors_ = false;
         watcher_.reset(new PipeEventWatcher(event_base_, xstd::bind(&EventLoop::DoPendingFunctors, this)));
         watcher_->Init();
@@ -85,8 +80,7 @@ namespace evpp
             boost::lock_guard<boost::mutex> lock(mutex_);
             functors.swap(after_loop_functors_);
         }
-        for (size_t i = 0; i < functors.size(); ++i)
-        {
+        for (size_t i = 0; i < functors.size(); ++i) {
             functors[i]();
         }
 
@@ -95,8 +89,7 @@ namespace evpp
     void EventLoop::AfterFork() {
         int rc = event_reinit(event_base_);
         assert(rc == 0);
-        if (rc != 0)
-        {
+        if (rc != 0) {
             fprintf(stderr, "event_reinit failed!\n");
             abort();
         }
@@ -123,14 +116,12 @@ namespace evpp
             pending_functors_.push_back(cb);
         }
 
-        if (calling_pending_functors_ || boost::this_thread::get_id() != tid_)
-        {
+        if (calling_pending_functors_ || boost::this_thread::get_id() != tid_) {
             watcher_->Notify();
         }
     }
 
-    void EventLoop::DoPendingFunctors()
-    {
+    void EventLoop::DoPendingFunctors() {
         std::vector<Functor> functors;
         calling_pending_functors_ = true;
 
@@ -139,8 +130,7 @@ namespace evpp
             functors.swap(pending_functors_);
         }
 
-        for (size_t i = 0; i < functors.size(); ++i)
-        {
+        for (size_t i = 0; i < functors.size(); ++i) {
             functors[i]();
         }
         calling_pending_functors_ = false;

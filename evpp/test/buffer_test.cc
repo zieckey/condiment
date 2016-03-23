@@ -1,4 +1,3 @@
-
 #include "test_common.h"
 
 #include "evpp/buffer.h"
@@ -236,3 +235,7 @@ TEST_UNIT(testBufferReserve) {
     H_TEST_ASSERT(buf.WritableBytes() >= 8 * Buffer::kInitialSize - 5);
     H_TEST_EQUAL(buf.PrependableBytes(), Buffer::kCheapPrepend);
 }
+
+
+//#include <boost/asio/ip/address.hpp>
+//boost::asio::ip::address

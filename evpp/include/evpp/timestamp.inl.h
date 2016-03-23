@@ -3,14 +3,10 @@
 
 namespace evpp {
     inline Timestamp::Timestamp()
-        : ns_(0)
-    {
-    }
+        : ns_(0) {}
 
     inline Timestamp::Timestamp(int64_t nanoseconds)
-        : ns_(nanoseconds)
-    {
-    }
+        : ns_(nanoseconds) {}
 
     inline bool Timestamp::IsEpoch() const {
         return ns_ == 0;
@@ -18,9 +14,7 @@ namespace evpp {
 
 
     inline Timestamp::Timestamp(const struct timeval& t)
-        : ns_(t.tv_sec*Duration::kSecond + t.tv_usec*Duration::kMicrosecond)
-    {
-    }
+        : ns_(t.tv_sec*Duration::kSecond + t.tv_usec*Duration::kMicrosecond) {}
 
     inline Timestamp Timestamp::Now() {
         return Timestamp(int64_t(utcmicrosecond()*Duration::kMicrosecond));
@@ -34,7 +28,7 @@ namespace evpp {
         t->tv_sec = (long)(ns_ / Duration::kSecond);
         t->tv_usec = (long)(ns_ % Duration::kSecond) / Duration::kMicrosecond;
     }
-    
+
     inline struct timeval Timestamp::TimeVal() const {
         struct timeval t;
         To(&t);

@@ -3,24 +3,19 @@
 
 namespace evpp {
     inline Duration::Duration()
-        : ns_(0)
-    {}
+        : ns_(0) {}
 
     inline Duration::Duration(const struct timeval& t)
-        : ns_(t.tv_sec*kSecond + t.tv_usec*kMicrosecond)
-    {}
+        : ns_(t.tv_sec*kSecond + t.tv_usec*kMicrosecond) {}
 
     inline Duration::Duration(int64_t nanoseconds)
-        : ns_(nanoseconds)
-    {}
+        : ns_(nanoseconds) {}
 
     inline Duration::Duration(int nanoseconds)
-        : ns_(nanoseconds)
-    {}
+        : ns_(nanoseconds) {}
 
     inline Duration::Duration(double seconds)
-        : ns_((int64_t)(seconds*kSecond))
-    {}
+        : ns_((int64_t)(seconds*kSecond)) {}
 
     inline bool Duration::IsZero() const {
         return ns_ == 0;

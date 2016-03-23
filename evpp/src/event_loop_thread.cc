@@ -3,8 +3,7 @@
 #include "evpp/event_loop.h"
 #include "evpp/event_loop_thread.h"
 
-namespace evpp
-{
+namespace evpp {
     class EventLoopThread::Impl {
     public:
         Impl();
@@ -43,12 +42,9 @@ namespace evpp
 
     EventLoopThread::Impl::Impl()
         : event_loop_(new EventLoop)
-        , state_(kStopped)
-    {
-    }
+        , state_(kStopped) {}
 
-    EventLoopThread::Impl::~Impl() {
-    }
+    EventLoopThread::Impl::~Impl() {}
 
     bool EventLoopThread::Impl::Start(bool wait_until_thread_started,
         const Functor& pre, const Functor& post) {
@@ -91,34 +87,29 @@ namespace evpp
         }
     }
 
-    void EventLoopThread::Impl::SetName(const std::string& n)
-    {
+    void EventLoopThread::Impl::SetName(const std::string& n) {
         //TODO
     }
 
-    const std::string& EventLoopThread::Impl::name() const
-    {
+    const std::string& EventLoopThread::Impl::name() const {
         //TODO
         const static std::string __s_empty;
         return __s_empty;
 
     }
 
-    boost::thread::id EventLoopThread::Impl::tid() const
-    {
+    boost::thread::id EventLoopThread::Impl::tid() const {
         if (thread_) {
             return thread_->get_id();
         }
         return boost::thread::id();
     }
 
-    bool EventLoopThread::Impl::IsRunning() const
-    {
+    bool EventLoopThread::Impl::IsRunning() const {
         return thread_ && state_ == kRunning;
     }
 
-    bool EventLoopThread::Impl::IsStopped() const
-    {
+    bool EventLoopThread::Impl::IsStopped() const {
         return state_ == kStopped;
     }
 
@@ -128,12 +119,9 @@ namespace evpp
     //////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////
     EventLoopThread::EventLoopThread()
-        : impl_(new Impl())
-    {
-    }
+        : impl_(new Impl()) {}
 
-    EventLoopThread::~EventLoopThread() {
-    }
+    EventLoopThread::~EventLoopThread() {}
 
     bool EventLoopThread::Start(bool wait_until_thread_started, const Functor& pre, const Functor& post) {
         return impl_->Start(wait_until_thread_started, pre, post);
@@ -143,38 +131,31 @@ namespace evpp
         impl_->Stop(wait_thread_exit);
     }
 
-    EventLoop* EventLoopThread::event_loop() const
-    {
+    EventLoop* EventLoopThread::event_loop() const {
         return impl_->event_loop();
     }
 
-    struct event_base * EventLoopThread::event_base()
-    {
+    struct event_base * EventLoopThread::event_base() {
         return event_loop()->event_base();
     }
 
-    bool EventLoopThread::IsRunning() const
-    {
+    bool EventLoopThread::IsRunning() const {
         return impl_->IsRunning();
     }
 
-    bool EventLoopThread::IsStopped() const
-    {
+    bool EventLoopThread::IsStopped() const {
         return impl_->IsStopped();
     }
 
-    void EventLoopThread::SetName(const std::string& n)
-    {
+    void EventLoopThread::SetName(const std::string& n) {
         return impl_->SetName(n);
     }
 
-    const std::string& EventLoopThread::name() const
-    {
+    const std::string& EventLoopThread::name() const {
         return impl_->name();
     }
 
-    boost::thread::id EventLoopThread::tid() const
-    {
+    boost::thread::id EventLoopThread::tid() const {
         return impl_->tid();
     }
 }

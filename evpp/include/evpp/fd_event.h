@@ -7,7 +7,7 @@ struct event_base;
 struct event;
 
 namespace evpp {
-    class _EXPORT_LIBEVENTPP FdEvent {
+    class EVPP_EXPORT FdEvent {
         static const int kTimedOut = 4;
     public:
         enum EventType {

@@ -8,7 +8,7 @@
 #include <algorithm>
 
 namespace evpp {
-    class _EXPORT_LIBEVENTPP Buffer {
+    class EVPP_EXPORT Buffer {
     public:
         static const size_t kCheapPrepend = 8;
         static const size_t kInitialSize = 1024;
@@ -127,6 +127,7 @@ namespace evpp {
             Prepend(&x, sizeof x);
         }
 
+        // Insert content, specified by the parameter, into the front of reading index
         void Prepend(const void* /*restrict*/ d, size_t len) {
             assert(len <= PrependableBytes());
             read_index_ -= len;

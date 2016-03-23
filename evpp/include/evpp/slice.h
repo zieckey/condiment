@@ -5,25 +5,23 @@
 #include <assert.h>
 #include <string>
 
-namespace evpp
-{
-    class Slice
-    {
+namespace evpp {
+    class Slice {
     public:
         typedef char value_type;
 
     public:
         // Create an empty slice.
-        Slice() : data_(""), size_(0) { }
+        Slice() : data_(""), size_(0) {}
 
         // Create a slice that refers to d[0,n-1].
-        Slice(const char* d, size_t n) : data_(d), size_(n) { }
+        Slice(const char* d, size_t n) : data_(d), size_(n) {}
 
         // Create a slice that refers to the contents of "s"
-        Slice(const std::string& s) : data_(s.data()), size_(s.size()) { }
+        Slice(const std::string& s) : data_(s.data()), size_(s.size()) {}
 
         // Create a slice that refers to s[0,strlen(s)-1]
-        Slice(const char* s) : data_(s), size_(strlen(s)) { }
+        Slice(const char* s) : data_(s), size_(strlen(s)) {}
 
         // Return a pointer to the beginning of the referenced data
         const char* data() const { return data_; }
@@ -36,8 +34,7 @@ namespace evpp
 
         // Return the ith byte in the referenced data.
         // REQUIRES: n < size()
-        char operator[](size_t n) const
-        {
+        char operator[](size_t n) const {
             assert(n < size());
             return data_[n];
         }
@@ -46,8 +43,7 @@ namespace evpp
         void clear() { data_ = ""; size_ = 0; }
 
         // Drop the first "n" bytes from this slice.
-        void remove_prefix(size_t n)
-        {
+        void remove_prefix(size_t n) {
             assert(n <= size());
             data_ += n;
             size_ -= n;

@@ -9,7 +9,7 @@
 
 namespace evpp {
 
-    class _EXPORT_LIBEVENTPP EventLoop {
+    class EVPP_EXPORT EventLoop {
     public:
         typedef xstd::function<void()> Functor;
     public:

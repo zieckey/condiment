@@ -16,7 +16,7 @@ struct event_base;
 namespace evpp {
 
 
-    class _EXPORT_LIBEVENTPP EventWatcher {
+    class EVPP_EXPORT EventWatcher {
     public:
         typedef xstd::function<void()> Handler;
 
@@ -59,7 +59,7 @@ namespace evpp {
     };
 
     //////////////////////////////////////////////////////////////////////////
-    class _EXPORT_LIBEVENTPP PipeEventWatcher : public EventWatcher {
+    class EVPP_EXPORT PipeEventWatcher : public EventWatcher {
     public:
         PipeEventWatcher(struct event_base *event_base,
             const Handler& handler);
@@ -74,18 +74,18 @@ namespace evpp {
     };
 
     //////////////////////////////////////////////////////////////////////////
-    class _EXPORT_LIBEVENTPP TimerEventWatcher : public EventWatcher {
+    class EVPP_EXPORT TimerEventWatcher : public EventWatcher {
     public:
         TimerEventWatcher(struct event_base *event_base, const Handler& handler);
 
-		bool AsyncWait(uint64_t timeout_us) { return Watch(timeout_us); }
+        bool AsyncWait(uint64_t timeout_us) { return Watch(timeout_us); }
 
     private:
         virtual bool DoInit();
         static void HandlerFn(int fd, short which, void *v);
     };
 
-	typedef TimerEventWatcher EventTimer;
+    typedef TimerEventWatcher EventTimer;
 
     //////////////////////////////////////////////////////////////////////////
 #ifdef H_OS_LINUX

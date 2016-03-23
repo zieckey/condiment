@@ -13,9 +13,7 @@ namespace evpp {
         : loop_(loop)
         , ev_(NULL)
         , flags_(0)
-        , active_(false)
-    {
-    }
+        , active_(false) {}
 
     FdEvent::~FdEvent() {
         LOG_INFO << "FdEvent::~Impl called, call Cancel";
@@ -30,7 +28,7 @@ namespace evpp {
             LOG_WARN << "invalid events, events: " << events;
             return;
         }
-        
+
         Cancel();
         assert(active_ == false);
 

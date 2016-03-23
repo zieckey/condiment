@@ -29,6 +29,7 @@
     <ClInclude Include="..\include\evpp\event_loop.h" />
     <ClInclude Include="..\include\evpp\event_loop_thread.h" />
     <ClInclude Include="..\include\evpp\event_loop_thread_pool.h" />
+    <ClInclude Include="..\include\evpp\evpp_export.h" />
     <ClInclude Include="..\include\evpp\exp.h" />
     <ClInclude Include="..\include\evpp\fd_channel.h" />
     <ClInclude Include="..\include\evpp\fd_event.h" />

@@ -5,8 +5,7 @@
 #include "duration.h"
 
 namespace evpp {
-    class Timestamp
-    {
+    class Timestamp {
     public:
         Timestamp();
         Timestamp(int64_t nanoseconds);

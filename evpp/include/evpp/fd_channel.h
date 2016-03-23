@@ -14,7 +14,7 @@ struct event;
 struct event_base;
 
 namespace evpp {
-    class _EXPORT_LIBEVENTPP FdChannel {
+    class EVPP_EXPORT FdChannel {
     public:
         enum EventType {
             kNone     = 0x00,

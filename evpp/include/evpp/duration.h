@@ -9,8 +9,7 @@ namespace evpp {
     // A Duration represents the elapsed time between two instants
     // as an int64 nanosecond count.  The representation limits the
     // largest representable duration to approximately 290 years.
-    class Duration
-    {
+    class Duration {
     public:
         static const int64_t kNanosecond = 1LL;
         static const int64_t kMicrosecond = 1000 * kNanosecond;

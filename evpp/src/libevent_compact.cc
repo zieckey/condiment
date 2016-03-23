@@ -2,8 +2,8 @@
 #include "evpp/libevent_headers.h"
 
 #ifdef _LIBEVENT14
-struct event * event_new(struct event_base *base, int fd, short events, void(*cb)(int, short, void *), void *arg)
-{
+struct event * event_new(struct event_base *base, int fd, short events,
+    void(*cb)(int, short, void *), void *arg) {
     struct event *ev;
     ev = (struct event*)malloc(sizeof(struct event));
     if (ev == NULL)
@@ -13,8 +13,7 @@ struct event * event_new(struct event_base *base, int fd, short events, void(*cb
     return (ev);
 }
 
-void event_free(struct event *ev)
-{
+void event_free(struct event *ev) {
     event_del(ev);
     free(ev);
 }

@@ -11,7 +11,7 @@ struct event;
 namespace evpp {
 
     class EventLoop;
-    class _EXPORT_LIBEVENTPP EventLoopThread {
+    class EVPP_EXPORT EventLoopThread {
     public:
         typedef xstd::function<void()> Functor;
         EventLoopThread();

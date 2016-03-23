@@ -17,15 +17,15 @@ namespace evpp
 #ifdef H_WINDOWS_API
 #	ifndef  H_STATIC_LIB_LIBEVENTPP
 #		ifdef  H_LIBEVENTPP_EXPORTS
-#			define _EXPORT_LIBEVENTPP __declspec(dllexport)
+#			define EVPP_EXPORT __declspec(dllexport)
 #		else
-#			define _EXPORT_LIBEVENTPP __declspec(dllimport)
+#			define EVPP_EXPORT __declspec(dllimport)
 #		endif
 #	else
-#		define _EXPORT_LIBEVENTPP
+#		define EVPP_EXPORT
 #	endif
 #else
-#	define _EXPORT_LIBEVENTPP
+#	define EVPP_EXPORT
 #endif
 
 }

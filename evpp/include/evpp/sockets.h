@@ -26,21 +26,19 @@
 #endif
 
 #ifdef H_OS_WINDOWS
-inline int readv(SOCKET sockfd, struct iovec *iov, int iovcnt)
-{
+inline int readv(SOCKET sockfd, struct iovec *iov, int iovcnt) {
     DWORD readn = 0;
     DWORD flags = 0;
-    if (::WSARecv(sockfd, iov, iovcnt, &readn, &flags, NULL, NULL) == 0)
-    {
+    if (::WSARecv(sockfd, iov, iovcnt, &readn, &flags, NULL, NULL) == 0) {
         return readn;
     }
 
-//     //TODO
-//     DWORD nError = WSAGetLastError();
-//     if (nError != WSA_IO_PENDING)
-//     {
-//         //set error state.
-//     }
+    //     //TODO
+    //     DWORD nError = WSAGetLastError();
+    //     if (nError != WSA_IO_PENDING)
+    //     {
+    //         //set error state.
+    //     }
     return -1;
 }
 #endif
