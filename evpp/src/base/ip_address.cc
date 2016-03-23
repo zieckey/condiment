@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+#include "evpp/base/inner_pre.h"
 #include "evpp/base/ip_address.h"
 
 namespace evpp {
@@ -40,7 +41,10 @@ namespace evpp {
             uint8_t b15) {
             const uint8_t address[] = { b0, b1, b2, b3, b4, b5, b6, b7,
                 b8, b9, b10, b11, b12, b13, b14, b15 };
-            ip_address_ = std::vector<uint8_t>(std::begin(address), std::end(address));
+            //ip_address_ = std::vector<uint8_t>(std::begin(address), std::end(address));
+            for (int i = 0; i < 16; ++i) {
+                ip_address_.push_back(address[i]);
+            }
         }
 
         IPAddress::~IPAddress() {}
@@ -64,12 +68,18 @@ namespace evpp {
         }
 
         bool IPAddress::IsZero() const {
-            for (auto x : ip_address_) {
-                if (x != 0)
+            for (size_t i = 0; i < ip_address_.size(); ++i) {
+                if (ip_address_[i] != 0) {
                     return false;
+                }
             }
+            return !ip_address_.empty();
+            //for (auto x : ip_address_) {
+            //    if (x != 0)
+            //        return false;
+            //}
 
-            return !empty();
+            //return !ip_address_.empty();
         }
 
         bool IPAddress::IsIPv4MappedIPv6() const {
@@ -94,18 +104,20 @@ namespace evpp {
             return true;
         }
 
+        //TODO
         // static
-        IPAddress IPAddress::IPv4Localhost() {
-            static const uint8_t kLocalhostIPv4[] = { 127, 0, 0, 1 };
-            return IPAddress(kLocalhostIPv4);
-        }
+        //IPAddress IPAddress::IPv4Localhost() {
+        //    static const uint8_t kLocalhostIPv4[] = { 127, 0, 0, 1 };
+        //    return IPAddress(kLocalhostIPv4);
+        //}
 
+        //TODO
         // static
-        IPAddress IPAddress::IPv6Localhost() {
-            static const uint8_t kLocalhostIPv6[] = { 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 1 };
-            return IPAddress(kLocalhostIPv6);
-        }
+        //IPAddress IPAddress::IPv6Localhost() {
+        //    static const uint8_t kLocalhostIPv6[] = { 0, 0, 0, 0, 0, 0, 0, 0,
+        //        0, 0, 0, 0, 0, 0, 0, 1 };
+        //    return IPAddress(kLocalhostIPv6);
+        //}
 
         // static
         IPAddress IPAddress::AllZeros(size_t num_zero_bytes) {

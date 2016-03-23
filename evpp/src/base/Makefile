@@ -9,25 +9,17 @@ CFLAGS=$(TOP_CFLAGS) -g -c -fPIC \
 	   -Wall -Wno-unused-parameter -Wno-unused-function -Wunused-variable -Wunused-value \
 	   -Wshadow -Wcast-qual -Wcast-align -Wwrite-strings -Wsign-compare \
 	   -Winvalid-pch -fms-extensions -Wfloat-equal -Wextra \
-	   -I .. -I ../include -MMD
+	   -std=gnu++0x \
+	   -I ../../include -MMD
 CPPFLAGS= $(CFLAGS) -Woverloaded-virtual -Wsign-promo -fno-gnu-keywords
+LDFLAGS=$(TOP_LDFLAGS) -lpthread -levent -lglog
 
-RTFLAGS := \
-    -Wl,-rpath=. \
-    -Wl,-rpath=$(GCC472_PATH)/lib64 \
-    -Wl,-rpath=$(CURRENT_DIR)/../src/base \
-    -Wl,-rpath=$(CURRENT_DIR)/../src
-
-LDFLAGS= $(RTFLAGS) -lpthread \
-		 -levent -lglog -levppbase \
-		 -L $(CURRENT_DIR)/../src/base \
-
+LIBNAME=evppbase
 
 SRCS := $(wildcard *.cc)
 OBJS := $(patsubst %.cc, %.o, $(SRCS)) $(CCOBJS)
 DEPS := $(patsubst %.o, %.d, $(OBJS))
 
-LIBNAME=evpp
 TARGET_SO=lib$(LIBNAME).so
 TARGET_A=lib$(LIBNAME).a
 

@@ -20,10 +20,10 @@
 #			define EVPPBASE_EXPORT __declspec(dllimport)
 #		endif
 #	else
-#		define EVPP_EXPORT
+#		define EVPPBASE_EXPORT
 #	endif
 #else
-#	define EVPP_EXPORT
+#	define EVPPBASE_EXPORT
 #endif // H_STATIC_LIB_
 
 #define NET_EXPORT EVPPBASE_EXPORT
