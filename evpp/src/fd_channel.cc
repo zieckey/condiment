@@ -41,7 +41,7 @@ namespace evpp {
 
     void FdChannel::HandlerFn(int f, short which) {
         if ((which & EV_READ) && read_fn_) {
-            read_fn_(Timestamp::Now());
+            read_fn_(base::Timestamp::Now());
         }
 
         if ((which & EV_WRITE) && write_fn_) {

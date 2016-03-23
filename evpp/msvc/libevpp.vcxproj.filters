@@ -5,9 +5,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="time">
-      <UniqueIdentifier>{ff5db783-2ed0-41c4-9543-d05587140e55}</UniqueIdentifier>
-    </Filter>
     <Filter Include="evloop">
       <UniqueIdentifier>{6a94d149-6f7b-47af-94e3-19d9eab3d441}</UniqueIdentifier>
     </Filter>
@@ -66,21 +63,6 @@
     </ClInclude>
     <ClInclude Include="..\include\evpp\platform_config.h">
       <Filter>base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\evpp\duration.h">
-      <Filter>time</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\evpp\duration.inl.h">
-      <Filter>time</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\evpp\gettimeofday.h">
-      <Filter>time</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\evpp\timestamp.h">
-      <Filter>time</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\evpp\timestamp.inl.h">
-      <Filter>time</Filter>
     </ClInclude>
     <ClInclude Include="..\include\evpp\fd_channel.h">
       <Filter>sockets</Filter>

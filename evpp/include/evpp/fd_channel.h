@@ -3,7 +3,8 @@
 #define LIBEVENTPP_FD_EVENT_WATCHER_H_
 
 #include "libevent_watcher.h"
-#include "timestamp.h"
+
+#include "evpp/base/timestamp.h"
 
 #include <boost/function.hpp>
 #include <boost/noncopyable.hpp>
@@ -22,7 +23,7 @@ namespace evpp {
             kWritable = 0x04,
         };
         typedef boost::function<void()> EventCallback;
-        typedef boost::function<void(Timestamp)> ReadEventCallback;
+        typedef boost::function<void(base::Timestamp)> ReadEventCallback;
 
     public:
         FdChannel(struct event_base *evbase, int fd,
