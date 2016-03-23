@@ -35,7 +35,6 @@
     <ClInclude Include="..\include\evpp\libevent_headers.h" />
     <ClInclude Include="..\include\evpp\libevent_watcher.h" />
     <ClInclude Include="..\include\evpp\platform_config.h" />
-    <ClInclude Include="..\include\evpp\slice.h" />
     <ClInclude Include="..\include\evpp\sockets.h" />
     <ClInclude Include="..\src\invoke_timer.inl.h" />
   </ItemGroup>

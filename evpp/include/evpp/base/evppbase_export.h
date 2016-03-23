@@ -26,5 +26,6 @@
 #	define EVPP_EXPORT
 #endif // H_STATIC_LIB_
 
+#define NET_EXPORT EVPPBASE_EXPORT
 
 #endif

@@ -2,7 +2,7 @@
 #define LIBEVENTPP_BUFFER_H_
 
 #include "evpp/inner_pre.h"
-#include "evpp/slice.h"
+#include "evpp/base/slice.h"
 #include "evpp/sockets.h"
 
 #include <algorithm>
@@ -83,7 +83,7 @@ namespace evpp {
             write_index_ += len;
         }
 
-        void Append(const Slice& str) {
+        void Append(const base::Slice& str) {
             Write(str.data(), str.size());
         }
 
@@ -166,8 +166,8 @@ namespace evpp {
             return result;
         }
 
-        Slice ToSlice() const {
-            return Slice(data(), static_cast<int>(length()));
+        base::Slice ToSlice() const {
+            return base::Slice(data(), static_cast<int>(length()));
         }
 
         void Shrink(size_t reserve) {
@@ -186,9 +186,9 @@ namespace evpp {
         // advancing the buffer as if the bytes had been returned by Read.
         // If there are fewer than n bytes in the buffer, Next returns the entire buffer.
         // The slice is only valid until the next call to a read or write method.
-        Slice Next(size_t len) {
+        base::Slice Next(size_t len) {
             if (len < length()) {
-                Slice result(data(), len);
+                base::Slice result(data(), len);
                 read_index_ += len;
                 return result;
             }
@@ -197,19 +197,19 @@ namespace evpp {
 
         // NextAll returns a slice containing all the unread portion of the buffer,
         // advancing the buffer as if the bytes had been returned by Read.
-        Slice NextAll() {
-            Slice result(data(), length());
+        base::Slice NextAll() {
+            base::Slice result(data(), length());
             Reset();
             return result;
         }
 
         std::string NextString(size_t len) {
-            Slice s = Next(len);
+            base::Slice s = Next(len);
             return std::string(s.data(), s.size());
         }
 
         std::string NextAllString() {
-            Slice s = NextAll();
+            base::Slice s = NextAll();
             return std::string(s.data(), s.size());
         }
 

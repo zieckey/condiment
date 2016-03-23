@@ -91,9 +91,6 @@
     <ClInclude Include="..\include\evpp\sockets.h">
       <Filter>sockets</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\evpp\slice.h">
-      <Filter>common</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\evpp\evpp_export.h">
       <Filter>base</Filter>
     </ClInclude>
