@@ -7,6 +7,93 @@
 
 namespace evpp {
     namespace base {
+        typedef std::vector<uint8_t> IPAddressNumber;
+
+        namespace {
+            const unsigned char kIPv4MappedPrefix[] =
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0xFF, 0xFF };
+
+            bool IsIPv4Mapped(const IPAddressNumber& address) {
+                if (address.size() != IPAddress::kIPv6AddressSize)
+                    return false;
+                return std::equal(address.begin(),
+                    address.begin() + H_ARRAYSIZE(kIPv4MappedPrefix),
+                    kIPv4MappedPrefix);
+            }
+
+            bool IPNumberPrefixCheck(const IPAddressNumber& ip_number,
+                const unsigned char* ip_prefix,
+                size_t prefix_length_in_bits) {
+                // Compare all the bytes that fall entirely within the prefix.
+                int num_entire_bytes_in_prefix = prefix_length_in_bits / 8;
+                for (int i = 0; i < num_entire_bytes_in_prefix; ++i) {
+                    if (ip_number[i] != ip_prefix[i])
+                        return false;
+                }
+
+                // In case the prefix was not a multiple of 8, there will be 1 byte
+                // which is only partially masked.
+                int remaining_bits = prefix_length_in_bits % 8;
+                if (remaining_bits != 0) {
+                    unsigned char mask = 0xFF << (8 - remaining_bits);
+                    int i = num_entire_bytes_in_prefix;
+                    if ((ip_number[i] & mask) != (ip_prefix[i] & mask))
+                        return false;
+                }
+                return true;
+            }
+
+            // Don't compare IPv4 and IPv6 addresses (they have different range
+            // reservations). Keep separate reservation arrays for each IP type, and
+            // consolidate adjacent reserved ranges within a reservation array when
+            // possible.
+            // Sources for info:
+            // www.iana.org/assignments/ipv4-address-space/ipv4-address-space.xhtml
+            // www.iana.org/assignments/ipv6-address-space/ipv6-address-space.xhtml
+            // They're formatted here with the prefix as the last element. For example:
+            // 10.0.0.0/8 becomes 10,0,0,0,8 and fec0::/10 becomes 0xfe,0xc0,0,0,0...,10.
+            static bool IsIPAddressReserved(const std::vector<uint8_t>& host_addr) {
+                static const unsigned char kReservedIPv4[][5] = {
+                    { 0, 0, 0, 0, 8 }, { 10, 0, 0, 0, 8 }, { 100, 64, 0, 0, 10 }, { 127, 0, 0, 0, 8 },
+                    { 169, 254, 0, 0, 16 }, { 172, 16, 0, 0, 12 }, { 192, 0, 2, 0, 24 },
+                    { 192, 88, 99, 0, 24 }, { 192, 168, 0, 0, 16 }, { 198, 18, 0, 0, 15 },
+                    { 198, 51, 100, 0, 24 }, { 203, 0, 113, 0, 24 }, { 224, 0, 0, 0, 3 }
+                };
+                static const unsigned char kReservedIPv6[][17] = {
+                    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8 },
+                    { 0x40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
+                    { 0x80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
+                    { 0xc0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3 },
+                    { 0xe0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4 },
+                    { 0xf0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5 },
+                    { 0xf8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6 },
+                    { 0xfc, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7 },
+                    { 0xfe, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9 },
+                    { 0xfe, 0x80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10 },
+                    { 0xfe, 0xc0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10 },
+                };
+                size_t array_size = 0;
+                const unsigned char* array = NULL;
+                switch (host_addr.size()) {
+                case IPAddress::kIPv4AddressSize:
+                    array_size = H_ARRAYSIZE(kReservedIPv4);
+                    array = kReservedIPv4[0];
+                    break;
+                case IPAddress::kIPv6AddressSize:
+                    array_size = H_ARRAYSIZE(kReservedIPv6);
+                    array = kReservedIPv6[0];
+                    break;
+                }
+                if (!array)
+                    return false;
+                size_t width = host_addr.size() + 1;
+                for (size_t i = 0; i < array_size; ++i, array += width) {
+                    if (IPNumberPrefixCheck(host_addr, array, array[width - 1]))
+                        return true;
+                }
+                return false;
+            }
+        }
 
         IPAddress::IPAddress() {}
 
@@ -62,9 +149,7 @@ namespace evpp {
         }
 
         bool IPAddress::IsReserved() const {
-            //return IsIPAddressReserved(ip_address_);
-            //TODO
-            return false;
+            return IsIPAddressReserved(ip_address_);
         }
 
         bool IPAddress::IsZero() const {
