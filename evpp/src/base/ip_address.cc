@@ -4,6 +4,9 @@
 
 #include "evpp/base/inner_pre.h"
 #include "evpp/base/ip_address.h"
+#include "evpp/base/sys_addrinfo.h"
+
+#include <sstream>
 
 namespace evpp {
     namespace base {
@@ -172,10 +175,36 @@ namespace evpp {
         }
 
         std::string IPAddress::ToString() const {
+            if (empty()) {
+                return "";
+            }
             return IPAddressToString(&ip_address_[0], ip_address_.size());
         }
 
-//         bool IPAddress::AssignFromIPLiteral(const Slice& ip_literal) {
+        bool IPAddress::AssignFromIPLiteral(const Slice& ip_literal) {
+            bool ipv6 = false;
+            bool ipv4 = true;
+            for (size_t i = 0; i < ip_literal.size(); ++i) {
+                if (ip_literal[i] == ':') {
+                    ipv6 = true;
+                    ipv4 = false;
+                }
+            }
+
+            if (ipv4) {
+                ip_address_.resize(kIPv4AddressSize);
+                if (::inet_pton(AF_INET, ip_literal.data(), &ip_address_[0]) == 1) {
+                    return true;
+                }
+            } else {
+                ip_address_.resize(kIPv6AddressSize);
+                if (::inet_pton(AF_INET6, ip_literal.data(), &ip_address_[0]) == 1) {
+                    return true;
+                }
+            }
+
+            return false;
+            
 //              std::vector<uint8_t> number;
 //              if (!ParseIPLiteralToNumber(ip_literal, &number))
 //                  return false;
@@ -183,7 +212,7 @@ namespace evpp {
 //              std::swap(number, ip_address_);
 //             //TODO
 //             return true;
-//         }
+        }
 
         // static
         IPAddress IPAddress::IPv4Localhost() {
@@ -202,7 +231,6 @@ namespace evpp {
         IPAddress IPAddress::AllZeros(size_t num_zero_bytes) {
             IPAddress ip;
             ip.ip_address_.resize(num_zero_bytes);
-            //TODO bzero
             return ip;
         }
 
@@ -233,11 +261,21 @@ namespace evpp {
             return ip_address_ < that.ip_address_;
         }
 
-//         std::string IPAddressToStringWithPort(const IPAddress& address, uint16_t port) {
-//             //return IPAddressToStringWithPort(address.bytes(), port);
-//             //TODO
-//             return std::string();
-//         }
+        std::string IPAddressToStringWithPort(const IPAddress& address, uint16_t port) {
+            if (address.empty()) {
+                return "";
+            }
+            std::string output = IPAddressToString(&address.bytes()[0], address.size());
+            std::ostringstream ss;
+            if (address.size() == IPAddress::kIPv4AddressSize) {
+                ss << output << ":" << port;
+                return ss.str();
+            } else if (address.size() == IPAddress::kIPv6AddressSize) {
+                ss << "[" << output << "]:" << port;
+                return ss.str();
+            }
+            return "";
+        }
 // 
 //         std::string IPAddressToPackedString(const IPAddress& address) {
 //             //return IPAddressToPackedString(address.bytes());

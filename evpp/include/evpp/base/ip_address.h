@@ -141,15 +141,15 @@ namespace evpp {
             uint16_t port);
 
         // Returns the address as a sequence of bytes in network-byte-order.
-        NET_EXPORT std::string IPAddressToPackedString(const IPAddress& address);
+        //NET_EXPORT std::string IPAddressToPackedString(const IPAddress& address);
 
         // Converts an IPv4 address to an IPv4-mapped IPv6 address.
         // For example 192.168.0.1 would be converted to ::ffff:192.168.0.1.
-        NET_EXPORT IPAddress ConvertIPv4ToIPv4MappedIPv6(const IPAddress& address);
+        //NET_EXPORT IPAddress ConvertIPv4ToIPv4MappedIPv6(const IPAddress& address);
 
         // Converts an IPv4-mapped IPv6 address to IPv4 address. Should only be called
         // on IPv4-mapped IPv6 addresses.
-        NET_EXPORT IPAddress ConvertIPv4MappedIPv6ToIPv4(const IPAddress& address);
+        //NET_EXPORT IPAddress ConvertIPv4MappedIPv6ToIPv4(const IPAddress& address);
 
         // Compares an IP address to see if it falls within the specified IP block.
         // Returns true if it does, false otherwise.
