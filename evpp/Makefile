@@ -1,5 +1,6 @@
 
 all : 
+	$(MAKE) -C src/base
 	$(MAKE) -C src
 	$(MAKE) -C test
 
