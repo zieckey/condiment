@@ -94,6 +94,7 @@
     <ClCompile Include="..\test\event_loop_test.cc" />
     <ClCompile Include="..\test\event_loop_thread_pool_test.cc" />
     <ClCompile Include="..\test\event_loop_thread_test.cc" />
+    <ClCompile Include="..\test\ip_address_test.cc" />
     <ClCompile Include="..\test\time_test.cc" />
     <ClCompile Include="..\test\event_condition_test.cc" />
     <ClCompile Include="..\test\event_watcher_test.cc" />

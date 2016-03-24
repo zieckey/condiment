@@ -4,6 +4,9 @@
 
 #include "evpp/base/inner_pre.h"
 #include "evpp/base/ip_address.h"
+#include "evpp/base/sys_addrinfo.h"
+
+#include <sstream>
 
 namespace evpp {
     namespace base {
@@ -168,47 +171,66 @@ namespace evpp {
         }
 
         bool IPAddress::IsIPv4MappedIPv6() const {
-            //return net::IsIPv4Mapped(ip_address_);
-            //TODO
-            return false;
+            return IsIPv4Mapped(ip_address_);
         }
 
         std::string IPAddress::ToString() const {
-            //return IPAddressToString(ip_address_);
-            //TODO
-            return "";
+            if (empty()) {
+                return "";
+            }
+            return IPAddressToString(&ip_address_[0], ip_address_.size());
         }
 
         bool IPAddress::AssignFromIPLiteral(const Slice& ip_literal) {
-//             std::vector<uint8_t> number;
-//             if (!ParseIPLiteralToNumber(ip_literal, &number))
-//                 return false;
-// 
-//             std::swap(number, ip_address_);
-            //TODO
-            return true;
+            bool ipv6 = false;
+            bool ipv4 = true;
+            for (size_t i = 0; i < ip_literal.size(); ++i) {
+                if (ip_literal[i] == ':') {
+                    ipv6 = true;
+                    ipv4 = false;
+                }
+            }
+
+            if (ipv4) {
+                ip_address_.resize(kIPv4AddressSize);
+                if (::inet_pton(AF_INET, ip_literal.data(), &ip_address_[0]) == 1) {
+                    return true;
+                }
+            } else {
+                ip_address_.resize(kIPv6AddressSize);
+                if (::inet_pton(AF_INET6, ip_literal.data(), &ip_address_[0]) == 1) {
+                    return true;
+                }
+            }
+
+            return false;
+            
+//              std::vector<uint8_t> number;
+//              if (!ParseIPLiteralToNumber(ip_literal, &number))
+//                  return false;
+//  
+//              std::swap(number, ip_address_);
+//             //TODO
+//             return true;
         }
 
-        //TODO
         // static
-        //IPAddress IPAddress::IPv4Localhost() {
-        //    static const uint8_t kLocalhostIPv4[] = { 127, 0, 0, 1 };
-        //    return IPAddress(kLocalhostIPv4);
-        //}
+        IPAddress IPAddress::IPv4Localhost() {
+            static const uint8_t kLocalhostIPv4[] = { 127, 0, 0, 1 };
+            return IPAddress(kLocalhostIPv4);
+        }
 
-        //TODO
         // static
-        //IPAddress IPAddress::IPv6Localhost() {
-        //    static const uint8_t kLocalhostIPv6[] = { 0, 0, 0, 0, 0, 0, 0, 0,
-        //        0, 0, 0, 0, 0, 0, 0, 1 };
-        //    return IPAddress(kLocalhostIPv6);
-        //}
+        IPAddress IPAddress::IPv6Localhost() {
+            static const uint8_t kLocalhostIPv6[] = { 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 1 };
+            return IPAddress(kLocalhostIPv6);
+        }
 
         // static
         IPAddress IPAddress::AllZeros(size_t num_zero_bytes) {
             IPAddress ip;
             ip.ip_address_.resize(num_zero_bytes);
-            //TODO bzero
             return ip;
         }
 
@@ -240,74 +262,84 @@ namespace evpp {
         }
 
         std::string IPAddressToStringWithPort(const IPAddress& address, uint16_t port) {
-            //return IPAddressToStringWithPort(address.bytes(), port);
-            //TODO
-            return std::string();
+            if (address.empty()) {
+                return "";
+            }
+            std::string output = IPAddressToString(&address.bytes()[0], address.size());
+            std::ostringstream ss;
+            if (address.size() == IPAddress::kIPv4AddressSize) {
+                ss << output << ":" << port;
+                return ss.str();
+            } else if (address.size() == IPAddress::kIPv6AddressSize) {
+                ss << "[" << output << "]:" << port;
+                return ss.str();
+            }
+            return "";
         }
-
-        std::string IPAddressToPackedString(const IPAddress& address) {
-            //return IPAddressToPackedString(address.bytes());
-            //TODO
-            return std::string();
-        }
-
-        IPAddress ConvertIPv4ToIPv4MappedIPv6(const IPAddress& address) {
-            //return IPAddress(ConvertIPv4NumberToIPv6Number(address.bytes()));
-            //TODO
-            return IPAddress();
-        }
-
-        IPAddress ConvertIPv4MappedIPv6ToIPv4(const IPAddress& address) {
-            //return IPAddress(ConvertIPv4MappedToIPv4(address.bytes()));
-            //TODO
-            return IPAddress();
-        }
-
-        bool IPAddressMatchesPrefix(const IPAddress& ip_address,
-                         const IPAddress& ip_prefix,
-                         size_t prefix_length_in_bits) {
-            //             return IPNumberMatchesPrefix(ip_address.bytes(), ip_prefix.bytes(),
-            //                 prefix_length_in_bits);
-            //TODO 
-            return true;
-        }
-
-        bool ParseCIDRBlock(const std::string& cidr_literal,
-            IPAddress* ip_address,
-            size_t* prefix_length_in_bits) {
-            //TODO
-            // We expect CIDR notation to match one of these two templates:
-            //   <IPv4-literal> "/" <number of bits>
-            //   <IPv6-literal> "/" <number of bits>
-
-//             std::vector<Slice> parts = Slice(
-//                 cidr_literal, "/", base::TRIM_WHITESPACE, base::SPLIT_WANT_ALL);
-//             if (parts.size() != 2)
-//                 return false;
 // 
-//             // Parse the IP address.
-//             if (!ip_address->AssignFromIPLiteral(parts[0]))
-//                 return false;
+//         std::string IPAddressToPackedString(const IPAddress& address) {
+//             //return IPAddressToPackedString(address.bytes());
+//             //TODO
+//             return std::string();
+//         }
 // 
-//             // TODO(martijnc): Find a more general solution for the overly permissive
-//             // base::StringToInt() parsing. https://crbug.com/596523.
-//             const base::StringPiece& prefix_length = parts[1];
-//             if (prefix_length.starts_with("+"))
-//                 return false;
+//         IPAddress ConvertIPv4ToIPv4MappedIPv6(const IPAddress& address) {
+//             //return IPAddress(ConvertIPv4NumberToIPv6Number(address.bytes()));
+//             //TODO
+//             return IPAddress();
+//         }
 // 
-//             // Parse the prefix length.
-//             int number_of_bits = -1;
-//             if (!base::StringToInt(prefix_length, &number_of_bits))
-//                 return false;
+//         IPAddress ConvertIPv4MappedIPv6ToIPv4(const IPAddress& address) {
+//             //return IPAddress(ConvertIPv4MappedToIPv4(address.bytes()));
+//             //TODO
+//             return IPAddress();
+//         }
 // 
-//             // Make sure the prefix length is in a valid range.
-//             if (number_of_bits < 0 ||
-//                 number_of_bits > static_cast<int>(ip_address->size() * 8))
-//                 return false;
+//         bool IPAddressMatchesPrefix(const IPAddress& ip_address,
+//                          const IPAddress& ip_prefix,
+//                          size_t prefix_length_in_bits) {
+//             //             return IPNumberMatchesPrefix(ip_address.bytes(), ip_prefix.bytes(),
+//             //                 prefix_length_in_bits);
+//             //TODO 
+//             return true;
+//         }
 // 
-//             *prefix_length_in_bits = static_cast<size_t>(number_of_bits);
-            return true;
-        }
+//         bool ParseCIDRBlock(const std::string& cidr_literal,
+//             IPAddress* ip_address,
+//             size_t* prefix_length_in_bits) {
+//             //TODO
+//             // We expect CIDR notation to match one of these two templates:
+//             //   <IPv4-literal> "/" <number of bits>
+//             //   <IPv6-literal> "/" <number of bits>
+// 
+// //             std::vector<Slice> parts = Slice(
+// //                 cidr_literal, "/", base::TRIM_WHITESPACE, base::SPLIT_WANT_ALL);
+// //             if (parts.size() != 2)
+// //                 return false;
+// // 
+// //             // Parse the IP address.
+// //             if (!ip_address->AssignFromIPLiteral(parts[0]))
+// //                 return false;
+// // 
+// //             // TODO(martijnc): Find a more general solution for the overly permissive
+// //             // base::StringToInt() parsing. https://crbug.com/596523.
+// //             const base::StringPiece& prefix_length = parts[1];
+// //             if (prefix_length.starts_with("+"))
+// //                 return false;
+// // 
+// //             // Parse the prefix length.
+// //             int number_of_bits = -1;
+// //             if (!base::StringToInt(prefix_length, &number_of_bits))
+// //                 return false;
+// // 
+// //             // Make sure the prefix length is in a valid range.
+// //             if (number_of_bits < 0 ||
+// //                 number_of_bits > static_cast<int>(ip_address->size() * 8))
+// //                 return false;
+// // 
+// //             *prefix_length_in_bits = static_cast<size_t>(number_of_bits);
+//             return true;
+//         }
 
 
         //TODO

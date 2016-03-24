@@ -45,6 +45,9 @@
     <ClInclude Include="..\include\evpp\base\slice.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\evpp\base\sys_addrinfo.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\base\pch.cc">

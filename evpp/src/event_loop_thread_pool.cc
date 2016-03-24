@@ -114,7 +114,7 @@ namespace evpp {
         EventLoop* loop = base_loop_;
 
         if (!threads_.empty()) {
-            uint64_t next = hash % threads_.size();
+            unsigned int next = hash % threads_.size();
             loop = (threads_[next])->event_loop();
         }
         return loop;
