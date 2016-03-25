@@ -1,6 +1,4 @@
-
-#ifndef LIBEVENTPP_EVENT_WATCHER_H_
-#define LIBEVENTPP_EVENT_WATCHER_H_
+#pragma once
 
 #include "inner_pre.h"
 
@@ -102,7 +100,4 @@ namespace evpp {
     };
 #endif
 } // namespace 
-
-#endif // MX_HTTP_LIBEVENT_EVENT_H_
-
 

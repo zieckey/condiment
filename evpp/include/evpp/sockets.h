@@ -1,5 +1,4 @@
-#ifndef LIBEVENTPP_SOCKETS_H_
-#define LIBEVENTPP_SOCKETS_H_
+#pragma once
 
 #include "evpp/inner_pre.h"
 
@@ -43,4 +42,3 @@ inline int readv(SOCKET sockfd, struct iovec *iov, int iovcnt) {
 }
 #endif
 
-#endif

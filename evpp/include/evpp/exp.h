@@ -1,5 +1,4 @@
-#ifndef LIBEVENTPP_ALL_EXPORT_H_
-#define LIBEVENTPP_ALL_EXPORT_H_
+#pragma once
 
 #include "platform_config.h"
 
@@ -10,7 +9,6 @@
 H_LINK_LIB( "libevpp")
 #endif // end of #ifdef H_OS_WINDOWS
 
-#endif
 
 
 

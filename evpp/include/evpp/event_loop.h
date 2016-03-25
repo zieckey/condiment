@@ -1,5 +1,4 @@
-#ifndef LIBEVENTPP_EVENT_LOOP_H_
-#define LIBEVENTPP_EVENT_LOOP_H_
+#pragma once
 
 #include "evpp/inner_pre.h"
 #include "evpp/libevent_watcher.h"
@@ -45,6 +44,3 @@ namespace evpp {
         std::vector<Functor> after_loop_functors_; // @Guarded By mutex_
     };
 }
-
-#endif
-

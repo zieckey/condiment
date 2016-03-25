@@ -2,8 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-#ifndef NET_BASE_IP_ADDRESS_NET_H_
-#define NET_BASE_IP_ADDRESS_NET_H_
+#pragma once
 
 #include <stddef.h>
 #include <stdint.h>
@@ -355,4 +354,3 @@ namespace evpp {
     }
 }  // namespace net
 
-#endif  // NET_BASE_IP_ADDRESS_NET_H_

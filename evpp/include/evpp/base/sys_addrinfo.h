@@ -15,6 +15,8 @@
 // Prefer including this file instead of directly writing the #if / #else,
 // since it avoids duplicating the platform-specific selections.
 
+#pragma once
+
 #include "platform_config.h"
 
 #ifdef H_OS_WINDOWS

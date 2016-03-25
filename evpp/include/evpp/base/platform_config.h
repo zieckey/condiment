@@ -1,5 +1,4 @@
-#ifndef LIBEVENTPP_BASE_PLATFROM_CONFIG_H_
-#define LIBEVENTPP_BASE_PLATFROM_CONFIG_H_
+#pragma once
 
 //! Define Operation System.
 #if ( defined(WIN32) || defined(WIN64) )
@@ -165,5 +164,3 @@
 
 #define H_ARRAY_SIZE H_ARRAYSIZE
 
-
-#endif // end of #ifndef LIBEVENTPP_PLATFROM_CONFIG_H_

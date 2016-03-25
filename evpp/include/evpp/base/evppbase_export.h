@@ -1,5 +1,4 @@
-#ifndef LIBEVENTPP_BASE_EXPORT_H_
-#define LIBEVENTPP_BASE_EXPORT_H_
+#pragma once
 
 //! Define Operation System.
 #if ( defined(WIN32) || defined(WIN64) )
@@ -28,4 +27,3 @@
 
 #define NET_EXPORT EVPPBASE_EXPORT
 
-#endif

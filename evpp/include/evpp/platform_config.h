@@ -1,5 +1,4 @@
-#ifndef LIBEVENTPP_PLATFROM_CONFIG_H_
-#define LIBEVENTPP_PLATFROM_CONFIG_H_
+#pragma once
 
 #include "evpp/base/platform_config.h"
 
@@ -26,5 +25,3 @@
         #define CHECK_NOTNULL(val) LOG_ERROR << "'" #val "' Must be non NULL";
     #endif
 #endif // end of define __cplusplus
-
-#endif // end of #ifndef LIBEVENTPP_PLATFROM_CONFIG_H_

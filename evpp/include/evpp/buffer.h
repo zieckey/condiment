@@ -1,5 +1,4 @@
-#ifndef LIBEVENTPP_BUFFER_H_
-#define LIBEVENTPP_BUFFER_H_
+#pragma once
 
 #include "evpp/inner_pre.h"
 #include "evpp/base/slice.h"
@@ -375,6 +374,3 @@ namespace evpp {
     };
 
 }
-
-#endif
-

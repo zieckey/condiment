@@ -1,5 +1,4 @@
-#ifndef LIBEVENTPP_UTIL_TIME_DURATION_H_
-#define LIBEVENTPP_UTIL_TIME_DURATION_H_
+#pragma once
 
 #include "inner_pre.h"
 #include "gettimeofday.h"
@@ -59,4 +58,3 @@ namespace evpp {
 
 #include "duration.inl.h"
 
-#endif // LDD_UTIL_TIME_DIFF_H_

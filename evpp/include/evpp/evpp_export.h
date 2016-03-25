@@ -1,5 +1,4 @@
-#ifndef LIBEVENTPP_EXPORT_H_
-#define LIBEVENTPP_EXPORT_H_
+#pragma once
 
 //! Define Operation System.
 #if ( defined(WIN32) || defined(WIN64) )
@@ -27,4 +26,3 @@
 #endif // H_STATIC_LIB_
 
 
-#endif

@@ -1,6 +1,4 @@
-
-#ifndef LIBEVENTPP_FD_EVENT_WATCHER_H_
-#define LIBEVENTPP_FD_EVENT_WATCHER_H_
+#pragma once
 
 #include "libevent_watcher.h"
 
@@ -57,7 +55,5 @@ namespace evpp {
     };
 
 } // namespace 
-
-#endif // MX_HTTP_LIBEVENT_EVENT_H_
 
 

@@ -1,5 +1,4 @@
-#ifndef LIBEVENTPP_BASE_GETTIMEOFDAY_H_
-#define LIBEVENTPP_BASE_GETTIMEOFDAY_H_
+#pragma once
 
 #include <time.h>
 
@@ -129,6 +128,4 @@ namespace evpp
         return tv;
     }
 }
-
-#endif
 

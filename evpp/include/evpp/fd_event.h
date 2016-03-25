@@ -1,5 +1,4 @@
-#ifndef EVENTQING_FD_EVENT_H_
-#define EVENTQING_FD_EVENT_H_
+#pragma once
 
 #include "inner_pre.h"
 
@@ -40,6 +39,3 @@ namespace evpp {
         bool active_;
     };
 }
-
-#endif
-

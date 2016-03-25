@@ -32,6 +32,7 @@
     <ProjectGuid>{CF25FD77-891D-470E-AF11-DEBDDA8FB2F9}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>libbase</RootNamespace>
+    <ProjectName>libevppbase</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

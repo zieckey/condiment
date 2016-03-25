@@ -1,5 +1,4 @@
-#ifndef LIBEVENTPP_SLICE_H_
-#define LIBEVENTPP_SLICE_H_
+#pragma once
 
 #include <string.h>
 #include <assert.h>
@@ -95,6 +94,3 @@ namespace evpp {
         }
     }
 }  // namespace evpp
-
-#endif
-

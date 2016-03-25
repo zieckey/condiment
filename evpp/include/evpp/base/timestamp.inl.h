@@ -1,5 +1,4 @@
-#ifndef LIBEVENTPP_UTIL_TIMESTAMP_INL_
-#define LIBEVENTPP_UTIL_TIMESTAMP_INL_
+#pragma once
 
 namespace evpp {
     namespace base {
@@ -81,4 +80,3 @@ namespace evpp {
     } // namespace base
 } // namespace evpp
 
-#endif

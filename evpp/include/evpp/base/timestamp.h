@@ -1,6 +1,4 @@
-
-#ifndef LIBEVENTPP_UTIL_TIMESTAMP_H_
-#define LIBEVENTPP_UTIL_TIMESTAMP_H_
+#pragma once
 
 #include "duration.h"
 
@@ -48,6 +46,4 @@ namespace evpp {
 } // namespace evpp
 
 #include "timestamp.inl.h"
-
-#endif
 

@@ -1,5 +1,4 @@
-#ifndef LIBEVENTPP_INVOKER_TIMER_H_
-#define LIBEVENTPP_INVOKER_TIMER_H_
+#pragma once
 
 #include "evpp/inner_pre.h"
 
@@ -59,5 +58,3 @@ namespace evpp {
         TimerEventWatcher* timer_;
     };
 }
-#endif
-

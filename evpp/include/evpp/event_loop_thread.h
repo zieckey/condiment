@@ -1,5 +1,4 @@
-#ifndef EVENTQING_EVENT_LOOP_THREAD_H_
-#define EVENTQING_EVENT_LOOP_THREAD_H_
+#pragma once
 
 #include "evpp/inner_pre.h"
 
@@ -35,6 +34,3 @@ namespace evpp {
         xstd::shared_ptr<Impl> impl_;
     };
 }
-
-#endif
-

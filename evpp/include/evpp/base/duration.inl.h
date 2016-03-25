@@ -1,5 +1,4 @@
-#ifndef LIBEVENTPP_UTIL_TIME_DURATION_INL_H_
-#define LIBEVENTPP_UTIL_TIME_DURATION_INL_H_
+#pragma once
 
 namespace evpp {
     namespace base {
@@ -62,4 +61,4 @@ namespace evpp {
         }
     } // namespace base
 } // namespace evpp
-#endif // LIBEVENTPP_UTIL_TIME_DURATION_INL_H_
+

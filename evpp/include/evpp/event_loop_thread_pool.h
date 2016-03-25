@@ -1,5 +1,4 @@
-#ifndef EVENTQING_EVENT_LOOP_THREAD_POOL_H_
-#define EVENTQING_EVENT_LOOP_THREAD_POOL_H_
+#pragma once
 
 #include "evpp/event_loop_thread.h"
 
@@ -28,6 +27,3 @@ namespace evpp {
         xstd::shared_ptr<Impl> impl_;
     };
 }
-
-#endif
-

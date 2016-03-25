@@ -6,9 +6,7 @@
  *
  *	Copyright 2010-2013, All Rights Reserved.
  ********************************************************************/
-
-#ifndef LIBEVENTPP_ALL_LIBEVENT_HEADERS_H_
-#define LIBEVENTPP_ALL_LIBEVENT_HEADERS_H_
+#pragma once
 
 #ifdef WIN32
 	#include <WinSock2.h>
@@ -43,6 +41,3 @@ extern "C" {
     void event_free(struct event *ev);
 }
 #endif
-
-#endif // #ifndef LIBEVENTPP_ALL_LIBEVENT_HEADERS_H_
-
