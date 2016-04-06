@@ -5,23 +5,22 @@
 #include "evpp/event_loop.h"
 #include "evpp/libevent_watcher.h"
 
-#include <boost/enable_shared_from_this.hpp>
+#include <thread>
 
 namespace evpp {
     class InvokeTimer
-        : public boost::enable_shared_from_this<InvokeTimer>
-        , public boost::noncopyable {
+        : public xstd::enable_shared_from_this<InvokeTimer> {
     public:
         typedef xstd::function<void()> Functor;
 
-        static boost::shared_ptr<InvokeTimer> Create(EventLoop* evloop,
+        static xstd::shared_ptr<InvokeTimer> Create(EventLoop* evloop,
             double timeout_ms, const Functor& f) {
-            boost::shared_ptr<InvokeTimer> it(new InvokeTimer(evloop, timeout_ms, f));
+            xstd::shared_ptr<InvokeTimer> it(new InvokeTimer(evloop, timeout_ms, f));
             return it;
         }
 
         ~InvokeTimer() {
-            LOG_INFO << "InvokeTimer::~InvokeTimer tid=" << boost::this_thread::get_id();
+            LOG_INFO << "InvokeTimer::~InvokeTimer tid=" <<  std::this_thread::get_id();
             if (timer_) {
                 delete timer_;
                 timer_ = NULL;
@@ -29,7 +28,7 @@ namespace evpp {
         }
 
         void Start() {
-            boost::shared_ptr<InvokeTimer> ref = shared_from_this(); // reference count +1
+            xstd::shared_ptr<InvokeTimer> ref = shared_from_this(); // reference count +1
             loop_->RunInLoop(xstd::bind(&InvokeTimer::AsyncWait, ref, timeout_us_));
         }
 
@@ -39,7 +38,7 @@ namespace evpp {
 
         void AsyncWait(uint64_t timeout_us) {
             //LOG_INFO << "InvokeTimer::AsyncWait tid=" << boost::this_thread::get_id();
-            boost::shared_ptr<InvokeTimer> ref = shared_from_this(); // reference count +1
+            xstd::shared_ptr<InvokeTimer> ref = shared_from_this(); // reference count +1
             timer_ = new TimerEventWatcher(loop_->event_base(),
                 xstd::bind(&InvokeTimer::OnTimeout, ref));
             timer_->Init();

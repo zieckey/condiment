@@ -5,25 +5,25 @@
 #include "evpp/event_loop.h"
 #include "evpp/event_loop_thread_pool.h"
 
-#include <boost/atomic.hpp>
-#include <boost/thread/lock_guard.hpp>
-#include <boost/thread/mutex.hpp>
+#include <atomic>
+#include <thread>
+#include <mutex>
 
 #include <set>
 
 namespace
 {
-    static std::set<boost::thread::id> g_working_tids;
+    static std::set<std::thread::id> g_working_tids;
 
     static void OnWorkingThread()
     {
-        static boost::mutex mutex;
-        boost::lock_guard<boost::mutex> g(mutex);
-        g_working_tids.insert(boost::this_thread::get_id());
+        static std::mutex mutex;
+        std::lock_guard<std::mutex> g(mutex);
+        g_working_tids.insert(std::this_thread::get_id());
     }
 
 
-    static boost::atomic<int> g_count;
+    static std::atomic<int> g_count;
     static void OnCount()
     {
         g_count++;

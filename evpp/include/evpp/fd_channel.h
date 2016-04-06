@@ -4,11 +4,6 @@
 
 #include "evpp/base/timestamp.h"
 
-#include <boost/function.hpp>
-#include <boost/noncopyable.hpp>
-#include <boost/shared_ptr.hpp>
-#include <boost/weak_ptr.hpp>
-
 struct event;
 struct event_base;
 
@@ -20,8 +15,8 @@ namespace evpp {
             kReadable = 0x02,
             kWritable = 0x04,
         };
-        typedef boost::function<void()> EventCallback;
-        typedef boost::function<void(base::Timestamp)> ReadEventCallback;
+        typedef xstd::function<void()> EventCallback;
+        typedef xstd::function<void(base::Timestamp)> ReadEventCallback;
 
     public:
         FdChannel(struct event_base *evbase, int fd,

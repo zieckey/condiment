@@ -1,14 +1,13 @@
 #include "evpp/inner_pre.h"
 
 #include <string.h>
-#include <boost/static_assert.hpp>
 
 #include "evpp/fd_channel.h"
 #include "evpp/libevent_headers.h"
 
 namespace evpp {
-    BOOST_STATIC_ASSERT(FdChannel::kReadable == EV_READ);
-    BOOST_STATIC_ASSERT(FdChannel::kWritable == EV_WRITE);
+    static_assert(FdChannel::kReadable == EV_READ, "");
+    static_assert(FdChannel::kWritable == EV_WRITE, "");
 
     FdChannel::FdChannel(struct event_base *event_base, int f, bool r, bool w)
         : fd_(f) {
