@@ -37,7 +37,7 @@ namespace evpp {
             : loop_(evloop), timeout_us_((uint64_t)(timeout_ms * 1000)), functor_(f), timer_(NULL) {}
 
         void AsyncWait(uint64_t timeout_us) {
-            //LOG_INFO << "InvokeTimer::AsyncWait tid=" << boost::this_thread::get_id();
+            //LOG_INFO << "InvokeTimer::AsyncWait tid=" << std::this_thread::get_id();
             xstd::shared_ptr<InvokeTimer> ref = shared_from_this(); // reference count +1
             timer_ = new TimerEventWatcher(loop_->event_base(),
                 xstd::bind(&InvokeTimer::OnTimeout, ref));
@@ -46,7 +46,7 @@ namespace evpp {
         }
 
         void OnTimeout() {
-            //LOG_INFO << "InvokeTimer::OnTimeout tid=" << boost::this_thread::get_id();
+            //LOG_INFO << "InvokeTimer::OnTimeout tid=" << std::this_thread::get_id();
             functor_();
         }
 

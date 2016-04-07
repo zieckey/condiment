@@ -43,7 +43,7 @@ namespace evpp {
             LOG_FATAL << "event_base_dispatch error";
             return;
         }
-        //LOG_TRACE << "EventLoop stopped, tid: " << boost::this_thread::get_id();
+        //LOG_TRACE << "EventLoop stopped, tid: " << std::this_thread::get_id();
     }
 
     void EventLoop::Stop() {
@@ -51,7 +51,7 @@ namespace evpp {
     }
 
     void EventLoop::StopInLoop() {
-        //LOG_TRACE << "EventLoop is stopping now, tid: " << boost::this_thread::get_id();
+        //LOG_TRACE << "EventLoop is stopping now, tid: " << std::this_thread::get_id();
         for (;;) {
             DoPendingFunctors();
 
