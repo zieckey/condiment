@@ -64,7 +64,7 @@ namespace evpp {
     void EventLoopThreadPool::Impl::Stop(bool wait_thread_exit) {
         for (int i = 0; i < threads_num_; ++i) {
             EventLoopThreadPtr& t = threads_[i];
-            t->Stop();
+            t->Stop(wait_thread_exit);
         }
 
         if (wait_thread_exit) {
