@@ -4,7 +4,7 @@
 
 #include "evpp/libevent_headers.h"
 #include "evpp/libevent_watcher.h"
-#include <boost/thread.hpp>
+#include <thread>
 
 namespace evtimer
 {
@@ -28,8 +28,8 @@ TEST_UNIT(testTimerEventWatcher)
 {
     using namespace evtimer;
     struct event_base* base = event_base_new();
-    boost::shared_ptr<evpp::TimerEventWatcher> ev(new evpp::TimerEventWatcher(base, xstd::bind(Handle, base)));
-    boost::thread th(MyEventThread, base, ev.get());
+    xstd::shared_ptr<evpp::TimerEventWatcher> ev(new evpp::TimerEventWatcher(base, xstd::bind(Handle, base)));
+    std::thread th(MyEventThread, base, ev.get());
     uint64_t start = evpp::utcmicrosecond();
     th.join();
     uint64_t end = evpp::utcmicrosecond();
