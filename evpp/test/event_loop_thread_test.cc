@@ -5,12 +5,12 @@
 #include "evpp/event_loop.h"
 #include "evpp/event_loop_thread.h"
 
-#include <boost/atomic.hpp>
+#include <atomic>
 
 namespace
 {
     static bool g_timeout = false;
-    static boost::atomic<int> g_count;
+    static std::atomic<int> g_count;
     static void OnTimeout()
     {
         g_timeout = true;
