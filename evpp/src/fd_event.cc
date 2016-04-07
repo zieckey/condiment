@@ -57,13 +57,13 @@ namespace evpp {
 
 
         struct timeval tv;
-        struct timeval * ptv = NULL;
+        struct timeval* ptv = NULL;
         if (timeout_us > 0) {
             tv = evpp::timevalconv(timeout_us);
             ptv = &tv;
         }
 
-        int rc = event_add(ev_, &tv);
+        int rc = event_add(ev_, ptv);
         if (rc != 0) {
             LOG_ERROR << "event_add error";
             return;

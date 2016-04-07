@@ -8,7 +8,7 @@ SOURCE_DIR=$(CURRENT_DIR)
 CFLAGS=$(TOP_CFLAGS) -g -c -fPIC \
 	   -Wall -Wno-unused-parameter -Wno-unused-function -Wunused-variable -Wunused-value \
 	   -Wshadow -Wcast-qual -Wcast-align -Wwrite-strings -Wsign-compare \
-	   -Winvalid-pch -fms-extensions -Wfloat-equal -Wextra \
+	   -Winvalid-pch -fms-extensions -Wfloat-equal -Wextra -std=c++11\
 	   -I .. -I ../include -MMD
 CPPFLAGS= $(CFLAGS) -Woverloaded-virtual -Wsign-promo -fno-gnu-keywords
 

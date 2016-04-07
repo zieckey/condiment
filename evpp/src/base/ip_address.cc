@@ -182,11 +182,9 @@ namespace evpp {
         }
 
         bool IPAddress::AssignFromIPLiteral(const Slice& ip_literal) {
-            bool ipv6 = false;
             bool ipv4 = true;
             for (size_t i = 0; i < ip_literal.size(); ++i) {
                 if (ip_literal[i] == ':') {
-                    ipv6 = true;
                     ipv4 = false;
                 }
             }
