@@ -35,7 +35,7 @@ LDFLAGS= $(RTFLAGS) \
 		 -L $(CURRENT_DIR)/../src/base \
 		 -L $(CURRENT_DIR)/../src \
 		 -lpthread \
-		 -levpp -levppbase \
+		 -levpp -levppbase -levent -lglog \
 		 -lboost_system-mt -lboost_filesystem-mt -lboost_thread-mt 
 
 DIRNAME=$(shell basename `pwd`)

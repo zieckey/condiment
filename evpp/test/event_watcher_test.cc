@@ -28,7 +28,7 @@ TEST_UNIT(testTimerEventWatcher)
 {
     using namespace evtimer;
     struct event_base* base = event_base_new();
-    boost::shared_ptr<evpp::TimerEventWatcher> ev(new evpp::TimerEventWatcher(base, std::tr1::bind(Handle, base)));
+    boost::shared_ptr<evpp::TimerEventWatcher> ev(new evpp::TimerEventWatcher(base, xstd::bind(Handle, base)));
     boost::thread th(MyEventThread, base, ev.get());
     uint64_t start = evpp::utcmicrosecond();
     th.join();

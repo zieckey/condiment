@@ -8,5 +8,6 @@ check : all
 	$(MAKE) check -C test
 
 clean:
+	$(MAKE) clean -C src/base
 	$(MAKE) clean -C src
 	$(MAKE) clean -C test

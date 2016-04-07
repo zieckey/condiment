@@ -498,7 +498,8 @@
 #  define GTEST_HAS_TR1_TUPLE 0
 # else
 // The user didn't tell us not to do it, so we assume it's OK.
-#  define GTEST_HAS_TR1_TUPLE 1
+//#  define GTEST_HAS_TR1_TUPLE 1
+#  define GTEST_HAS_TR1_TUPLE 0 // gcc4.8 work around, 2016.4.7 by zieckey@gmail.com
 # endif
 #endif  // GTEST_HAS_TR1_TUPLE
 
