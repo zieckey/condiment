@@ -350,3 +350,42 @@ namespace evpp {
 //         }
     } // namespace base
 }  // namespace evpp
+
+#ifndef H_OS_WINDOWS
+int _itoa_s(int value, char* buffer, size_t size_in_chars, int radix) {
+    const char* format_str;
+    if (radix == 10)
+        format_str = "%d";
+    else if (radix == 16)
+        format_str = "%x";
+    else
+        return EINVAL;
+
+    int written = snprintf(buffer, size_in_chars, format_str, value);
+    if (static_cast<size_t>(written) >= size_in_chars) {
+        // Output was truncated, or written was negative.
+        return EINVAL;
+    }
+    return 0;
+}
+
+int _itow_s(int value, uint16_t* buffer, size_t size_in_chars, int radix) {
+    if (radix != 10)
+        return EINVAL;
+
+    // No more than 12 characters will be required for a 32-bit integer.
+    // Add an extra byte for the terminating null.
+    char temp[13];
+    int written = snprintf(temp, sizeof(temp), "%d", value);
+    if (static_cast<size_t>(written) >= size_in_chars) {
+        // Output was truncated, or written was negative.
+        return EINVAL;
+    }
+
+    for (int i = 0; i < written; ++i) {
+        buffer[i] = static_cast<uint16_t>(temp[i]);
+    }
+    buffer[written] = '\0';
+    return 0;
+}
+#endif
