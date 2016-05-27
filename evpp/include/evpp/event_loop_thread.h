@@ -2,7 +2,7 @@
 
 #include "evpp/inner_pre.h"
 
-#include <boost/thread/thread.hpp>
+#include <thread>
 
 struct event_base;
 struct event;
@@ -21,7 +21,7 @@ namespace evpp {
 
         void SetName(const std::string& n);
         const std::string& name() const;
-        boost::thread::id tid() const;
+        std::thread::id tid() const;
     public:
         EventLoop* event_loop() const;
         struct event_base *event_base();

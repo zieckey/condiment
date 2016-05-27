@@ -20,7 +20,7 @@ CPPFLAGS= -g -c -fPIC \
 		  -D_DEBUG -D_USE_GTEST \
 		  -Wshadow -Wcast-qual -Wcast-align -Wwrite-strings \
 		  -Wsign-compare -Winvalid-pch -fms-extensions -Wall \
-		  -MMD -Woverloaded-virtual -Wsign-promo -fno-gnu-keywords \
+		  -MMD -Woverloaded-virtual -Wsign-promo -fno-gnu-keywords -std=c++11\
 		  -I ./$(GTESTDIR) \
 		  -I ../include\
 		  -I $(SOURCE_DIR)/../3rdparty \
@@ -35,7 +35,7 @@ LDFLAGS= $(RTFLAGS) \
 		 -L $(CURRENT_DIR)/../src/base \
 		 -L $(CURRENT_DIR)/../src \
 		 -lpthread \
-		 -levpp -levppbase \
+		 -levpp -levppbase -levent -lglog \
 		 -lboost_system-mt -lboost_filesystem-mt -lboost_thread-mt 
 
 DIRNAME=$(shell basename `pwd`)

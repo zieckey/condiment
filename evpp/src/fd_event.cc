@@ -1,13 +1,11 @@
 #include "evpp/inner_pre.h"
 
-#include <boost/static_assert.hpp>
-
 #include "evpp/fd_event.h"
 #include "evpp/libevent_headers.h"
 
 namespace evpp {
-    BOOST_STATIC_ASSERT(FdEvent::kReadable == EV_READ);
-    BOOST_STATIC_ASSERT(FdEvent::kWritable == EV_WRITE);
+    static_assert(FdEvent::kReadable == EV_READ, "");
+    static_assert(FdEvent::kWritable == EV_WRITE, "");
 
     FdEvent::FdEvent(struct event_base* loop)
         : loop_(loop)
@@ -57,13 +55,13 @@ namespace evpp {
 
 
         struct timeval tv;
-        struct timeval * ptv = NULL;
+        struct timeval* ptv = NULL;
         if (timeout_us > 0) {
             tv = evpp::timevalconv(timeout_us);
             ptv = &tv;
         }
 
-        int rc = event_add(ev_, &tv);
+        int rc = event_add(ev_, ptv);
         if (rc != 0) {
             LOG_ERROR << "event_add error";
             return;

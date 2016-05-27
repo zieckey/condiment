@@ -4,7 +4,7 @@
 
 #include "evpp/libevent_headers.h"
 #include "evpp/libevent_watcher.h"
-#include <boost/thread.hpp>
+#include <thread>
 
 namespace
 {
@@ -28,8 +28,8 @@ namespace
 TEST_UNIT(testPipeEventWatcher)
 {
     struct event_base* base = event_base_new();
-    evpp::PipeEventWatcher ev(base, std::tr1::bind(Handle, base));
-    boost::thread th(MyEventThread, base, &ev);
+    evpp::PipeEventWatcher ev(base, xstd::bind(Handle, base));
+    std::thread th(MyEventThread, base, &ev);
     ::usleep(1000 * 100);
     ev.Notify();
     th.join();

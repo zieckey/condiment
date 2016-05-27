@@ -1,7 +1,7 @@
 #include "evpp/inner_pre.h"
 #include "evpp/event_loop_thread_pool.h"
 
-#include <boost/atomic.hpp>
+#include <atomic>
 
 namespace evpp {
     class EventLoopThreadPool::Impl {
@@ -25,7 +25,7 @@ namespace evpp {
         EventLoop* base_loop_;
         bool started_;
         int threads_num_;
-        boost::atomic<int> next_;
+        std::atomic<int> next_;
 
         std::vector<EventLoopThreadPtr> threads_;
     };
@@ -64,7 +64,7 @@ namespace evpp {
     void EventLoopThreadPool::Impl::Stop(bool wait_thread_exit) {
         for (int i = 0; i < threads_num_; ++i) {
             EventLoopThreadPtr& t = threads_[i];
-            t->Stop();
+            t->Stop(wait_thread_exit);
         }
 
         if (wait_thread_exit) {

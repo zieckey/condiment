@@ -20,14 +20,14 @@ namespace evpp {
         void SetName(const std::string& n);
         const std::string& name() const;
 
-        boost::thread::id tid() const;
+        std::thread::id tid() const;
 
     private:
         void Run(const Functor& pre, const Functor& post);
 
     private:
         xstd::shared_ptr<EventLoop> event_loop_;
-        boost::shared_ptr<boost::thread> thread_;
+        xstd::shared_ptr<std::thread> thread_;
         enum State {
             kRunning = 1,
             kStopping = 2,
@@ -48,7 +48,7 @@ namespace evpp {
 
     bool EventLoopThread::Impl::Start(bool wait_until_thread_started,
         const Functor& pre, const Functor& post) {
-        thread_.reset(new boost::thread(
+        thread_.reset(new std::thread(
             xstd::bind(&Impl::Run, this, pre, post)));
         if (!wait_until_thread_started) {
             return true;
@@ -98,11 +98,11 @@ namespace evpp {
 
     }
 
-    boost::thread::id EventLoopThread::Impl::tid() const {
+    std::thread::id EventLoopThread::Impl::tid() const {
         if (thread_) {
             return thread_->get_id();
         }
-        return boost::thread::id();
+        return std::thread::id();
     }
 
     bool EventLoopThread::Impl::IsRunning() const {
@@ -155,7 +155,7 @@ namespace evpp {
         return impl_->name();
     }
 
-    boost::thread::id EventLoopThread::tid() const {
+    std::thread::id EventLoopThread::tid() const {
         return impl_->tid();
     }
 }

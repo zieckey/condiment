@@ -5,9 +5,6 @@
 #include "evpp/event_loop.h"
 #include "invoke_timer.inl.h"
 
-#include <boost/thread/lock_guard.hpp>
-
-
 namespace evpp {
     EventLoop::EventLoop() {
         event_base_ = event_base_new();
@@ -35,7 +32,7 @@ namespace evpp {
 
 
     void EventLoop::Run() {
-        tid_ = boost::this_thread::get_id();
+        tid_ = std::this_thread::get_id();
 
         int rc = event_base_dispatch(event_base_);
         DoAfterLoopFunctors();
@@ -46,7 +43,7 @@ namespace evpp {
             LOG_FATAL << "event_base_dispatch error";
             return;
         }
-        //LOG_TRACE << "EventLoop stopped, tid: " << boost::this_thread::get_id();
+        //LOG_TRACE << "EventLoop stopped, tid: " << std::this_thread::get_id();
     }
 
     void EventLoop::Stop() {
@@ -54,11 +51,11 @@ namespace evpp {
     }
 
     void EventLoop::StopInLoop() {
-        //LOG_TRACE << "EventLoop is stopping now, tid: " << boost::this_thread::get_id();
+        //LOG_TRACE << "EventLoop is stopping now, tid: " << std::this_thread::get_id();
         for (;;) {
             DoPendingFunctors();
 
-            boost::lock_guard<boost::mutex> lock(mutex_);
+            std::lock_guard<std::mutex> lock(mutex_);
             if (pending_functors_.empty()) {
                 break;
             }
@@ -70,14 +67,14 @@ namespace evpp {
         event_base_loopexit(event_base_, &tv);
     }
     void EventLoop::AddAfterLoopFunctor(const Functor& cb) {
-        boost::lock_guard<boost::mutex> lock(mutex_);
+        std::lock_guard<std::mutex> lock(mutex_);
         after_loop_functors_.push_back(cb);
     }
 
     void EventLoop::DoAfterLoopFunctors() {
         std::vector<Functor> functors;
         {
-            boost::lock_guard<boost::mutex> lock(mutex_);
+            std::lock_guard<std::mutex> lock(mutex_);
             functors.swap(after_loop_functors_);
         }
         for (size_t i = 0; i < functors.size(); ++i) {
@@ -97,12 +94,12 @@ namespace evpp {
     }
 
     void EventLoop::RunAfter(double delay_ms, const Functor& f) {
-        boost::shared_ptr<InvokeTimer> t = InvokeTimer::Create(this, delay_ms, f);
+        xstd::shared_ptr<InvokeTimer> t = InvokeTimer::Create(this, delay_ms, f);
         t->Start();
     }
 
     void EventLoop::RunInLoop(const Functor& functor) {
-        boost::thread::id cur_tid = boost::this_thread::get_id();
+        std::thread::id cur_tid = std::this_thread::get_id();
         if (cur_tid == tid_) {
             functor();
         } else {
@@ -112,11 +109,11 @@ namespace evpp {
 
     void EventLoop::QueueInLoop(const Functor& cb) {
         {
-            boost::lock_guard<boost::mutex> lock(mutex_);
+            std::lock_guard<std::mutex> lock(mutex_);
             pending_functors_.push_back(cb);
         }
 
-        if (calling_pending_functors_ || boost::this_thread::get_id() != tid_) {
+        if (calling_pending_functors_ || std::this_thread::get_id() != tid_) {
             watcher_->Notify();
         }
     }
@@ -126,7 +123,7 @@ namespace evpp {
         calling_pending_functors_ = true;
 
         {
-            boost::lock_guard<boost::mutex> lock(mutex_);
+            std::lock_guard<std::mutex> lock(mutex_);
             functors.swap(pending_functors_);
         }
 

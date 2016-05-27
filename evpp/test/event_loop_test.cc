@@ -6,11 +6,11 @@
 #include "evpp/libevent_watcher.h"
 #include "evpp/event_loop.h"
 
-#include <boost/thread.hpp>
+#include <thread>
 
 namespace evloop
 {
-    static boost::shared_ptr<evpp::EventLoop> loop;
+    static xstd::shared_ptr<evpp::EventLoop> loop;
     static double delay_ms = 1000.0;
     static bool g_event_handler_called = false;
     static void Handle() {
@@ -20,7 +20,7 @@ namespace evloop
 
     static void MyEventThread() {
         LOG_INFO << "EventLoop is running ...";
-        loop = boost::shared_ptr<evpp::EventLoop>(new evpp::EventLoop);
+        loop = xstd::shared_ptr<evpp::EventLoop>(new evpp::EventLoop);
         loop->Run();
     }
 }
@@ -28,7 +28,7 @@ namespace evloop
 TEST_UNIT(testEventLoop)
 {
     using namespace evloop;
-    boost::thread th(MyEventThread);
+    std::thread th(MyEventThread);
     usleep((uint32_t)(delay_ms * 1000));
     uint64_t start = evpp::utcmicrosecond();
     loop->RunAfter(delay_ms, &Handle);

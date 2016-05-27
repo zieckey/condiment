@@ -3,8 +3,8 @@
 #include "evpp/inner_pre.h"
 #include "evpp/libevent_watcher.h"
 
-#include <boost/thread.hpp>
-#include <boost/thread/mutex.hpp>
+#include <thread>
+#include <mutex>
 
 namespace evpp {
 
@@ -35,9 +35,9 @@ namespace evpp {
 
     private:
         struct event_base *event_base_;
-        boost::thread::id tid_;
+        std::thread::id tid_;
 
-        boost::mutex mutex_;
+        std::mutex mutex_;
         xstd::shared_ptr<PipeEventWatcher> watcher_;
         std::vector<Functor> pending_functors_; // @Guarded By mutex_
         bool calling_pending_functors_;

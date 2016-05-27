@@ -1,7 +1,6 @@
 #include "evpp/inner_pre.h"
 
 #include <string.h>
-#include <boost/static_assert.hpp>
 
 #include "evpp/libevent_watcher.h"
 #include "evpp/libevent_headers.h"
