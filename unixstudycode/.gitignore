@@ -112,3 +112,6 @@ wait
 sigprocmask
 sigwaitinfo
 sigprocmask2
+boost/process_display
+pollhup
+ucontext/setcontext

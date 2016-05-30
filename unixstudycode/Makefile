@@ -37,6 +37,8 @@ SUBDIRS=echo-server \
 				boost_ptree \
 				boost_shared_memory_map \
 				url_extractor \
+				tun \
+				ucontext \
 				string_copy 
 
     
