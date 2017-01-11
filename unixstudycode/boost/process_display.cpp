@@ -3,7 +3,7 @@
 
   int main()
   {
-      long int i(1100000000),j(1100000000),k(1);
+      long int i(110000000),j(110000000),k(1);
       boost::progress_display pd(i);
       boost::progress_timer t;
       while(i>0)
