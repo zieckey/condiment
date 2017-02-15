@@ -1,6 +1,3 @@
-message(STATUS "This is SOURCE dir " ${CMAKE_SOURCE_DIR})
-SET(MYINCLUDEDIR ${CMAKE_SOURCE_DIR}/lib)
-message(STATUS "This is MYINCLUDEDIR " ${MYINCLUDEDIR})
-include_directories(${MYINCLUDEDIR})
+include_directories(${CMAKE_SOURCE_DIR}/lib)
 add_executable(main main.c)
 target_link_libraries(main hello_static)
