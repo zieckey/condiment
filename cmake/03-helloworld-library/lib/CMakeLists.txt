@@ -25,6 +25,6 @@ set (CPACK_PACKAGING_INSTALL_PREFIX ${CPACK_INSTALL_PREFIX})
 
 include (CPack)
 
-install (TARGETS hello DESTINATION "lib")
+install (TARGETS hello hello_static DESTINATION "lib")
 install (FILES hello.h DESTINATION "include")
 
