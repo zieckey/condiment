@@ -1,5 +1,5 @@
-message(STATUS "This is SOURCE dir " ${HELLO_SOURCE_DIR})
-SET(MYINCLUDEDIR ${HELLO_SOURCE_DIR}/lib)
+message(STATUS "This is SOURCE dir " ${CMAKE_SOURCE_DIR})
+SET(MYINCLUDEDIR ${CMAKE_SOURCE_DIR}/lib)
 message(STATUS "This is MYINCLUDEDIR " ${MYINCLUDEDIR})
 include_directories(${MYINCLUDEDIR})
 add_executable(main main.c)
