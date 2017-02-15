@@ -8,5 +8,5 @@ add_executable(main_static main.c)
 target_link_libraries(main_static hello_static)
 
 include(CTest)
-add_test(NAME main COMMAND main)
-add_test(NAME main_static COMMAND main_static)
+add_test(NAME test-main COMMAND main)
+add_test(NAME test-main_static COMMAND main_static)
