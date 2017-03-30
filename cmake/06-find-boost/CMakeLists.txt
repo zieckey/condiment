@@ -5,11 +5,13 @@ project (hello-boost)
 set(Boost_DEBUG 1)
 
 find_package(Boost REQUIRED)
+#find_package(Boost REQUIRED COMPONENTS system) # DON'T WORK
 
 if(NOT Boost_FOUND)
     message(fatal_error "Boost was not found. See FindBoost.cmake for details.")
 else ()
     message(STATUS "Boost_INCLUDE_DIR=${Boost_INCLUDE_DIR}")
+    message(STATUS "Boost_LIBRARY_DIR=${Boost_LIBRARY_DIR}")
     message(STATUS "Boost_FILESYSTEM_LIBRARY=${Boost_FILESYSTEM_LIBRARY}")
     message(STATUS "Boost_SYSTEM_LIBRARY=${Boost_SYSTEM_LIBRARY}")
     message(STATUS "Boost_CHRONO_LIBRARY=${Boost_CHRONO_LIBRARY}")
@@ -48,6 +50,7 @@ add_executable(hello main.cc)
 # -- [ C:/Program Files (x86)/CMake/share/cmake-3.2/Modules/FindBoost.cmake:1088 ] Boost_FOUND = 1
 # -- Boost version: 1.58.0
 # -- Boost_INCLUDE_DIR=D:/cppworkspace/boost_1_58_0/output/include/boost-1_58
+# -- Boost_LIBRARY_DIR=
 # -- Boost_FILESYSTEM_LIBRARY=
 # -- Boost_SYSTEM_LIBRARY=
 # -- Boost_CHRONO_LIBRARY=
