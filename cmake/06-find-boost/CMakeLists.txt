@@ -4,8 +4,10 @@ project (hello-boost)
 
 set(Boost_DEBUG 1)
 
-find_package(Boost REQUIRED)
-#find_package(Boost REQUIRED COMPONENTS system) # DON'T WORK
+set(BOOST_ROOT "d:/cppworkspace/boost_1_58_0-bak/output")
+#find_package(Boost REQUIRED)
+#find_package(Boost COMPONENTS system REQUIRED) # DON'T WORK
+find_package (Boost 1.58.0 REQUIRED COMPONENTS program_options)
 
 if(NOT Boost_FOUND)
     message(fatal_error "Boost was not found. See FindBoost.cmake for details.")
@@ -19,6 +21,9 @@ else ()
     message(STATUS "Boost_SIGNALS_LIBRARY=${Boost_SIGNALS_LIBRARY}")
     message(STATUS "Boost_THREAD_LIBRARY=${Boost_THREAD_LIBRARY}")
     message(STATUS "Boost_LIBRARY=${Boost_LIBRARY}")
+    message(STATUS "Boost_LIBRARIES=${Boost_LIBRARIES}")
+    include_directories(${Boost_INCLUDE_DIR})
+    link_directories(${Boost_LIBRARY_DIRS})
 endif()
 
 include_directories(${Boost_INCLUDE_DIR})
@@ -27,7 +32,8 @@ include_directories(${Boost_INCLUDE_DIR})
 add_executable(hello main.cc)
 
 
-# Êä³ö
+# $ export BOOST_ROOT=/d/cppworkspace/boost_1_58_0
+#
 # $ cmake ..
 # -- [ C:/Program Files (x86)/CMake/share/cmake-3.2/Modules/FindBoost.cmake:515 ] _boost_TEST_VERSIONS = 1.58.0;1.58;1.57.0;1.57;1.56.0;1.56;1.55.0;1.55;1.54.0;1.54;1.53.0;1.53;1.52.0;1.52;1.51.0;1.51;1.50.0;1.50;1.49.0;1.49;1.48.0;1.48;1.47.0;1.47;1.46.1;1.46.0;1.46;1.45.0;1.45;1.44.0;1.44;1.43.0;1.43;1.42.0;1.42;1.41.0;1.41;1.40.0;1.40;1.39.0;1.39;1.38.0;1.38;1.37.0;1.37;1.36.1;1.36.0;1.36;1.35.1;1.35.0;1.35;1.34.1;1.34.0;1.34;1.33.1;1.33.0;1.33
 # -- [ C:/Program Files (x86)/CMake/share/cmake-3.2/Modules/FindBoost.cmake:517 ] Boost_USE_MULTITHREADED = TRUE
