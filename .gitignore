@@ -23,9 +23,25 @@ libevent++/msvc/bin/
 libevent++/msvc/libevent++.opensdf
 libevent++/msvc/libevent++.sdf
 
+evpp/msvc/.vs/
+evpp/msvc/libevpp.VC.db
+
 unixstudycode.tar.gz
 *.out
 
 ind/inspector_test
 ind/pingpong_server
+
+
+vcpkgprojects/.vs/
+vcpkgprojects/Debug/
+vcpkgprojects/glog/Debug/
+vcpkgprojects/glog/x64/
+vcpkgprojects/libevent_timer.sln
+vcpkgprojects/libevent_timer/Debug/
+vcpkgprojects/libevent_timer/x64/
+vcpkgprojects/x64
+vcpkgprojects/Release/
+vcpkgprojects/glog/Release/
+vcpkgprojects/libevent_timer/Release/
 
